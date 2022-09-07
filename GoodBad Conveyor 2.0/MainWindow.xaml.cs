@@ -1,0 +1,906 @@
+﻿using System;
+using System.Data;
+using System.Deployment.Application;
+using System.IO.Ports;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+
+namespace GoodBad_Conveyor_2._0
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        SerialPort _Keyence1 = new SerialPort();
+        SerialPort _Keyence2 = new SerialPort();
+        DispatcherTimer _TimerDAQ = new DispatcherTimer();
+        NI Ni = new NI();
+
+        bool Busy_1 = false;
+        bool Busy_2 = false;
+        bool CheckPointLane1_OK = false;
+        bool CheckPointLane2_OK = false;
+
+        bool[] DAQDefault =
+                        {
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false
+                        };
+
+        bool[] outLane1_OK =
+                        {
+                           false,
+                           true,
+                           true,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false
+                        };
+
+        bool[] outLane1_NG =
+                        {
+                           true,
+                           true,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false,
+                           false
+                        };
+
+        bool[] outLane2_OK =
+                        {
+                           false,
+                           true,
+                           false,
+                           false,
+                           false,
+                           true,
+                           false,
+                           false
+                        };
+
+        bool[] outLane2_NG =
+                        {
+                           false,
+                           true,
+                           false,
+                           true,
+                           false,
+                           false,
+                           false,
+                           false
+                        };
+
+        public struct DataLane1
+        {
+            public DateTime DATE { set; get; }
+            public string SERIAL_NUMBER { set; get; }
+            public string PROCESS { set; get; }
+            public string CRD { set; get; }
+            public string DEFECT { set; get; }
+            public string STATUS { set; get; }
+        }
+
+        public struct DataLane2
+        {
+            public DateTime DATE { set; get; }
+            public string SERIAL_NUMBER { set; get; }
+            public string PROCESS { set; get; }
+            public string CRD { set; get; }
+            public string DEFECT { set; get; }
+            public string STATUS { set; get; }
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            btnOnOff_Lane1.Visibility = Visibility.Hidden;
+            btnOnOff_Lane2.Visibility = Visibility.Hidden;
+            DockMenu.Width = 0;
+            InitializeDgv();
+            GetVersion();       
+
+            LogEvents.RegisterEvent(13, "Initializing application GoodBad Conveyor 2.0");
+
+            Ni.WriteDAQ(DAQDefault);
+
+            _TimerDAQ.Interval = new TimeSpan(0, 0, 0,0, 500);
+            _TimerDAQ.Tick += _TimerReadDAQ;
+            _TimerDAQ.Start();
+
+            InitLanes();
+        }
+
+        void GetVersion()
+        {
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                Version myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                lblVersion.Content = "PRD v" + myVersion;
+            }
+            else
+            {
+                lblVersion.Content = "UAT v" + "1.0.0.0";
+            }
+        }
+
+        void InitializeDgv()
+        {
+            DataGridTextColumn DATE = new DataGridTextColumn();
+            DATE.Header = "DATE";
+            DATE.Binding = new Binding("DATE");
+            DATE.Width = 150;
+            DATE.IsReadOnly = true;
+
+            DataGridTextColumn SERIAL_NUMBER = new DataGridTextColumn();
+            SERIAL_NUMBER.Header = "SERIAL NUMBER";
+            SERIAL_NUMBER.Binding = new Binding("SERIAL_NUMBER");
+            SERIAL_NUMBER.Width = 130;
+            SERIAL_NUMBER.IsReadOnly = true;
+
+            DataGridTextColumn PROCESS = new DataGridTextColumn();
+            PROCESS.Header = "PROCESS";
+            PROCESS.Binding = new Binding("PROCESS");
+            PROCESS.Width = 680;
+            PROCESS.IsReadOnly = true;
+
+            DataGridTextColumn STATUS = new DataGridTextColumn();
+            STATUS.Header = "STATUS";
+            STATUS.Binding = new Binding("STATUS");
+            STATUS.Width = 100;
+            STATUS.IsReadOnly = true;
+
+
+            DgLane1.Columns.Add(DATE);
+            DgLane1.Columns.Add(SERIAL_NUMBER);
+            DgLane1.Columns.Add(PROCESS);
+            DgLane1.Columns.Add(STATUS);
+
+
+
+            DataGridTextColumn DATE2 = new DataGridTextColumn();
+            DATE2.Header = "DATE";
+            DATE2.Binding = new Binding("DATE");
+            DATE2.Width = 150;
+            DATE2.IsReadOnly = true;
+
+            DataGridTextColumn SERIAL_NUMBER2 = new DataGridTextColumn();
+            SERIAL_NUMBER2.Header = "SERIAL NUMBER";
+            SERIAL_NUMBER2.Binding = new Binding("SERIAL_NUMBER");
+            SERIAL_NUMBER2.Width = 130;
+            SERIAL_NUMBER2.IsReadOnly = true;
+
+            DataGridTextColumn PROCESS2 = new DataGridTextColumn();
+            PROCESS2.Header = "PROCESS";
+            PROCESS2.Binding = new Binding("PROCESS");
+            PROCESS2.Width = 300;
+            PROCESS2.IsReadOnly = true;
+
+            DataGridTextColumn STATUS2 = new DataGridTextColumn();
+            STATUS2.Header = "STATUS";
+            STATUS2.Binding = new Binding("STATUS");
+            STATUS2.Width = 100;
+            STATUS2.IsReadOnly = true;
+
+
+            DgLane2.Columns.Add(DATE2);
+            DgLane2.Columns.Add(SERIAL_NUMBER2);
+            DgLane2.Columns.Add(PROCESS2);
+            DgLane2.Columns.Add(STATUS2);
+        }
+
+        void InitLanes() 
+        {
+            if (Globals.IS_ACTIVE_LANE_1) 
+            {
+                lblLane1Disable.Visibility = Visibility.Hidden;
+                lblLane1Disable.Width = 0;
+                OnScanners();
+            }
+                
+            if (!Globals.IS_ACTIVE_LANE_1) 
+            {
+                lblLane1Disable.Visibility = Visibility.Visible;
+                lblLane1Disable.Width = 1270;
+                OffScanners();
+            }
+
+
+            if (Globals.IS_ACTIVE_LANE_2) 
+            {
+                lblLane2Disable.Visibility = Visibility.Hidden;
+                lblLane2Disable.Width = 0;
+                OnScanners();
+            }
+               
+
+            if (!Globals.IS_ACTIVE_LANE_2) 
+            {
+                lblLane2Disable.Visibility = Visibility.Visible;
+                lblLane2Disable.Width = 1270;
+                OffScanners();
+            }               
+        }
+
+        void OnScanners() 
+        {
+            if (Globals.IS_ACTIVE_LANE_1) 
+            {
+                try
+                {
+                    if (_Keyence1.IsOpen) return;
+                    _Keyence1.PortName = Globals.COM_SCANNER1;
+                    _Keyence1.BaudRate = Globals.BAUD_RATE;
+                    _Keyence1.DataBits = Globals.DATA_BITS;
+                    _Keyence1.Parity = Parity.None;
+                    _Keyence1.Handshake = Handshake.None;
+                    _Keyence1.DataReceived += _Keyence1_DataReceived;
+                    _Keyence1.Open();
+                }
+                catch (Exception ex)
+                {
+                    WriteDgv(1, DateTime.Now, "SCANNER 1", "ERROR: " + ex.Message, "FAIL");
+                    LogEvents.RegisterEvent(1, "OnScanners: " + ex.Message);
+                }
+            }
+
+            if (Globals.IS_ACTIVE_LANE_2)
+            {
+                try
+                {
+                    if (_Keyence2.IsOpen) return;
+                    _Keyence2.PortName = Globals.COM_SCANNER2;
+                    _Keyence2.BaudRate = Globals.BAUD_RATE;
+                    _Keyence2.DataBits = Globals.DATA_BITS;
+                    _Keyence2.Parity = Parity.None;
+                    _Keyence2.Handshake = Handshake.None;
+                    _Keyence2.DataReceived += _Keyence2_DataReceived;
+                    _Keyence2.Open();
+                }
+                catch (Exception ex)
+                {
+                    WriteDgv(2, DateTime.Now, "SCANNER 2", "ERROR: " + ex.Message, "FAIL");
+                    LogEvents.RegisterEvent(2, "OnScanners: " + ex.Message);
+                }
+            }
+        }
+
+        void OffScanners()
+        {
+            if (!Globals.IS_ACTIVE_LANE_1)
+            {
+                try
+                {
+                    if (_Keyence1.IsOpen) _Keyence1.Close();
+                }
+                catch (Exception ex)
+                {
+                    WriteDgv(1, DateTime.Now, "SCANNER 1", "ERROR: " + ex.Message, "FAIL");
+                    LogEvents.RegisterEvent(1, "OffScanners: " + ex.Message);
+                }
+            }
+
+            if (!Globals.IS_ACTIVE_LANE_2)
+            {
+                try
+                {
+                    if(_Keyence2.IsOpen) _Keyence2.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    WriteDgv(2, DateTime.Now, "SCANNER 2", "ERROR: " + ex.Message, "FAIL");
+                    LogEvents.RegisterEvent(2, "OffScanners: " + ex.Message);
+                }
+            }
+        }
+  
+        private void _Keyence1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string Result = _Keyence1.ReadLine();
+            try { Result = Result.TrimEnd('\r'); }
+            catch(Exception ex) { }
+            
+            if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
+            {                
+                Globals.SERIAL_NUMBER1 = Result;
+                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "DATA RECEIVED", "PASS");
+                if(!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
+
+            }    
+        }
+
+        private void _Keyence2_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string Result = _Keyence2.ReadLine();
+            try { Result = Result.TrimEnd('\r'); }
+            catch (Exception ex) { }
+
+            if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
+            {
+                Globals.SERIAL_NUMBER2 = Result;
+                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "DATA RECEIVED", "PASS");
+                if(!Busy_2) Task.Factory.StartNew(() => VerifyProcess2());
+            }
+        }
+
+        private void _TimerReadDAQ(object sender, EventArgs e)
+        {
+            if (!Globals.DAQ_OK) return;
+
+            Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+            if (Globals.IS_ACTIVE_LANE_1) VerifyLane1();
+            if (Globals.IS_ACTIVE_LANE_2) VerifyLane2();
+        }
+
+        void VerifyLane1()
+        {
+            try 
+            {
+                if (Globals.DAQ_OUT_PUTS[1])
+                {
+                    lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4CAF50")); //DEEP GREEN 900
+                    lblLane1IO.Content = Globals.SERIAL_NUMBER1;
+
+                    if (!Busy_1)
+                    {
+                        _Keyence1.Write("LON\r");
+                        Globals.COUNT_RETRY_SCANNING1++;
+
+                        if (Globals.COUNT_RETRY_SCANNING1 > 1)
+                            WriteDgv(1, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
+                    }
+
+                    if (Busy_1 && CheckPointLane1_OK)
+                    {
+                        Ni.WriteDAQ(outLane1_OK);
+                        WaitNSeconds(2);
+                        CheckPointLane1_OK = false;
+                        CleanUP1();
+                    }
+                }
+
+                if (!Globals.DAQ_OUT_PUTS[1])
+                {
+                    Globals.COUNT_RETRY1 = 0;
+
+                    _Keyence1.Write("LOFF\r");
+                    Ni.WriteDAQ(DAQDefault);
+
+                    Busy_1 = false;
+                    lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242")); //DEEP GREEN 900
+                    lblLane1IO.Content = "";
+                    CleanUP1();
+                }
+
+                if (Globals.COUNT_RETRY_SCANNING1 == Globals.RETRIES_SCANNING)
+                {
+                    _Keyence1.Write("LOFF\r");
+                    Ni.WriteDAQ(outLane1_NG);
+                    LogEvents.RegisterEvent(1, "VerifyLane1: " + "Retries limit scanning exceeded " + Globals.COUNT_RETRY_SCANNING1);
+                   
+                    while (Globals.DAQ_OUT_PUTS[1]) 
+                    {
+                        Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                new Action(delegate { }));
+                    }                 
+                }
+
+                if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
+                {
+                    _Keyence1.Write("LOFF\r");
+                    Ni.WriteDAQ(outLane1_NG);
+                    LogEvents.RegisterEvent(1, "VerifyLane1: " + "Retries limit VerifyProcess exceeded " + Globals.COUNT_RETRY1);
+
+                    while (Globals.DAQ_OUT_PUTS[1])
+                    {
+                        Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                new Action(delegate { }));
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                LogEvents.RegisterEvent(1, "VerifyLane1: " + ex.Message);
+            }           
+        }
+
+        void VerifyLane2() 
+        {
+            try 
+            {
+                if (Globals.DAQ_OUT_PUTS[6])
+                {
+                    lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4CAF50")); //DEEP BLACK
+                    lblLane2IO.Content = Globals.SERIAL_NUMBER2;
+
+                    if (!Busy_2)
+                    {
+                        _Keyence2.Write("LON\r");
+                        Globals.COUNT_RETRY_SCANNING2++;
+
+                        if (Globals.COUNT_RETRY_SCANNING2 > 1)
+                            WriteDgv(2, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
+                    }
+
+
+                    if (Busy_2 && CheckPointLane2_OK)
+                    {
+                        Ni.WriteDAQ(outLane2_OK);
+                        WaitNSeconds(2);
+                        CheckPointLane2_OK = false;
+                        CleanUP2();
+                    }
+                }
+                if (!Globals.DAQ_OUT_PUTS[6])
+                {
+                    Globals.COUNT_RETRY2 = 0;
+
+                    _Keyence2.Write("LOFF\r");
+                    Ni.WriteDAQ(DAQDefault);
+
+                    Busy_2 = false;
+                    lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242")); //DEEP BLACK
+                    lblLane2IO.Content = "";
+                    CleanUP2();
+                }
+                if (Globals.COUNT_RETRY_SCANNING2 == Globals.RETRIES_SCANNING)
+                {
+                    _Keyence2.Write("LOFF\r");
+                    Ni.WriteDAQ(outLane2_NG);
+                   
+                    LogEvents.RegisterEvent(2, "VerifyLane2: " + "Retries limit scanning exceeded " + Globals.COUNT_RETRY_SCANNING2);
+       
+                    while (Globals.DAQ_OUT_PUTS[1])
+                    {
+                        Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                new Action(delegate { }));
+                    }
+                }
+
+                if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
+                {
+                    _Keyence2.Write("LOFF\r");
+                    Ni.WriteDAQ(outLane2_NG);                    
+                    LogEvents.RegisterEvent(2, "VerifyLane2: " + "Retries limit VerifyProcess exceeded " + Globals.COUNT_RETRY2);
+                    while (Globals.DAQ_OUT_PUTS[1])
+                    {
+                        Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                new Action(delegate { }));
+                    }
+                }
+            }
+            catch(Exception ex) 
+            {
+                LogEvents.RegisterEvent(2, "VerifyLane2: " + ex.Message);
+            }    
+        }
+
+        void VerifyProcess1() 
+        {
+            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1) || Busy_1) return;
+           
+
+          RetryCheckPoint:
+
+            Busy_1 = true;
+            Globals.COUNT_MATRIX1 = 0;
+            Globals.DT_LANE1 = StaticFunctions.VerifyCheckPoint(Globals.SERIAL_NUMBER1, Globals.STEP_TO_CHECK);
+
+            foreach (DataRow _dr in Globals.DT_LANE1.Rows)
+            {
+                string _TempStep = _dr[7].ToString();
+                string _TempStatus = _dr[8].ToString();
+
+                if (_TempStep == "MRB" || _TempStep == Globals.STEP_TO_CHECK) 
+                {
+                    Globals.COUNT_MATRIX1++; 
+                }
+                else {  }
+            }
+
+
+            if (Globals.COUNT_MATRIX1 != 15)
+            {
+                Globals.COUNT_RETRY1++;
+                CheckPointLane1_OK = false;
+                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY PROCESS RETRY: " + Globals.COUNT_RETRY1.ToString(), "FAIL");
+
+                if (Globals.COUNT_RETRY1 < Globals.RETRIES_CHECKPROCESS) goto RetryCheckPoint;              
+                Busy_1 = false;
+
+                LogEvents.RegisterEvent(1, "VerifyProcess: FAIL " + Globals.SERIAL_NUMBER1);
+
+                DataTable _dtReport = Globals.DT_LANE1.Copy();
+                foreach (DataRow _drReport in _dtReport.Rows) 
+                {
+                    string SN = _drReport[3].ToString();
+                    string Array = _drReport[4].ToString();
+                    string StepName = _drReport[7].ToString();
+                    string Status = _drReport[8].ToString();
+
+                    string LogString = "SN: " + SN + " " +
+                                        "POS: " + Array + " " +
+                                        "STEP: " + StepName + " " +
+                                        "STATUS: " + Status;
+
+                    LogEvents.RegisterEvent(1, "VerifyProcess: DETAIL " + LogString);
+                }              
+            }
+
+            if (Globals.COUNT_MATRIX1 == 15)
+            {
+                CheckPointLane1_OK = true;
+                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY PROCESS", "PASS");
+                CleanUP1();
+
+                LogEvents.RegisterEvent(1, "VerifyProcess: OK " + Globals.SERIAL_NUMBER1);
+            }
+        }
+
+        void VerifyProcess2()
+        {
+            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER2) || Busy_2) return;
+
+          RetryCheckPoint:
+
+            Busy_2 = true;
+            Globals.COUNT_MATRIX2 = 0;
+            Globals.DT_LANE2 = StaticFunctions.VerifyCheckPoint(Globals.SERIAL_NUMBER2, Globals.STEP_TO_CHECK);
+
+            foreach (DataRow _dr in Globals.DT_LANE2.Rows)
+            {
+                string _TempStep = _dr[7].ToString();
+                string _TempStatus = _dr[8].ToString();
+
+                if (_TempStep == "MRB" || _TempStep == Globals.STEP_TO_CHECK) { Globals.COUNT_MATRIX2++; }
+                else { }
+            }
+
+
+            if (Globals.COUNT_MATRIX2 != 15)
+            {
+                Globals.COUNT_RETRY2++;
+                CheckPointLane2_OK = false;
+                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY PROCESS: MISSING STEP", "FAIL");
+
+                if (Globals.COUNT_RETRY2 < Globals.RETRIES_CHECKPROCESS) goto RetryCheckPoint;
+                Busy_2 = false;
+
+                LogEvents.RegisterEvent(2, "VerifyProcess: FAIL " + Globals.SERIAL_NUMBER2);
+
+
+                DataTable _dtReport = Globals.DT_LANE2.Copy();
+                foreach (DataRow _drReport in _dtReport.Rows)
+                {
+                    string SN = _drReport[3].ToString();
+                    string Array = _drReport[4].ToString();
+                    string StepName = _drReport[7].ToString();
+                    string Status = _drReport[8].ToString();
+
+                    string LogString = "SN: " + SN + " " +
+                                        "POS: " + Array + " " +
+                                        "STEP: " + StepName + " " +
+                                        "STATUS: " + Status;
+
+                    LogEvents.RegisterEvent(2, "VerifyProces: DETAIL " + LogString);
+                }
+            }
+
+            if (Globals.COUNT_MATRIX2 == 15)
+            {
+                CheckPointLane2_OK = true;
+                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY PROCESS: ALL STEPS OK", "PASS");
+                CleanUP2();
+                
+
+                LogEvents.RegisterEvent(2, "VerifyProcess: OK " + Globals.SERIAL_NUMBER2);
+            }
+        }
+
+        private void WaitNSeconds(int segundos)
+        {
+            if (segundos < 1) return;
+            DateTime _desired = DateTime.Now.AddSeconds(segundos);
+            while (DateTime.Now < _desired)
+            {
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                      new Action(delegate { }));
+            }
+        }
+
+        void CleanUP1()
+        {
+            Globals.SERIAL_NUMBER1 = string.Empty;
+            Globals.STEPS_MISSING1 = string.Empty;
+            Globals.COUNT_MATRIX1 = 0;
+            Globals.COUNT_RETRY_SCANNING1 = 0;
+            Globals.COUNT_RETRY1 = 0;
+        }
+
+        void CleanUP2()
+        {
+            Globals.SERIAL_NUMBER2 = string.Empty;
+            Globals.STEPS_MISSING2 = string.Empty;
+            Globals.COUNT_MATRIX2 = 0;
+            Globals.COUNT_RETRY_SCANNING2 = 0;
+        }
+
+        void WriteDgv(int _LANE, DateTime _DATE, string _SERIAL_NUMBER, string _PROCESS, string _STATUS)
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {     
+                if(_LANE == 1) 
+                {
+                    try 
+                    {
+                        DgLane1.Items.Add(new DataLane1 { DATE = _DATE, SERIAL_NUMBER = _SERIAL_NUMBER, PROCESS = _PROCESS, STATUS = _STATUS });
+
+                        if (DgLane1.Items.Count > 0)
+                        {
+                            var border = VisualTreeHelper.GetChild(DgLane1, 0) as Decorator;
+                            if (border != null)
+                            {
+                                var scroll = border.Child as ScrollViewer;
+                                if (scroll != null) scroll.ScrollToEnd();
+                            }
+                        }
+                    }
+                    catch(Exception ex) 
+                    {
+                        WriteDgv(1, DateTime.Now, "APP ERROR", ex.Message, "FAIL");
+                        LogEvents.RegisterEvent(1, "WriteDgv: " + ex.Message);
+                    }
+                   
+                }
+
+                if (_LANE == 2) 
+                { 
+                    try 
+                    {
+                        DgLane2.Items.Add(new DataLane2 { DATE = _DATE, SERIAL_NUMBER = _SERIAL_NUMBER, PROCESS = _PROCESS, STATUS = _STATUS });
+
+                        if (DgLane2.Items.Count > 0)
+                        {
+                            var border = VisualTreeHelper.GetChild(DgLane2, 0) as Decorator;
+                            if (border != null)
+                            {
+                                var scroll = border.Child as ScrollViewer;
+                                if (scroll != null) scroll.ScrollToEnd();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteDgv(2, DateTime.Now, "APP ERROR", ex.Message, "FAIL");
+                        LogEvents.RegisterEvent(2, "WriteDgv: " + ex.Message);
+                    }
+                }
+
+                return;
+            }));
+        }
+
+        private void lblLane1IO_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try { if (!string.IsNullOrEmpty(lblLane1IO.Content.ToString())) new HistroyDataWin(1).Show(); }
+            catch(Exception ex) { }        
+        }
+
+        private void lblLane2IO_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try { if (!string.IsNullOrEmpty(lblLane2IO.Content.ToString())) new HistroyDataWin(2).Show(); }
+            catch (Exception ex) { }
+        }
+
+
+        #region Events Handler DAQ
+        NationalInstruments.DAQmx.Task myTask;
+        private NationalInstruments.DAQmx.DigitalSingleChannelReader myDigitalReader;
+        void DAQEvents() 
+        {
+            myTask = new NationalInstruments.DAQmx.Task();
+
+            myTask.DIChannels.CreateChannel("DIO/port1/line0:0", "", NationalInstruments.DAQmx.ChannelLineGrouping.OneChannelForAllLines);
+
+            myTask.Timing.ConfigureChangeDetection("DIO/port1/line0:7", "DIO/port1/line0:7", NationalInstruments.DAQmx.SampleQuantityMode.ContinuousSamples);
+
+            myTask.SynchronizeCallbacks = true;
+
+            //myTask.DigitalChangeDetection += new NationalInstruments.DAQmx.DigitalChangeDetectionEventHandler(MyTask_DigitalChangeDetection);
+            myTask.DigitalChangeDetection += new NationalInstruments.DAQmx.DigitalChangeDetectionEventHandler(MyTask_DigitalChangeDetection);
+
+            myDigitalReader = new NationalInstruments.DAQmx.DigitalSingleChannelReader(myTask.Stream);
+
+            myTask.Start();
+        }
+
+        private void MyTask_DigitalChangeDetection(object sender, NationalInstruments.DAQmx.DigitalChangeDetectionEventArgs e)
+        {
+            
+        }
+
+        #endregion
+
+        #region Generic Events application
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (Globals.DOCK_MENU)
+            {
+                //Margin="10,120,10,440"
+                //Thickness _temp = lblEventosLane1.Margin;
+                //_temp.Left = 200f;
+
+                btnOnOff_Lane1.Visibility = Visibility.Visible;
+                btnOnOff_Lane2.Visibility = Visibility.Visible;
+                Globals.DOCK_MENU = false;
+                DockMenu.Width = 180;
+                return;
+            }
+
+            if (!Globals.DOCK_MENU)
+            {
+                //Thickness _temp = lblEventosLane1.Margin;
+                //_temp.Left = 10f;
+
+
+                btnOnOff_Lane1.Visibility = Visibility.Hidden;
+                btnOnOff_Lane2.Visibility = Visibility.Hidden;
+                Globals.DOCK_MENU = true;
+                DockMenu.Width = 0;
+                return;
+            }
+        }
+
+        private void btnOnOff_Lane1_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            
+            if (Globals.IS_ACTIVE_LANE_1)
+            {
+                LogEvents.RegisterEvent(1, "DISABLE");
+                WriteDgv(1, DateTime.Now, "LANE 1 DISABLE", "NULL", "PASS");
+                Globals.IS_ACTIVE_LANE_1 = false;
+                InitLanes();
+                OffScanners();
+
+                return;
+            }
+
+            if (!Globals.IS_ACTIVE_LANE_1)
+            {
+                LogEvents.RegisterEvent(1, "ENABLE");
+                WriteDgv(1, DateTime.Now, "LANE 1 ACTIVE", "NULL", "PASS");           
+                Globals.IS_ACTIVE_LANE_1 = true;
+                InitLanes();
+                OnScanners();
+                return;
+            }
+        }
+
+        private void btnOnOff_Lane2_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (Globals.IS_ACTIVE_LANE_2)
+            {
+                LogEvents.RegisterEvent(2, "DISABLE");
+                WriteDgv(2, DateTime.Now, "LANE 2 DISABLE", "NULL", "PASS");
+                Globals.IS_ACTIVE_LANE_2 = false;
+                InitLanes();
+                return;
+            }
+
+            if (!Globals.IS_ACTIVE_LANE_2)
+            {
+                LogEvents.RegisterEvent(2, "ENABLE");
+                WriteDgv(2, DateTime.Now, "LANE 2 ACTIVE", "NULL", "PASS");                
+                Globals.IS_ACTIVE_LANE_2 = true;
+                InitLanes();
+                return;
+            }
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left) DragMove();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void DgLane1_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var row = e.Row;
+            DataLane1 _myData = new DataLane1();
+            _myData = (DataLane1)row.DataContext;
+
+            if (_myData.STATUS == "PASS")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1B5E20")); //DEEP GREEN 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+            if (_myData.STATUS == "FAIL")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B71C1C")); //DEEP RED 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+            if (_myData.STATUS == "UNKOWN")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BF360C")); //DEEP ORANGE 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+        }
+
+        private void DgLane2_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var row = e.Row;
+            DataLane2 _myData = new DataLane2();
+            _myData = (DataLane2)row.DataContext;
+
+            if (_myData.STATUS == "PASS")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1B5E20")); //DEEP GREEN 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+            if (_myData.STATUS == "FAIL")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B71C1C")); //DEEP RED 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+            if (_myData.STATUS == "UNKOWN")
+            {
+                row.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BF360C")); //DEEP ORANGE 900
+                row.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+        }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_Keyence1.IsOpen) _Keyence1.Close();
+            if (_Keyence2.IsOpen) _Keyence1.Close();
+
+            myTask.Dispose();
+        }
+
+
+
+        #endregion
+
+  
+    }
+}
