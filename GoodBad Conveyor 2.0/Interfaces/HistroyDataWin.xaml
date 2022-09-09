@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:GoodBad_Conveyor_2._0"
         mc:Ignorable="d"
         Title="HistroyDataWin" 
-        Height="647.073" 
-        Width="643.961"
+        Height="587.073" 
+        Width="574.961"
         AllowsTransparency="True"
         Background="Transparent" 
         ResizeMode="NoResize"
         BorderThickness="0"
         BorderBrush="Transparent"
-        WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="Manual"
+        Top="0"          
         WindowStyle="None">
 
 
@@ -55,25 +56,25 @@
         <Grid Background="White" Opacity="90" MouseDown="Grid_MouseDown">
             <DataGrid x:Name="DgMesData"
             HorizontalAlignment="Left" 
-            Height="538" 
-            Margin="10,79,0,0" 
+            Height="487" 
+            Margin="9,72,0,0" 
             VerticalAlignment="Top" 
-            Width="602"
+            Width="536"
             LoadingRow="DgMesData_LoadingRow"/>
 
             <Label x:Name="lblTitle"
             Content="MES Data"
-            Width="408" Height="60" 
+            Width="349" Height="60" 
             FontSize="21"
             FontWeight="Normal" 
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Background="#263238"
+            Background="#263250"
             Style="{DynamicResource RoundLabel}"
             Foreground="WhiteSmoke" 
-            Margin="120,10,96,0"/>
+            Margin="11,5,0,0"/>
 
             <Button x:Name="btnExit"
                 Style="{DynamicResource RoundButton}"
@@ -82,9 +83,9 @@
                 Background="#D50000"
                 Foreground="WhiteSmoke"
                 BorderBrush="Transparent"
-                HorizontalAlignment="Center"
-                Margin="566,10,12,592" 
-                VerticalAlignment="Center" 
+                HorizontalAlignment="Left"
+                Margin="499,5,0,0" 
+                VerticalAlignment="Top" 
                 Width="46" 
                 Height="25"
                 Click="btnExit_Click" RenderTransformOrigin="1.78,0.548"/>

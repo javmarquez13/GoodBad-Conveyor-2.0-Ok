@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoodBad_Conveyor_2._0"
         mc:Ignorable="d"       
-        Title="MainWindow" Height="884" Width="1344"
+        Title="MainWindow" Height="894" Width="1344"
         Topmost="False"
         AllowsTransparency="True"
         Background="Transparent" 
@@ -158,18 +158,18 @@
                 LoadingRow="DgLane1_LoadingRow"/>
 
             <Label x:Name="lblTitle"
-                Content="GOOD BAD CONVEYOR 2.0"
-                Width="436" Height="60" 
+                Content="GOOD BAD CONVEYOR"
+                Width="436" Height="70" 
                 FontSize="21"
                 FontWeight="Normal" 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#263238"
+                Background="#263250"
                 Style="{DynamicResource RoundLabel}"
                 Foreground="WhiteSmoke" 
-                Margin="460,8,428,796"/>
+                Margin="460,4,428,800"/>
 
             <Button x:Name="btnExit"
                 Style="{DynamicResource RoundButton}"
@@ -209,11 +209,11 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Background="#263250"
-                Foreground="White" Margin="904,6,272,827"/>
+                Foreground="White" Margin="904,1,272,832"/>
 
             <Label x:Name="lblLane1Disable"
                 Content="LANE 1 DISABLE"                
-                Width="0" Height="380"
+                Width="1270" Height="380"
                 FontSize="20"
                 FontWeight="Normal" 
                 HorizontalAlignment="Center"
@@ -251,21 +251,21 @@
                 Background="#263238"
                 Style="{DynamicResource RoundLabel}"
                 Foreground="WhiteSmoke" 
-                Margin="0,0,1145,0"/>
+                Margin="0,-5,1145,-5" Height="884" VerticalAlignment="Top"/>
 
             <Button x:Name="btnMenu"
                 Style="{DynamicResource RoundButton}"
-                Content="MENU"
+                Content="M"
                 FontSize="14"
                 Foreground="WhiteSmoke"
                 BorderThickness=".5"             
                 BorderBrush="Transparent"
-                Background="#263238"
+                Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="27,16,0,791" 
+                Margin="6,5,0,824" 
                 VerticalAlignment="Center" 
-                Width="136" 
-                Height="57"
+                Width="45" 
+                Height="45"
                 Click="btnMenu_Click"/>
 
             <Button x:Name="btnOnOff_Lane1"
@@ -275,9 +275,9 @@
                 Foreground="WhiteSmoke"
                 BorderThickness=".5"             
                 BorderBrush="Transparent"
-                Background="#263250"
+                Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="31,80,0,0" 
+                Margin="29,75,0,0" 
                 VerticalAlignment="Top" 
                 Width="120" 
                 Height="50"
@@ -290,17 +290,43 @@
                 Foreground="WhiteSmoke"
                 BorderThickness=".5"             
                 BorderBrush="Transparent"
-                Background="#263250"
+                Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="31,144,0,670" 
+                Margin="29,139,0,675" 
                 VerticalAlignment="Center" 
                 Width="120" 
                 Height="50"
                 Click="btnOnOff_Lane2_Click"/>
 
+            <Button x:Name="btnDebug"
+                Style="{DynamicResource RoundButton}"
+                Content="DEBUG"
+                FontSize="14"
+                Foreground="WhiteSmoke"
+                BorderThickness=".5"             
+                BorderBrush="Transparent"
+                Background="#455A64"
+                HorizontalAlignment="Left"
+                Margin="29,204,0,610" 
+                VerticalAlignment="Center" 
+                Width="120" 
+                Height="50"
+                Click="btnDebug_Click"/>
 
-
-
+            <Button x:Name="btnPassThru"
+                Style="{DynamicResource RoundButton}"
+                Content="PASS THRU"
+                FontSize="14"
+                Foreground="WhiteSmoke"
+                BorderThickness=".5"             
+                BorderBrush="Transparent"
+                Background="#00897B"
+                HorizontalAlignment="Left"
+                Margin="29,798,0,16" 
+                VerticalAlignment="Center" 
+                Width="120" 
+                Height="50"
+                Click="btnPassThru_Click"/>
         </Grid>
     </Border>
 </Window>

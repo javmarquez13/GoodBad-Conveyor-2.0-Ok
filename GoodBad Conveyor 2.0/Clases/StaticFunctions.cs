@@ -74,6 +74,136 @@ namespace GoodBad_Conveyor_2._0
             return _dtResult;
         }
 
+
+
+        public static DataTable VerifyCheckPointNew(string SerialNumber)
+        {
+            DataTable _dtResult = new DataTable();
+            DataTable _dtPanel = new DataTable();
+
+            DataSet _dsQuery = new MES.Service().SelectBySerialNumber(SerialNumber);
+            int _CustomerID = Convert.ToInt32(_dsQuery.Tables[0].Rows[0][2]);
+            int _WIP_ID = Convert.ToInt32(_dsQuery.Tables[0].Rows[0][0]);
+
+            if (SerialNumber.Length == Globals.SMOTHER_LENGH) _dtPanel = new MES.Service().ListByBoard(_WIP_ID + 1).Tables[0];
+            if (SerialNumber.Length == Globals.SN_LENGH) _dtPanel = new MES.Service().ListByBoard(_WIP_ID).Tables[0];
+
+            _dtResult = _dtPanel.Copy();
+            _dtResult.Columns.Add("History");
+            _dtResult.Columns.Add("Status");
+
+            DataTable EventsByStepMatrix = new DataTable();
+
+            foreach (DataRow _dr in _dtPanel.Rows)
+            {
+                _dsQuery = new MES.Service().BoardHistoryReport(_dr[3].ToString(), _CustomerID);
+
+                foreach (string _Key in Globals.DATA_MATRIX)
+                {
+                    string StepToCheck = ConfigFiles.reader("DATA_MATRIX", _Key, Globals.CONFIG_FILE);
+
+                    try
+                    {
+                        EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
+                                     .Where(r => r.Field<string>("Test_Process") == "QC / MRB")
+                                     .CopyToDataTable();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                              .Select(b => b["History"] = "QC / MRB")
+                                             .ToList();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                 .Select(b => b["Status"] = "QC / MRB")
+                                .ToList();
+
+                        break;
+                    }
+                    catch (Exception) { }
+
+
+                    try
+                    {
+                        EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
+                                                               .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                           r.Field<string>("Test_Process") == Globals.STEP_TO_CHECK &&
+                                                                           r.Field<string>("TestStatus") == "Pass")
+                                                               .CopyToDataTable();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                              .Select(b => b["History"] = Globals.STEP_TO_CHECK)
+                                             .ToList();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                 .Select(b => b["Status"] = "Pass")
+                                .ToList();
+
+                        break;
+                    }
+                    catch (Exception) { }
+
+                    try
+                    {
+                        EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
+                                                                  .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                              r.Field<string>("Test_Process") == StepToCheck &&
+                                                                              r.Field<string>("TestStatus") == "Fail")
+                                                                  .CopyToDataTable();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                                     .Select(b => b["History"] = StepToCheck)
+                                                    .ToList();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                 .Select(b => b["Status"] = "Fail")
+                                .ToList();
+                        break;
+                    }
+                    catch (Exception) { }
+                   
+                    try 
+                    {
+                        EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
+                                                                  .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                              r.Field<string>("Test_Process") == StepToCheck &&
+                                                                              r.Field<string>("TestStatus") == "Pass")
+                                                                  .CopyToDataTable();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                                     .Select(b => b["History"] = StepToCheck)
+                                                    .ToList();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                 .Select(b => b["Status"] = "Pass")
+                                .ToList();
+                    }
+                    catch (Exception) 
+                    {
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                                               .Select(b => b["History"] = StepToCheck)
+                                                              .ToList();
+
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                            .Select(b => b["Status"] = "Missing Step")
+                                           .ToList();
+
+                        break;
+                    }                                       
+                }
+            }
+
+            return _dtResult;
+        }
+
+
+
+
+
+
+
+
+
+
+
         public static void RejectedNotify(int Lane) 
         {
             if(Lane == 1) 

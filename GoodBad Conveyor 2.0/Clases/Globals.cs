@@ -155,6 +155,21 @@ namespace GoodBad_Conveyor_2._0
             }
         }
 
+        private static bool _PassThrue = false;
+        public static bool PASS_THRUE
+        {
+            get
+            {
+                return _PassThrue;
+            }
+            set
+            {
+                _PassThrue = value;
+            }
+        }
+
+
+
         #endregion
 
         #region Variables MES INFORMATION
@@ -303,6 +318,20 @@ namespace GoodBad_Conveyor_2._0
             set
             {
                 _DT_LANE2 = value;
+            }
+        }
+
+
+        private static bool _DebugMES = false;
+        public static bool DEBUG_MES
+        {
+            get
+            {
+                return _DebugMES;
+            }
+            set
+            {
+                _DebugMES = value;
             }
         }
 

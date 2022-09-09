@@ -18,7 +18,7 @@ namespace GoodBad_Conveyor_2._0
             if(LANE == 13) logText = DateTime.Now.ToString() + " - OK: " + LOG_STRING;
             if(LANE == 14) logText = DateTime.Now.ToString() + " - ERROR: " + LOG_STRING;
 
-            string LogName = DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_GoodBadConveyor.log";
+            string LogName = DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_GoodBadConveyor.txt";
             string LogPath = @"C:\GoodBadConveyor\AppLogFiles\"+LogName;
 
             if (!Directory.Exists(@"C:\GoodBadConveyor\AppLogFiles\")) Directory.CreateDirectory(@"C:\GoodBadConveyor\AppLogFiles\");
