@@ -136,7 +136,7 @@ namespace GoodBad_Conveyor_2._0
             //DC12622008107089
             //DataTable _debug = StaticFunctions.VerifyCheckPointNew("DC21522008189069");
 
-            LogEvents.RegisterEvent(13, "Initializing application GoodBad Conveyor 2.0");
+            LogEvents.RegisterEvent(13, "Initializing application GOOD BAD CONVEYOR");
 
             Ni.WriteDAQ(DAQDefault);
 
@@ -398,7 +398,8 @@ namespace GoodBad_Conveyor_2._0
                                                     new Action(delegate { }));
                         }
 
-                        Ni.WriteDAQ(DAQDefault); ////EVALUAR
+                        Ni.WriteDAQ(DAQDefault);
+
                         CheckPointLane1_OK = false;
                         CleanUP1();
                     }
@@ -411,10 +412,13 @@ namespace GoodBad_Conveyor_2._0
                     if(!Globals.PASS_THRUE) 
                         _Keyence1.Write("LOFF\r");
 
-                    Ni.WriteDAQ(DAQDefault);
-
                     Busy_1 = false;
-                    lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242")); //DEEP GREEN 900
+
+                    if(Globals.PASS_THRUE) 
+                        lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
+                    else                       
+                        lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
+
                     lblLane1IO.Content = "";
                     CleanUP1();
                 }
@@ -431,7 +435,9 @@ namespace GoodBad_Conveyor_2._0
                         Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
                         Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                                 new Action(delegate { }));
-                    }                 
+                    }
+
+                    Ni.WriteDAQ(DAQDefault);
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
@@ -447,6 +453,8 @@ namespace GoodBad_Conveyor_2._0
                         Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                                 new Action(delegate { }));
                     }
+
+                    Ni.WriteDAQ(DAQDefault);
                 }
             }
             catch(Exception ex)
@@ -485,6 +493,8 @@ namespace GoodBad_Conveyor_2._0
                                                     new Action(delegate { }));
                         }
 
+                        Ni.WriteDAQ(DAQDefault);
+
                         CheckPointLane2_OK = false;
                         CleanUP2();
                     }
@@ -497,10 +507,13 @@ namespace GoodBad_Conveyor_2._0
                     if (!Globals.PASS_THRUE)
                         _Keyence2.Write("LOFF\r");
 
-                    Ni.WriteDAQ(DAQDefault);
-
                     Busy_2 = false;
-                    lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242")); //DEEP BLACK
+
+                    if (Globals.PASS_THRUE)
+                        lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
+                    else
+                        lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
+
                     lblLane2IO.Content = "";
                     CleanUP2();
                 }
@@ -518,6 +531,8 @@ namespace GoodBad_Conveyor_2._0
                         Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                                 new Action(delegate { }));
                     }
+
+                    Ni.WriteDAQ(DAQDefault);
                 }
 
                 if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
@@ -533,6 +548,8 @@ namespace GoodBad_Conveyor_2._0
                         Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                                 new Action(delegate { }));
                     }
+
+                    Ni.WriteDAQ(DAQDefault);
                 }
             }
             catch(Exception ex) 
@@ -951,14 +968,20 @@ namespace GoodBad_Conveyor_2._0
         {           
             if (Globals.PASS_THRUE)
             {
-                lblLane1Disable.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BDBDBD"));
-                lblLane1Disable.Width = 1270;
-                lblLane1Disable.Content = "LANE 1 DISABLE";
+                Globals.IS_ACTIVE_LANE_1 = false;
+                Globals.IS_ACTIVE_LANE_2 = false;
+                InitLanes();
 
-                lblLane2Disable.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#BDBDBD"));
-                lblLane2Disable.Width = 1270;
-                lblLane2Disable.Content = "LANE 2 DISABLE";
+                lblLane1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
+                lblLane1.Content = "LANE 1";
+                lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
 
+                lblLane2.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
+                lblLane2.Content = "LANE 2";
+                lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#424242"));
+
+                WriteDgv(1, DateTime.Now, "NULL", "PASS THRUE DISABLE", "PASS");
+                WriteDgv(2, DateTime.Now, "NULL", "PASS THRUE DISABLE", "PASS");
                 LogEvents.RegisterEvent(13, "DISABLE PASS THROUGH MODE");
                 Globals.PASS_THRUE = false;
                 return;
@@ -969,16 +992,21 @@ namespace GoodBad_Conveyor_2._0
                 bool? result = new UsersLogin().ShowDialog();
                 if (result == true) 
                 {
-                    Globals.IS_ACTIVE_LANE_1 = false;
-                    Globals.IS_ACTIVE_LANE_2 = false;
-                    InitLanes();
+                    lblLane1Disable.Visibility = Visibility.Hidden;
+                    lblLane1Disable.Width = 0;
+                    lblLane2Disable.Visibility = Visibility.Hidden;
+                    lblLane2Disable.Width = 0;
 
-                    lblLane1Disable.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#004D40"));
-                    lblLane1Disable.Content = "LANE 1 PASS THROUGH >>>";
+                    lblLane1.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
+                    lblLane1.Content = "LANE 1 PASS THRUE >>>";
+                    lblLane1IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
 
-                    lblLane2Disable.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#004D40"));
-                    lblLane2Disable.Content = "LANE 2 PASS THROUGH >>>";
+                    lblLane2.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
+                    lblLane2.Content = "LANE 2 PASS THRUE >>>";
+                    lblLane2IO.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00897B"));
 
+                    WriteDgv(1, DateTime.Now, "NULL", "PASS THRUE ENABLE", "PASS");
+                    WriteDgv(2, DateTime.Now, "NULL", "PASS THRUE ENABLE", "PASS");
                     LogEvents.RegisterEvent(13, "ENABLE PASS THROUGH MODE");
                     Globals.PASS_THRUE = true;
 
