@@ -15,6 +15,23 @@ namespace GoodBad_Conveyor_2._0
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    ///
+    /// 
+    /// DEVELOPED BY JAVIER MARQUEZ
+    /// GOOD BAD CONVEYOR 
+    /// 
+    /// 
+    /// 
+    /// 1.0.0.51
+    /// FIRST RELEASE TO PRD 
+    /// 22 SEP 2022
+    ///
+
+
+
+
+
+
     public partial class MainWindow : Window
     {
         SerialPort _Keyence1 = new SerialPort();
@@ -154,10 +171,7 @@ namespace GoodBad_Conveyor_2._0
                 Version myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
                 lblVersion.Content = "PRD v" + myVersion;
             }
-            else
-            {
-                lblVersion.Content = "UAT v" + "1.0.0.0";
-            }
+            else lblVersion.Content = "UAT v" + "1.0.0.0";
         }
 
         void InitializeDgv()
@@ -905,7 +919,8 @@ namespace GoodBad_Conveyor_2._0
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            Application.Current.Shutdown();
+            //Environment.Exit(0);
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -1028,17 +1043,10 @@ namespace GoodBad_Conveyor_2._0
         {
             if (_Keyence1.IsOpen) _Keyence1.Close();
             if (_Keyence2.IsOpen) _Keyence1.Close();
+            //myTask.Dispose();
 
-            myTask.Dispose();
+            LogEvents.RegisterEvent(13, "Finalizing application GOOD BAD CONVEYOR");
         }
-
-
-
-
-
-
-
-
         #endregion
 
   

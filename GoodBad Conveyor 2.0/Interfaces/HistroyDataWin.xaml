@@ -52,7 +52,7 @@
         </Style>
     </Window.Resources>
 
-    <Border BorderThickness="10" BorderBrush="#263238" CornerRadius="10" Margin="0,0,0,0">
+    <Border BorderThickness="7" BorderBrush="#263238" CornerRadius="7" Margin="0,0,0,0">
         <Grid Background="White" Opacity="90" MouseDown="Grid_MouseDown">
             <DataGrid x:Name="DgMesData"
             HorizontalAlignment="Left" 
@@ -77,14 +77,14 @@
             Margin="11,5,0,0"/>
 
             <Button x:Name="btnExit"
-                Style="{DynamicResource RoundButton}"
+                Style="{DynamicResource RoundExitButton}"
                 Content="X"
                 FontSize="14"
                 Background="#D50000"
                 Foreground="WhiteSmoke"
                 BorderBrush="Transparent"
                 HorizontalAlignment="Left"
-                Margin="499,5,0,0" 
+                Margin="523,-8,-8,0" 
                 VerticalAlignment="Top" 
                 Width="46" 
                 Height="25"

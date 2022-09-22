@@ -23,7 +23,7 @@ namespace GoodBad_Conveyor_2._0
             {
                 string[] Devices = DaqSystem.Local.Devices;
 
-                DaqSystem.Local.DaqWarning += Local_DaqWarning;
+                //DaqSystem.Local.DaqWarning += Local_DaqWarning;
              
                 TaskReadIn = new NationalInstruments.DAQmx.Task();
                 //TaskWriteOut = new NationalInstruments.DAQmx.Task();

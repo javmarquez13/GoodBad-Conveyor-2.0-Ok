@@ -51,7 +51,7 @@
 
     </Window.Resources>
 
-    <Border BorderThickness="10" BorderBrush="White" CornerRadius="10" Margin="0,0,0,0">
+    <Border BorderThickness="7" BorderBrush="White" CornerRadius="10" Margin="0,0,0,0">
         <Grid Background="White" MouseDown="Grid_MouseDown" Margin="0,0,0,0">
 
             <Label x:Name="lblLane2"
@@ -173,30 +173,29 @@
                 Margin="460,4,428,800"/>
 
             <Button x:Name="btnExit"
-                Style="{DynamicResource RoundButton}"
+                Style="{DynamicResource RoundExitButton}"
                 Content="X"
                 FontSize="14"
                 Background="#D50000"
                 Foreground="WhiteSmoke"
                 BorderBrush="Transparent"
                 HorizontalAlignment="Right"
-                Margin="0,-1,2,840" 
+                Margin="0,-8,-8,863" 
                 VerticalAlignment="Center" 
-                Width="45" 
+                Width="46" 
                 Height="25"
                 Click="btnExit_Click"/>
 
             <Button x:Name="btnMinimize"
-                Style="{DynamicResource RoundButton}"
                 Content="_"
                 FontSize="14"
                 Background="White"
                 BorderBrush="Transparent"
                 HorizontalAlignment="Right"
-                Margin="0,-4,64,0" 
+                Margin="0,-7,37,0" 
                 VerticalAlignment="Top" 
                 Width="46" 
-                Height="26"
+                Height="23"
                 Click="btnMinimize_Click"/>
 
             <Label x:Name="lblVersion"
