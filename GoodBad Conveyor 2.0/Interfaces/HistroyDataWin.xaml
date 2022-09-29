@@ -54,13 +54,6 @@
 
     <Border BorderThickness="7" BorderBrush="#263238" CornerRadius="7" Margin="0,0,0,0">
         <Grid Background="White" Opacity="90" MouseDown="Grid_MouseDown">
-            <DataGrid x:Name="DgMesData"
-            HorizontalAlignment="Left" 
-            Height="487" 
-            Margin="9,72,0,0" 
-            VerticalAlignment="Top" 
-            Width="536"
-            LoadingRow="DgMesData_LoadingRow"/>
 
             <Label x:Name="lblTitle"
             Content="MES Data"
@@ -76,6 +69,17 @@
             Foreground="WhiteSmoke" 
             Margin="11,5,0,0"/>
 
+
+
+
+            <DataGrid x:Name="DgMesData"
+            HorizontalAlignment="Left" 
+            Height="487" 
+            Margin="9,72,0,0" 
+            VerticalAlignment="Top" 
+            Width="536"
+            LoadingRow="DgMesData_LoadingRow"/>
+
             <Button x:Name="btnExit"
                 Style="{DynamicResource RoundExitButton}"
                 Content="X"
@@ -89,6 +93,12 @@
                 Width="46" 
                 Height="25"
                 Click="btnExit_Click" RenderTransformOrigin="1.78,0.548"/>
+            
+            <Ellipse Height="Auto" Width="Auto" Margin="121,27,422,527">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/FlagGreen_40967.ico"/>
+                </Ellipse.Fill>
+            </Ellipse>
 
 
 

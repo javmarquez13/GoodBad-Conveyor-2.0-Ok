@@ -26,12 +26,6 @@ namespace GoodBad_Conveyor_2._0
     /// FIRST RELEASE TO PRD 
     /// 22 SEP 2022
     ///
-
-
-
-
-
-
     public partial class MainWindow : Window
     {
         SerialPort _Keyence1 = new SerialPort();
@@ -833,9 +827,9 @@ namespace GoodBad_Conveyor_2._0
                 btnOnOff_Lane2.Visibility = Visibility.Visible;
                 btnDebug.Visibility = Visibility.Visible;
                 btnPassThru.Visibility = Visibility.Visible;
-                btnMenu.Content = "MENU";
-                btnMenu.Width = 168;
-                btnMenu.Height = 75;
+                //btnMenu.Content = "MENU";
+                //btnMenu.Width = 168;
+                //btnMenu.Height = 75;
                 Globals.DOCK_MENU = false;
                 DockMenu.Width = 180;
                 return;
@@ -850,9 +844,9 @@ namespace GoodBad_Conveyor_2._0
                 btnOnOff_Lane2.Visibility = Visibility.Hidden;
                 btnDebug.Visibility = Visibility.Hidden;
                 btnPassThru.Visibility = Visibility.Hidden;
-                btnMenu.Content = "M";
-                btnMenu.Width = 45;
-                btnMenu.Height = 45;
+                //btnMenu.Content = "M";
+                //btnMenu.Width = 45;
+                //btnMenu.Height = 45;
                 Globals.DOCK_MENU = true;
                 DockMenu.Width = 0;
                 return;

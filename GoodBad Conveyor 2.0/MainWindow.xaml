@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoodBad_Conveyor_2._0"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"       
         Title="SMART CONVEYOR" Height="894" Width="1344"
         Topmost="False"
@@ -27,6 +28,7 @@
             <!--<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="HorizontalAlignment" Value="Stretch" />-->
         </Style>
+
         <Style TargetType="{x:Type Label}" x:Key="RoundLabel">
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -34,6 +36,15 @@
                 </Style>
             </Style.Resources>
         </Style>
+
+        <Style TargetType="{x:Type Label}" x:Key="RoundLabelTop">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="0,0,7,7" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
         <Style TargetType="{x:Type DockPanel}" x:Key="RoundDock">
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -44,7 +55,7 @@
         <Style TargetType="{x:Type Button}" x:Key="RoundButton">
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10" />
+                    <Setter Property="CornerRadius" Value="7" />
                 </Style>
             </Style.Resources>
         </Style>
@@ -53,6 +64,7 @@
 
     <Border BorderThickness="7" BorderBrush="White" CornerRadius="10" Margin="0,0,0,0">
         <Grid Background="White" MouseDown="Grid_MouseDown" Margin="0,0,0,0">
+
 
             <Label x:Name="lblLane2"
                 Content="LANE 2"
@@ -199,7 +211,7 @@
                 Click="btnMinimize_Click"/>
 
             <Label x:Name="lblVersion"
-                Style="{DynamicResource RoundLabel}"
+                Style="{DynamicResource RoundLabelTop}"
                 Content="v1.0.0.0"
                 Width="148" Height="31" 
                 FontSize="14"
@@ -209,7 +221,7 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Background="#263250"
-                Foreground="White" Margin="904,1,272,832"/>
+                Foreground="White" Margin="1093,-7,89,856"/>
 
             <Label x:Name="lblLane1Disable"
                 Content="LANE 1 DISABLE"                
@@ -239,21 +251,23 @@
                 Foreground="WhiteSmoke" 
                 Margin="26,468,28,16"/>
 
-            <!--<DockPanel 
-                x:Name="DockMenu"
-                Style="{DynamicResource RoundDock}"
-                HorizontalAlignment="Left"  
-                Background="#37474F"               
-                Width="180" Margin="2,2,2,2"/>-->
-
             <Label x:Name="DockMenu"
                 Content="" 
                 Background="#263238"
                 Style="{DynamicResource RoundLabel}"
                 Foreground="WhiteSmoke" 
-                Margin="0,-5,1145,-5" Height="884" VerticalAlignment="Top"/>
+                Margin="-1,-1,1146,0" Height="881" VerticalAlignment="Top"/>
 
-            <Button x:Name="btnMenu"
+
+            <Button x:Name="btnMenu" 
+                    Click="btnMenu_Click"
+                    Margin="9,8,0,842"
+                    Style="{StaticResource TopButton}">
+                <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+            </Button>
+
+
+            <!--<Button x:Name="btnMenu"
                 Style="{DynamicResource RoundButton}"
                 Content="M"
                 FontSize="14"
@@ -266,7 +280,7 @@
                 VerticalAlignment="Center" 
                 Width="45" 
                 Height="45"
-                Click="btnMenu_Click"/>
+                Click="btnMenu_Click"/>-->
 
             <Button x:Name="btnOnOff_Lane1"
                 Style="{DynamicResource RoundButton}"
@@ -277,10 +291,10 @@
                 BorderBrush="Transparent"
                 Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="29,75,0,0" 
+                Margin="29,65,0,0" 
                 VerticalAlignment="Top" 
                 Width="120" 
-                Height="50"
+                Height="35"
                 Click="btnOnOff_Lane1_Click"/>
 
             <Button x:Name="btnOnOff_Lane2"
@@ -292,10 +306,10 @@
                 BorderBrush="Transparent"
                 Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="29,139,0,675" 
+                Margin="29,118,0,728" 
                 VerticalAlignment="Center" 
                 Width="120" 
-                Height="50"
+                Height="34"
                 Click="btnOnOff_Lane2_Click"/>
 
             <Button x:Name="btnDebug"
@@ -307,10 +321,10 @@
                 BorderBrush="Transparent"
                 Background="#455A64"
                 HorizontalAlignment="Left"
-                Margin="29,204,0,610" 
+                Margin="29,170,0,676" 
                 VerticalAlignment="Center" 
                 Width="120" 
-                Height="50"
+                Height="34"
                 Click="btnDebug_Click"/>
 
             <Button x:Name="btnPassThru"
@@ -322,11 +336,17 @@
                 BorderBrush="Transparent"
                 Background="#00897B"
                 HorizontalAlignment="Left"
-                Margin="29,798,0,16" 
+                Margin="29,821,0,23" 
                 VerticalAlignment="Center" 
                 Width="120" 
-                Height="50"
+                Height="36"
                 Click="btnPassThru_Click"/>
+            <Ellipse Height="Auto" Width="Auto" Margin="543,35,769,826">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="Resources/FlagGreen_40967.ico"/>
+                </Ellipse.Fill>
+
+            </Ellipse>
         </Grid>
     </Border>
 </Window>
