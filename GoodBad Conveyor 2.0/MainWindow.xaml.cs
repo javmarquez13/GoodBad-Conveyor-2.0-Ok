@@ -279,6 +279,7 @@ namespace GoodBad_Conveyor_2._0
                     _Keyence1.Parity = Parity.None;
                     _Keyence1.Handshake = Handshake.None;
                     _Keyence1.DataReceived += _Keyence1_DataReceived;
+                    _Keyence1.ErrorReceived += _Keyence1_ErrorReceived;
                     _Keyence1.Open();
                 }
                 catch (Exception ex)
@@ -341,31 +342,64 @@ namespace GoodBad_Conveyor_2._0
   
         private void _Keyence1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string Result = _Keyence1.ReadLine();
-            try { Result = Result.TrimEnd('\r'); }
-            catch(Exception ex) { }
-            
-            if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
-            {                
-                Globals.SERIAL_NUMBER1 = Result;
-                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "DATA RECEIVED", "PASS");
-                if(!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
+            string Result = String.Empty;
 
-            }    
+            try 
+            {
+                if (Globals.SCANNER_BASE == "USB")
+                    Result = _Keyence1.ReadExisting();
+
+                if (Globals.SCANNER_BASE == "SERIAL")
+                    Result = _Keyence1.ReadLine();
+
+                try { Result = Result.TrimEnd('\r'); }
+                catch (Exception ex) { LogEvents.RegisterEvent(1, "Keyence1_DataReceived Delete r: " + ex.Message); }
+
+                if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
+                {
+                    Globals.SERIAL_NUMBER1 = Result;
+                    WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "DATA RECEIVED", "PASS");
+                    if (!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
+
+                }
+            }
+            catch(Exception ex) 
+            {
+                LogEvents.RegisterEvent(1, "Keyence1_DataReceived: " + ex.Message);
+            }        
+        }
+
+        private void _Keyence1_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+
         }
 
         private void _Keyence2_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string Result = _Keyence2.ReadLine();
-            try { Result = Result.TrimEnd('\r'); }
-            catch (Exception ex) { }
+            string Result = String.Empty;
 
-            if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
+            try 
             {
-                Globals.SERIAL_NUMBER2 = Result;
-                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "DATA RECEIVED", "PASS");
-                if(!Busy_2) Task.Factory.StartNew(() => VerifyProcess2());
+                if (Globals.SCANNER_BASE == "USB")
+                    Result = _Keyence2.ReadExisting();
+
+                if (Globals.SCANNER_BASE == "SERIAL")
+                    Result = _Keyence2.ReadLine();
+
+                try { Result = Result.TrimEnd('\r'); }
+                catch (Exception ex) { }
+
+                if (Result.Length == Globals.SN_LENGH || Result.Length == Globals.SMOTHER_LENGH)
+                {
+                    Globals.SERIAL_NUMBER2 = Result;
+                    WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "DATA RECEIVED", "PASS");
+                    if (!Busy_2) Task.Factory.StartNew(() => VerifyProcess2());
+                }
             }
+            catch(Exception ex) 
+            {
+                LogEvents.RegisterEvent(2, "Keyence2_DataReceived: " + ex.Message);
+            }      
         }
 
         private void _TimerReadDAQ(object sender, EventArgs e)
@@ -582,7 +616,7 @@ namespace GoodBad_Conveyor_2._0
                 string _TempStatus = _dr[8].ToString();
 
                 //if (_TempStep == "MRB" || _TempStep == Globals.STEP_TO_CHECK) 
-                if (_TempStep == "QC / MRB" || _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass") 
+                if (_TempStep == "QC / MRB" || _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || _TempStep == "FVT / PBTS" && _TempStatus == "Fail") 
                 {
                     Globals.COUNT_MATRIX1++; 
                 }

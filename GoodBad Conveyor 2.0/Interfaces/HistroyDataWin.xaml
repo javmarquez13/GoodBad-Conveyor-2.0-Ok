@@ -94,11 +94,7 @@
                 Height="25"
                 Click="btnExit_Click" RenderTransformOrigin="1.78,0.548"/>
             
-            <Ellipse Height="Auto" Width="Auto" Margin="121,27,422,527">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/FlagGreen_40967.ico"/>
-                </Ellipse.Fill>
-            </Ellipse>
+    
 
 
 

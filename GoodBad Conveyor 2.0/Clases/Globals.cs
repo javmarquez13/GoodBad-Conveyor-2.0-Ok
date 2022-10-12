@@ -16,9 +16,20 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                return @"\\MXCHIM0REL02\Dexcom\TEApplications\GoodBad Conveyor 2.0\Config.INI";
+                return @"C:\GoodBadConveyor\Config.INI";
             }
         }
+
+
+
+        public static string SCANNER_BASE
+        {
+            get
+            {
+                return ConfigFiles.reader("KEYENCE", "BASE", CONFIG_FILE);
+            }
+        }
+
 
         public static string COM_SCANNER1
         {
