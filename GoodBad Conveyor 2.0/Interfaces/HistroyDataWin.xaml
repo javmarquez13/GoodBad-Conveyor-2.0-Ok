@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GoodBad_Conveyor_2._0"
         mc:Ignorable="d"
         Title="HistroyDataWin" 
-        Height="587.073" 
-        Width="574.961"
+        Height="478.073" 
+        Width="468.461"
         AllowsTransparency="True"
         Background="Transparent" 
         ResizeMode="NoResize"
@@ -57,8 +57,8 @@
 
             <Label x:Name="lblTitle"
             Content="MES Data"
-            Width="349" Height="60" 
-            FontSize="21"
+            Width="357" Height="35" 
+            FontSize="14"
             FontWeight="Normal" 
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -74,27 +74,27 @@
 
             <DataGrid x:Name="DgMesData"
             HorizontalAlignment="Left" 
-            Height="487" 
-            Margin="9,72,0,0" 
+            Height="405" 
+            Margin="9,49,0,0" 
             VerticalAlignment="Top" 
-            Width="536"
+            Width="438"
             LoadingRow="DgMesData_LoadingRow"/>
 
             <Button x:Name="btnExit"
-                Style="{DynamicResource RoundExitButton}"
+                Style="{DynamicResource RoundButton}"
                 Content="X"
                 FontSize="14"
                 Background="#D50000"
                 Foreground="WhiteSmoke"
                 BorderBrush="Transparent"
                 HorizontalAlignment="Left"
-                Margin="523,-8,-8,0" 
+                Margin="428,2,0,0" 
                 VerticalAlignment="Top" 
-                Width="46" 
+                Width="22" 
                 Height="25"
                 Click="btnExit_Click" RenderTransformOrigin="1.78,0.548"/>
-            
-    
+
+
 
 
 

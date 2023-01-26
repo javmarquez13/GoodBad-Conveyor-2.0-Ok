@@ -121,26 +121,29 @@ namespace GoodBad_Conveyor_2._0
                     catch (Exception) { }
 
 
-                    try
+                    if (Globals.CHECK_PREVIOUS == "TRUE") 
                     {
-                        EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
-                                                               .Where(r => r.Field<string>("TestType") == "TEST" &&
-                                                                           r.Field<string>("Test_Process") == Globals.STEP_TO_CHECK &&
-                                                                           r.Field<string>("TestStatus") == "Pass")
-                                                               .CopyToDataTable();
+                        try
+                        {
+                            EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
+                                                                   .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                               r.Field<string>("Test_Process") == Globals.STEP_TO_CHECK &&
+                                                                               r.Field<string>("TestStatus") == "Pass")
+                                                                   .CopyToDataTable();
 
-                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                              .Select(b => b["History"] = Globals.STEP_TO_CHECK)
-                                             .ToList();
+                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                                  .Select(b => b["History"] = Globals.STEP_TO_CHECK)
+                                                 .ToList();
 
-                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                 .Select(b => b["Status"] = "Pass")
-                                .ToList();
+                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                     .Select(b => b["Status"] = "Pass")
+                                    .ToList();
 
-                        break;
+                            break;
+                        }
+                        catch (Exception) { }
                     }
-                    catch (Exception) { }
-
+                 
                     try
                     {
                         EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()

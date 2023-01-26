@@ -47,6 +47,14 @@ namespace GoodBad_Conveyor_2._0
             }
         }
 
+        public static string SINGLE_SCANNER
+        {
+            get
+            {
+                return ConfigFiles.reader("KEYENCE", "SINGLE_SCANNER", CONFIG_FILE);
+            }
+        }
+
         public static int BAUD_RATE
         {
             get
@@ -115,8 +123,13 @@ namespace GoodBad_Conveyor_2._0
             }
         }
 
-
-
+        public static bool IS_SHUTTLE
+        {
+            get
+            {
+                return Convert.ToBoolean(ConfigFiles.reader("GOOD BAD CONVEYOR", "IS_SHUTTLE", CONFIG_FILE));
+            }
+        }
 
 
         #endregion
@@ -307,6 +320,14 @@ namespace GoodBad_Conveyor_2._0
             }
         }
 
+        public static string CHECK_PREVIOUS
+        {
+            get             
+            {               
+                return ConfigFiles.reader("CHECK PROCESS", "CHECK_PREVIOUS", CONFIG_FILE).ToUpper();
+            }
+        }
+
         private static DataTable _DT_LANE1;
         private static DataTable _DT_LANE2;
         public static DataTable DT_LANE1
@@ -345,6 +366,21 @@ namespace GoodBad_Conveyor_2._0
                 _DebugMES = value;
             }
         }
+
+
+        private static string _Shuttle_Lane_Active;
+        public static string _SHUTTLE_LANE_ACTIVE
+        {
+            get
+            {
+                return _Shuttle_Lane_Active;
+            }
+            set
+            {
+                _Shuttle_Lane_Active = value;
+            }
+        }
+
 
         #endregion
 

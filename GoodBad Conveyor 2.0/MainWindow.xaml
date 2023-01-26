@@ -7,7 +7,7 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"       
         Title="SMART CONVEYOR" Height="894" Width="1344"
-        Topmost="False"
+        Topmost="True"
         AllowsTransparency="True"
         Background="Transparent" 
         ResizeMode="NoResize"
@@ -263,7 +263,7 @@
                     Click="btnMenu_Click"
                     Margin="9,8,0,842"
                     Style="{StaticResource TopButton}">
-                <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                <Icon:PackIconMaterial Kind="MenuOpen"  Width="15" Height="15"/>
             </Button>
 
 
@@ -341,6 +341,7 @@
                 Width="120" 
                 Height="36"
                 Click="btnPassThru_Click"/>
+            
             <Ellipse Height="Auto" Width="Auto" Margin="543,35,769,826">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="Resources/FlagGreen_40967.ico"/>

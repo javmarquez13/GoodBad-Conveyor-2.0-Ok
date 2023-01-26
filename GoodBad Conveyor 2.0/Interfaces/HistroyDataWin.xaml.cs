@@ -64,7 +64,7 @@ namespace GoodBad_Conveyor_2._0
             DataGridTextColumn HISTORY = new DataGridTextColumn();
             HISTORY.Header = "HISTORY";
             HISTORY.Binding = new Binding("HISTORY");
-            HISTORY.Width = 280;
+            HISTORY.Width = 200;
             HISTORY.IsReadOnly = true;
 
             DataGridTextColumn STATUS = new DataGridTextColumn();
