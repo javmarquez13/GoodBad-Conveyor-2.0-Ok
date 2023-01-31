@@ -43,6 +43,21 @@ namespace GoodBad_Conveyor_2._0
     /// Added variable CHECK_PREVIOUS to improve the logic on GOOD BAD CONVEYOR FOR NEPTUNE C+
     /// 28 OCTOBER 2022
     /// 
+    /// 
+    /// 1.0.0.67
+    /// 1.0.0.68
+    /// 1.0.0.69
+    /// 1.0.0.70
+    /// 1.0.0.71
+    /// 1.0.0.72
+    /// 1.0.0.73
+    /// 1.0.0.74
+    /// 1.0.0.75
+    /// Debug new functionality for Shutter
+    /// 1.0.0.76
+    /// Added functionality for Shutter and Release to production
+    /// 31 JAN 2023
+    /// 
     public partial class MainWindow : Window
     {
         SerialPort _Keyence1 = new SerialPort();

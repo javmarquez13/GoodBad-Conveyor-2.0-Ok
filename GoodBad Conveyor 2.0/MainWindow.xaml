@@ -171,7 +171,7 @@
 
             <Label x:Name="lblTitle"
                 Content="GOOD BAD CONVEYOR"
-                Width="436" Height="70" 
+                Width="861" Height="70" 
                 FontSize="21"
                 FontWeight="Bold" 
                 HorizontalAlignment="Center"
@@ -182,7 +182,7 @@
                 Style="{DynamicResource RoundLabel}"
                 Foreground="WhiteSmoke"
                 
-                Margin="460,4,428,800"/>
+                Margin="206,3,263,807"/>
 
             <Button x:Name="btnExit"
                 Style="{DynamicResource RoundExitButton}"
@@ -341,8 +341,8 @@
                 Width="120" 
                 Height="36"
                 Click="btnPassThru_Click"/>
-            
-            <Ellipse Height="Auto" Width="Auto" Margin="543,35,769,826">
+
+            <Ellipse Height="Auto" Width="Auto" Margin="491,31,821,830">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="Resources/FlagGreen_40967.ico"/>
                 </Ellipse.Fill>
