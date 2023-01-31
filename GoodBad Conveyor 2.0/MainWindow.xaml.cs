@@ -802,8 +802,7 @@ namespace GoodBad_Conveyor_2._0
                 {
                     _SingleKeyence.Write("LOFF\r");
 
-                    //Ni.WriteDAQ(outLane1_NG);
-                    Ni.WriteDAQ(outLane1_OK);
+                    Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1);
 
@@ -814,6 +813,7 @@ namespace GoodBad_Conveyor_2._0
                                                 new Action(delegate { }));
                     }
 
+                    WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
                 }
 
@@ -831,6 +831,7 @@ namespace GoodBad_Conveyor_2._0
                                                 new Action(delegate { }));
                     }
 
+                    WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
                 }
             }
@@ -912,7 +913,7 @@ namespace GoodBad_Conveyor_2._0
                                                 new Action(delegate { }));
                     }
 
-
+                    WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
                 }
 
@@ -930,6 +931,7 @@ namespace GoodBad_Conveyor_2._0
                                                 new Action(delegate { }));
                     }
 
+                    WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
                 }
             }

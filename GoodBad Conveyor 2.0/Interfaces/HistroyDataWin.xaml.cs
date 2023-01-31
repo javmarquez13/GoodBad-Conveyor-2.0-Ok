@@ -32,8 +32,23 @@ namespace GoodBad_Conveyor_2._0
             InitDataGrid();
             LaneDataWin = Lane;
 
-            if (LaneDataWin == 1) lblTitle.Content = "MES Data LANE 1";
-            if (LaneDataWin == 2) lblTitle.Content = "MES Data LANE 2";
+            if (LaneDataWin == 1) 
+            {
+                lblTitle.Content = "MES Data LANE 1";
+                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+                this.Left = 0;
+                this.Top = 0;
+            }
+          
+            if (LaneDataWin == 2) 
+            {
+                lblTitle.Content = "MES Data LANE 2";
+                var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+                this.Left = 0;
+                this.Top = desktopWorkingArea.Bottom - this.Height;
+            }
+
+           
 
             RefreshMESData.Interval = new TimeSpan(0, 0, 1);
             RefreshMESData.Tick += RefreshMESData_Tick;
