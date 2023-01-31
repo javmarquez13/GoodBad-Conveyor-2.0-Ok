@@ -197,16 +197,6 @@ namespace GoodBad_Conveyor_2._0
             return _dtResult;
         }
 
-
-
-
-
-
-
-
-
-
-
         public static void RejectedNotify(int Lane) 
         {
             if(Lane == 1) 
