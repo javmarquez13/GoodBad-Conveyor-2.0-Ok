@@ -585,6 +585,7 @@ namespace GoodBad_Conveyor_2._0
 
                     if (Busy_1 && CheckPointLane1_OK || Globals.PASS_THRUE)
                     {
+                        _TimerDAQ.Stop(); //Validacion
                         Ni.WriteDAQ(outLane1_OK);
 
                         while (Globals.DAQ_OUT_PUTS[1])
@@ -595,7 +596,7 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
-
+                        _TimerDAQ.Start(); //Validacion
                         CheckPointLane1_OK = false;
                         CleanUP1();
                     }
@@ -621,24 +622,28 @@ namespace GoodBad_Conveyor_2._0
                 if (Globals.COUNT_RETRY_SCANNING1 == Globals.RETRIES_SCANNING)
                 {
                     _Keyence1.Write("LOFF\r");
-                    
+                    _TimerDAQ.Stop(); //Validacion
+
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1);
                    
                     while (Globals.DAQ_OUT_PUTS[1])
-                    {
+                    {           
                         Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
                         Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
                                                 new Action(delegate { }));
                     }
 
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _Keyence1.Write("LOFF\r");
+                    _TimerDAQ.Stop(); //Validacion
+
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1);
@@ -651,6 +656,7 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
+             
                 }
             }
             catch(Exception ex)
@@ -683,17 +689,18 @@ namespace GoodBad_Conveyor_2._0
 
                     if (Busy_2 && CheckPointLane2_OK || Globals.PASS_THRUE)
                     {
+                        _TimerDAQ.Stop(); //Validacion
                         Ni.WriteDAQ(outLane2_OK);
 
                         while (Globals.DAQ_OUT_PUTS[6])
                         {
                             Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
                             Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
-                                                    new Action(delegate { }));
+                                                    new Action(delegate { }));                         
                         }
 
                         Ni.WriteDAQ(DAQDefault);
-
+                        _TimerDAQ.Start(); //Validacion
                         CheckPointLane2_OK = false;
                         CleanUP2();
                     }
@@ -719,6 +726,8 @@ namespace GoodBad_Conveyor_2._0
                 if (Globals.COUNT_RETRY_SCANNING2 == Globals.RETRIES_SCANNING)
                 {
                     _Keyence2.Write("LOFF\r");
+                    _TimerDAQ.Stop(); //Validacion
+
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2);
@@ -731,11 +740,14 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
 
                 if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _Keyence2.Write("LOFF\r");
+                    _TimerDAQ.Stop(); //Validacion
+
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY2);
@@ -748,6 +760,7 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
             }
             catch(Exception ex) 
@@ -779,6 +792,7 @@ namespace GoodBad_Conveyor_2._0
 
                     if (Busy_1 && CheckPointLane1_OK || Globals.PASS_THRUE)
                     {
+                        _TimerDAQ.Stop(); //Validacion
                         Ni.WriteDAQ(outLane1_OK);
 
                         while (Globals.DAQ_OUT_PUTS[1])
@@ -789,6 +803,8 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
+
+                        _TimerDAQ.Start(); //Validacion
 
                         CheckPointLane1_OK = false;
                         CleanUP1();
@@ -817,6 +833,8 @@ namespace GoodBad_Conveyor_2._0
                 {
                     _SingleKeyence.Write("LOFF\r");
 
+                    _TimerDAQ.Stop(); //Validacion
+
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1);
@@ -830,11 +848,14 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _SingleKeyence.Write("LOFF\r");
+
+                    _TimerDAQ.Stop(); //Validacion
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1);
@@ -848,6 +869,7 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
             }
             catch (Exception ex)
@@ -880,6 +902,7 @@ namespace GoodBad_Conveyor_2._0
 
                     if (Busy_2 && CheckPointLane2_OK || Globals.PASS_THRUE)
                     {
+                        _TimerDAQ.Stop(); //Validacion
                         Ni.WriteDAQ(ShuttlerOutLane2_OK);
 
                         while (Globals.DAQ_OUT_PUTS[6])
@@ -890,6 +913,7 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
+                        _TimerDAQ.Start(); //Validacion
 
                         CheckPointLane2_OK = false;
                         CleanUP2();
@@ -917,6 +941,8 @@ namespace GoodBad_Conveyor_2._0
                 if (Globals.COUNT_RETRY_SCANNING2 == Globals.RETRIES_SCANNING)
                 {
                     _SingleKeyence.Write("LOFF\r");
+
+                    _TimerDAQ.Stop(); //Validacion
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2);
@@ -930,11 +956,14 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
 
                 if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _SingleKeyence.Write("LOFF\r");
+
+                    _TimerDAQ.Stop(); //Validacion
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY2);
@@ -948,6 +977,7 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
+                    _TimerDAQ.Start(); //Validacion
                 }
             }
             catch (Exception ex)
@@ -1301,13 +1331,18 @@ namespace GoodBad_Conveyor_2._0
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) DragMove();
+            if (e.ChangedButton == MouseButton.Left) 
+            {
+                _TimerDAQ.Stop(); //Validacion
+                DragMove();
+                _TimerDAQ.Start(); //Validacion
+            }
+           
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-            //Environment.Exit(0);
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)

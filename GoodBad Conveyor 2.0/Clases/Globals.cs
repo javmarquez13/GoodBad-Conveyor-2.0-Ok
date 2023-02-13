@@ -151,7 +151,7 @@ namespace GoodBad_Conveyor_2._0
 
         #endregion
 
-        #region VARIABLES DAQ CONTROL
+        #region VARIABLES DAQ CONTRO
 
         private static bool[] outputs = new bool[8];
         public static bool[] DAQ_OUT_PUTS
