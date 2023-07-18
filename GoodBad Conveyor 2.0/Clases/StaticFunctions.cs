@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace GoodBad_Conveyor_2._0
 {
@@ -91,6 +92,7 @@ namespace GoodBad_Conveyor_2._0
             _dtResult = _dtPanel.Copy();
             _dtResult.Columns.Add("History");
             _dtResult.Columns.Add("Status");
+            _dtResult.Columns.Add("Has2Loops"); //OnValidation
 
             DataTable EventsByStepMatrix = new DataTable();
 
@@ -159,6 +161,18 @@ namespace GoodBad_Conveyor_2._0
                         _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
                                  .Select(b => b["Status"] = "Fail")
                                 .ToList();
+
+
+
+                        if(Globals.PLATFORM == "FVT" && StepToCheck == "FVT / PBTS") 
+                        {
+                            bool _has2Loops = Has2Loop(_dsQuery);
+
+                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                .Select(b => b["Has2Loops"] = _has2Loops.ToString())
+                               .ToList();
+                        }
+
                         break;
                     }
                     catch (Exception) { }
@@ -196,6 +210,60 @@ namespace GoodBad_Conveyor_2._0
 
             return _dtResult;
         }
+
+
+        public static bool Has2Loop(DataSet _dsQuery)
+        {
+            bool _Result = false;
+
+            DataTable EventsByLoop_1 = new DataTable();
+            DataTable EventsByLoop_2 = new DataTable();
+            DataTable EventsByPass = new DataTable();
+
+            try
+            {
+                EventsByPass = _dsQuery.Tables[0].AsEnumerable()
+                                                       .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                   r.Field<string>("Test_Process") == "FVT / PBTS" &&
+                                                                   r.Field<string>("TestStatus") == "Pass")
+                                                       .CopyToDataTable();
+                _Result = true;
+                goto Skip;
+            }
+            catch (Exception) { _Result = false; }
+
+
+            try 
+            {
+                EventsByLoop_1 = _dsQuery.Tables[0].AsEnumerable()
+                                                      .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                                  r.Field<string>("Test_Process") == "FVT / PBTS" &&
+                                                                  r.Field<string>("TestStatus") == "Fail" &&
+                                                                  r.Field<string>("EquipmentRouteName") == "Loop 1")
+                                                      .CopyToDataTable();
+            }
+            catch (Exception) { }
+
+
+            try
+            {
+                EventsByLoop_2 = _dsQuery.Tables[0].AsEnumerable()
+                                                   .Where(r => r.Field<string>("TestType") == "TEST" &&
+                                                               r.Field<string>("Test_Process") == "FVT / PBTS" &&
+                                                               r.Field<string>("TestStatus") == "Fail" &&
+                                                               r.Field<string>("EquipmentRouteName") == "Loop 2")
+                                                   .CopyToDataTable();
+                _Result = true;
+            }
+            catch (Exception) { _Result = false; }
+
+
+        Skip: { }
+
+            return _Result;
+        }
+
+
 
         public static void RejectedNotify(int Lane) 
         {

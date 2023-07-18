@@ -25,8 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>82</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -36,7 +36,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>\\MXCHIM2DEXGBC01\SharedFolder\GoodBadConveyor Debug\</OutputPath>
+    <OutputPath>bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -199,6 +199,7 @@
     <Compile Include="Interfaces\UsersLogin.xaml.cs">
       <DependentUpon>UsersLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StaticMESFunctions.cs" />
     <Compile Include="Web References\MES\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,20 +270,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://mxchim0mestis10/wsMES/">
+    <WebReferenceUrl Include="http://mxchim0mestis12/wsMES/">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\MES\</RelPath>
-      <UpdateFromURL>http://mxchim0mestis10/wsMES/</UpdateFromURL>
+      <UpdateFromURL>http://mxchim0mestis12/wsMES/</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>GoodBad_Conveyor_2_0_MES_Service</CachedSettingsPropName>
+      <CachedSettingsPropName>Good_Bad_Conveyor_MES12_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\MES\Mes.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IcoApp.ico" />
@@ -298,6 +296,9 @@
     <Resource Include="Resources\FlagGreen_40967.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\MES\Mes.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

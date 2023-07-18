@@ -7,7 +7,7 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"       
         Title="SMART CONVEYOR" Height="894" Width="1344"
-        Topmost="True"
+        Topmost="true"
         AllowsTransparency="True"
         Background="Transparent" 
         ResizeMode="NoResize"
@@ -59,7 +59,6 @@
                 </Style>
             </Style.Resources>
         </Style>
-
     </Window.Resources>
 
     <Border BorderThickness="7" BorderBrush="White" CornerRadius="10" Margin="0,0,0,0">
@@ -141,7 +140,7 @@
                 Foreground="White" Margin="31,656,1123,176"/>
 
             <DataGrid x:Name="DgLane2"
-               HorizontalAlignment="Left" 
+                      HorizontalAlignment="Left" 
                       Height="192" 
                       Margin="206,656,0,0" 
                       VerticalAlignment="Top" 
@@ -170,7 +169,7 @@
                 LoadingRow="DgLane1_LoadingRow"/>
 
             <Label x:Name="lblTitle"
-                Content="GOOD BAD CONVEYOR"
+                Content="HLC GOOD BAD CONVEYOR"
                 Width="861" Height="70" 
                 FontSize="21"
                 FontWeight="Bold" 
@@ -342,7 +341,7 @@
                 Height="36"
                 Click="btnPassThru_Click"/>
 
-            <Ellipse Height="Auto" Width="Auto" Margin="491,31,821,830">
+            <Ellipse Height="Auto" Width="Auto" Margin="477,31,835,830">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="Resources/FlagGreen_40967.ico"/>
                 </Ellipse.Fill>

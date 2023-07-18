@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace GoodBad_Conveyor_2._0
@@ -16,7 +18,18 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                return @"C:\GoodBadConveyor\Config.INI";
+                string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\YJLink Buffer Control 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
+
+                if (!File.Exists(Path_Config))
+                {
+                    MessageBox.Show("Configuration File missing " + Path_Config + "\n \n" + "GoodBadConveyor will be closed, please contact to Administrator", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    Environment.Exit(1);
+                }
+
+                return Path_Config;
+
+                //return @"C:\GoodBadConveyor\Config.INI"; 
             }
         }
 
@@ -153,7 +166,12 @@ namespace GoodBad_Conveyor_2._0
 
         #region VARIABLES DAQ CONTRO
 
+  
         private static bool[] outputs = new bool[8];
+
+        /// <summary>
+        /// Outputs from DAQ
+        /// </summary>
         public static bool[] DAQ_OUT_PUTS
         {
             get
@@ -327,6 +345,84 @@ namespace GoodBad_Conveyor_2._0
                 return ConfigFiles.reader("CHECK PROCESS", "CHECK_PREVIOUS", CONFIG_FILE).ToUpper();
             }
         }
+
+
+        public static string PLATFORM
+        {
+            get
+            {
+                return ConfigFiles.reader("CHECK PROCESS", "PLATFORM", CONFIG_FILE).ToUpper();
+            }
+        }
+
+
+        private static string _DEFECT_LOOP1;
+        private static string _DEFECT_LOOP2;
+        private static string _DEFECT_TYPE;
+        private static string _STATUS;
+        private static string _PROCESS;
+
+        public static string PROCESS
+        {
+            get
+            {
+                return _PROCESS;
+            }
+            set
+            {
+                _PROCESS = value;
+            }
+        }
+
+        public static string STATUS
+        {
+            get
+            {
+                return _STATUS;
+            }
+            set
+            {
+                _STATUS = value;
+            }
+        }
+
+
+        public static string DEFECT_LOOP1
+        {
+            get
+            {
+                return _DEFECT_LOOP1;
+            }
+            set
+            {
+                _DEFECT_LOOP1 = value;
+            }
+        }
+
+        public static string DEFECT_LOOP2
+        {
+            get
+            {
+                return _DEFECT_LOOP2;
+            }
+            set
+            {
+                _DEFECT_LOOP2 = value;
+            }
+        }
+
+        public static string DEFECT_TYPE
+        {
+            get
+            {
+                return _DEFECT_TYPE;
+            }
+            set
+            {
+                _DEFECT_TYPE = value;
+            }
+        }
+
 
         private static DataTable _DT_LANE1;
         private static DataTable _DT_LANE2;

@@ -14,59 +14,33 @@
 #pragma warning disable 1591
 
 namespace GoodBad_Conveyor_2._0.MES {
-    using System;
-    using System.Web.Services;
     using System.Diagnostics;
-    using System.Web.Services.Protocols;
+    using System;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Web.Services.Protocols;
+    using System.Web.Services;
     using System.Data;
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ServiceSoap", Namespace="http://chimestis10/webservices/")]
     public partial class Service : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback BoardInHoldOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IsScrapOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback LoopsByStepOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetMaterialIDOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetRouteStepID_EquipmentIDOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback JoinPanelSkipXOUTOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SetXOutOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback BreakPanelOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetNextAssemblyOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GetTester_IDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetTesterInfoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetDataEquipmentByBayOperationCompleted;
+        private System.Threading.SendOrPostCallback GetSerialsInBoxOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetDataEquipmentOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetUserMESIDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetDataProgressionOperationCompleted;
-        
         private System.Threading.SendOrPostCallback EPS_LinkNonUniqueComponentOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetDataProgressionByRouteBayOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GetCheckPointOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EPS_ProgressionInspectionOperationCompleted;
         
         private System.Threading.SendOrPostCallback EPS_LinkUniqueComponentOperationCompleted;
         
@@ -83,8 +57,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         private System.Threading.SendOrPostCallback ListByPanelOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAssemblySequenceOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetAssemblySequenceWithSideOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetWorkCellInMESOperationCompleted;
         
@@ -110,19 +82,15 @@ namespace GoodBad_Conveyor_2._0.MES {
         
         private System.Threading.SendOrPostCallback CR_RouteStepsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback PlaceBoardOnHoldOperationCompleted;
-        
         private System.Threading.SendOrPostCallback ReleaseBoardOnHoldOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListActiveHoldsByWipIDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback SearchRepairOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SearchDefectOperationCompleted;
-        
         private System.Threading.SendOrPostCallback ListActiveByCustomerOperationCompleted;
         
         private System.Threading.SendOrPostCallback BoardHistoryReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback EPS_GetAssemblyMaterialOperationCompleted;
         
         private System.Threading.SendOrPostCallback EPS_BirthHistoryOperationCompleted;
         
@@ -141,8 +109,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         private System.Threading.SendOrPostCallback SelectByNameAssemblyVersionOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetCRDsByAssemblyOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback InspectionsOperationCompleted;
         
         private System.Threading.SendOrPostCallback IDModelOperationCompleted;
         
@@ -164,57 +130,37 @@ namespace GoodBad_Conveyor_2._0.MES {
         
         private System.Threading.SendOrPostCallback StepStatusOperationCompleted;
         
-        private System.Threading.SendOrPostCallback IStepStatusOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetStepStatusOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback DiagnosticsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetBoardSideOperationCompleted;
-        
         private System.Threading.SendOrPostCallback IsMasterOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IsMasterTypeOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IsMasterModelOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IsMasterProductOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetBoardSideMachineFYPOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetBoardSideMachineAXIOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetBoardSideMachineOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetTesterAOIOperationCompleted;
         
         private System.Threading.SendOrPostCallback IDAssemblyOperationCompleted;
         
         private System.Threading.SendOrPostCallback EPS_BoardWipMoveStatusOperationCompleted;
         
-        private System.Threading.SendOrPostCallback EPS_BoardWipMoveOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback PassInspectionsOperationCompleted;
-        
         private System.Threading.SendOrPostCallback EPS_BatchInfoOperationCompleted;
         
         private System.Threading.SendOrPostCallback EPS_BatchSNOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EPS_GetBatchesOperationCompleted;
         
         private System.Threading.SendOrPostCallback EPS_LinkedSNOperationCompleted;
         
         private System.Threading.SendOrPostCallback HistoryStatusOperationCompleted;
         
-        private System.Threading.SendOrPostCallback JoinPanelOperationCompleted;
+        private System.Threading.SendOrPostCallback BoardInHoldOperationCompleted;
         
-        private System.Threading.SendOrPostCallback BreakOutPanelOperationCompleted;
+        private System.Threading.SendOrPostCallback IsScrapOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback LoopsByStepOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetMaterialIDOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback EPS_GetBatchesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAssemblySequenceWithSideOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
         public Service() {
-            this.Url = global::GoodBad_Conveyor_2._0.Properties.Settings.Default.GoodBad_Conveyor_2_0_MES_Service;
+            this.Url = global::GoodBad_Conveyor_2._0.Properties.Settings.Default.Good_Bad_Conveyor_MES12_Service;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -249,40 +195,10 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        public event BoardInHoldCompletedEventHandler BoardInHoldCompleted;
-        
-        /// <remarks/>
-        public event IsScrapCompletedEventHandler IsScrapCompleted;
-        
-        /// <remarks/>
-        public event LoopsByStepCompletedEventHandler LoopsByStepCompleted;
-        
-        /// <remarks/>
-        public event GetMaterialIDCompletedEventHandler GetMaterialIDCompleted;
-        
-        /// <remarks/>
-        public event GetRouteStepID_EquipmentIDCompletedEventHandler GetRouteStepID_EquipmentIDCompleted;
-        
-        /// <remarks/>
-        public event JoinPanelSkipXOUTCompletedEventHandler JoinPanelSkipXOUTCompleted;
-        
-        /// <remarks/>
-        public event SetXOutCompletedEventHandler SetXOutCompleted;
-        
-        /// <remarks/>
-        public event BreakPanelCompletedEventHandler BreakPanelCompleted;
-        
-        /// <remarks/>
-        public event GetNextAssemblyCompletedEventHandler GetNextAssemblyCompleted;
-        
-        /// <remarks/>
         public event GetTester_IDCompletedEventHandler GetTester_IDCompleted;
         
         /// <remarks/>
-        public event GetTesterInfoCompletedEventHandler GetTesterInfoCompleted;
-        
-        /// <remarks/>
-        public event GetDataEquipmentByBayCompletedEventHandler GetDataEquipmentByBayCompleted;
+        public event GetSerialsInBoxCompletedEventHandler GetSerialsInBoxCompleted;
         
         /// <remarks/>
         public event GetDataEquipmentCompletedEventHandler GetDataEquipmentCompleted;
@@ -291,19 +207,10 @@ namespace GoodBad_Conveyor_2._0.MES {
         public event GetUserMESIDCompletedEventHandler GetUserMESIDCompleted;
         
         /// <remarks/>
-        public event GetDataProgressionCompletedEventHandler GetDataProgressionCompleted;
-        
-        /// <remarks/>
         public event EPS_LinkNonUniqueComponentCompletedEventHandler EPS_LinkNonUniqueComponentCompleted;
         
         /// <remarks/>
-        public event GetDataProgressionByRouteBayCompletedEventHandler GetDataProgressionByRouteBayCompleted;
-        
-        /// <remarks/>
         public event GetCheckPointCompletedEventHandler GetCheckPointCompleted;
-        
-        /// <remarks/>
-        public event EPS_ProgressionInspectionCompletedEventHandler EPS_ProgressionInspectionCompleted;
         
         /// <remarks/>
         public event EPS_LinkUniqueComponentCompletedEventHandler EPS_LinkUniqueComponentCompleted;
@@ -328,9 +235,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         
         /// <remarks/>
         public event GetAssemblySequenceCompletedEventHandler GetAssemblySequenceCompleted;
-        
-        /// <remarks/>
-        public event GetAssemblySequenceWithSideCompletedEventHandler GetAssemblySequenceWithSideCompleted;
         
         /// <remarks/>
         public event GetWorkCellInMESCompletedEventHandler GetWorkCellInMESCompleted;
@@ -369,25 +273,19 @@ namespace GoodBad_Conveyor_2._0.MES {
         public event CR_RouteStepsCompletedEventHandler CR_RouteStepsCompleted;
         
         /// <remarks/>
-        public event PlaceBoardOnHoldCompletedEventHandler PlaceBoardOnHoldCompleted;
-        
-        /// <remarks/>
         public event ReleaseBoardOnHoldCompletedEventHandler ReleaseBoardOnHoldCompleted;
         
         /// <remarks/>
         public event ListActiveHoldsByWipIDCompletedEventHandler ListActiveHoldsByWipIDCompleted;
         
         /// <remarks/>
-        public event SearchRepairCompletedEventHandler SearchRepairCompleted;
-        
-        /// <remarks/>
-        public event SearchDefectCompletedEventHandler SearchDefectCompleted;
-        
-        /// <remarks/>
         public event ListActiveByCustomerCompletedEventHandler ListActiveByCustomerCompleted;
         
         /// <remarks/>
         public event BoardHistoryReportCompletedEventHandler BoardHistoryReportCompleted;
+        
+        /// <remarks/>
+        public event EPS_GetAssemblyMaterialCompletedEventHandler EPS_GetAssemblyMaterialCompleted;
         
         /// <remarks/>
         public event EPS_BirthHistoryCompletedEventHandler EPS_BirthHistoryCompleted;
@@ -415,9 +313,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         
         /// <remarks/>
         public event GetCRDsByAssemblyCompletedEventHandler GetCRDsByAssemblyCompleted;
-        
-        /// <remarks/>
-        public event InspectionsCompletedEventHandler InspectionsCompleted;
         
         /// <remarks/>
         public event IDModelCompletedEventHandler IDModelCompleted;
@@ -450,40 +345,7 @@ namespace GoodBad_Conveyor_2._0.MES {
         public event StepStatusCompletedEventHandler StepStatusCompleted;
         
         /// <remarks/>
-        public event IStepStatusCompletedEventHandler IStepStatusCompleted;
-        
-        /// <remarks/>
-        public event GetStepStatusCompletedEventHandler GetStepStatusCompleted;
-        
-        /// <remarks/>
-        public event DiagnosticsCompletedEventHandler DiagnosticsCompleted;
-        
-        /// <remarks/>
-        public event GetBoardSideCompletedEventHandler GetBoardSideCompleted;
-        
-        /// <remarks/>
         public event IsMasterCompletedEventHandler IsMasterCompleted;
-        
-        /// <remarks/>
-        public event IsMasterTypeCompletedEventHandler IsMasterTypeCompleted;
-        
-        /// <remarks/>
-        public event IsMasterModelCompletedEventHandler IsMasterModelCompleted;
-        
-        /// <remarks/>
-        public event IsMasterProductCompletedEventHandler IsMasterProductCompleted;
-        
-        /// <remarks/>
-        public event GetBoardSideMachineFYPCompletedEventHandler GetBoardSideMachineFYPCompleted;
-        
-        /// <remarks/>
-        public event GetBoardSideMachineAXICompletedEventHandler GetBoardSideMachineAXICompleted;
-        
-        /// <remarks/>
-        public event GetBoardSideMachineCompletedEventHandler GetBoardSideMachineCompleted;
-        
-        /// <remarks/>
-        public event GetTesterAOICompletedEventHandler GetTesterAOICompleted;
         
         /// <remarks/>
         public event IDAssemblyCompletedEventHandler IDAssemblyCompleted;
@@ -492,19 +354,10 @@ namespace GoodBad_Conveyor_2._0.MES {
         public event EPS_BoardWipMoveStatusCompletedEventHandler EPS_BoardWipMoveStatusCompleted;
         
         /// <remarks/>
-        public event EPS_BoardWipMoveCompletedEventHandler EPS_BoardWipMoveCompleted;
-        
-        /// <remarks/>
-        public event PassInspectionsCompletedEventHandler PassInspectionsCompleted;
-        
-        /// <remarks/>
         public event EPS_BatchInfoCompletedEventHandler EPS_BatchInfoCompleted;
         
         /// <remarks/>
         public event EPS_BatchSNCompletedEventHandler EPS_BatchSNCompleted;
-        
-        /// <remarks/>
-        public event EPS_GetBatchesCompletedEventHandler EPS_GetBatchesCompleted;
         
         /// <remarks/>
         public event EPS_LinkedSNCompletedEventHandler EPS_LinkedSNCompleted;
@@ -513,283 +366,22 @@ namespace GoodBad_Conveyor_2._0.MES {
         public event HistoryStatusCompletedEventHandler HistoryStatusCompleted;
         
         /// <remarks/>
-        public event JoinPanelCompletedEventHandler JoinPanelCompleted;
+        public event BoardInHoldCompletedEventHandler BoardInHoldCompleted;
         
         /// <remarks/>
-        public event BreakOutPanelCompletedEventHandler BreakOutPanelCompleted;
+        public event IsScrapCompletedEventHandler IsScrapCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/BoardInHold", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool BoardInHold(int iWipID) {
-            object[] results = this.Invoke("BoardInHold", new object[] {
-                        iWipID});
-            return ((bool)(results[0]));
-        }
+        public event LoopsByStepCompletedEventHandler LoopsByStepCompleted;
         
         /// <remarks/>
-        public void BoardInHoldAsync(int iWipID) {
-            this.BoardInHoldAsync(iWipID, null);
-        }
+        public event GetMaterialIDCompletedEventHandler GetMaterialIDCompleted;
         
         /// <remarks/>
-        public void BoardInHoldAsync(int iWipID, object userState) {
-            if ((this.BoardInHoldOperationCompleted == null)) {
-                this.BoardInHoldOperationCompleted = new System.Threading.SendOrPostCallback(this.OnBoardInHoldOperationCompleted);
-            }
-            this.InvokeAsync("BoardInHold", new object[] {
-                        iWipID}, this.BoardInHoldOperationCompleted, userState);
-        }
-        
-        private void OnBoardInHoldOperationCompleted(object arg) {
-            if ((this.BoardInHoldCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.BoardInHoldCompleted(this, new BoardInHoldCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event EPS_GetBatchesCompletedEventHandler EPS_GetBatchesCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsScrap", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool IsScrap(int WipID) {
-            object[] results = this.Invoke("IsScrap", new object[] {
-                        WipID});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IsScrapAsync(int WipID) {
-            this.IsScrapAsync(WipID, null);
-        }
-        
-        /// <remarks/>
-        public void IsScrapAsync(int WipID, object userState) {
-            if ((this.IsScrapOperationCompleted == null)) {
-                this.IsScrapOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsScrapOperationCompleted);
-            }
-            this.InvokeAsync("IsScrap", new object[] {
-                        WipID}, this.IsScrapOperationCompleted, userState);
-        }
-        
-        private void OnIsScrapOperationCompleted(object arg) {
-            if ((this.IsScrapCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsScrapCompleted(this, new IsScrapCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/LoopsByStep", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int LoopsByStep(string SerialNumber, string Step, int CustomerID) {
-            object[] results = this.Invoke("LoopsByStep", new object[] {
-                        SerialNumber,
-                        Step,
-                        CustomerID});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void LoopsByStepAsync(string SerialNumber, string Step, int CustomerID) {
-            this.LoopsByStepAsync(SerialNumber, Step, CustomerID, null);
-        }
-        
-        /// <remarks/>
-        public void LoopsByStepAsync(string SerialNumber, string Step, int CustomerID, object userState) {
-            if ((this.LoopsByStepOperationCompleted == null)) {
-                this.LoopsByStepOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoopsByStepOperationCompleted);
-            }
-            this.InvokeAsync("LoopsByStep", new object[] {
-                        SerialNumber,
-                        Step,
-                        CustomerID}, this.LoopsByStepOperationCompleted, userState);
-        }
-        
-        private void OnLoopsByStepOperationCompleted(object arg) {
-            if ((this.LoopsByStepCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.LoopsByStepCompleted(this, new LoopsByStepCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetMaterialID", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetMaterialID(int Assembly_ID, string LinkAssemblyNumber) {
-            object[] results = this.Invoke("GetMaterialID", new object[] {
-                        Assembly_ID,
-                        LinkAssemblyNumber});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetMaterialIDAsync(int Assembly_ID, string LinkAssemblyNumber) {
-            this.GetMaterialIDAsync(Assembly_ID, LinkAssemblyNumber, null);
-        }
-        
-        /// <remarks/>
-        public void GetMaterialIDAsync(int Assembly_ID, string LinkAssemblyNumber, object userState) {
-            if ((this.GetMaterialIDOperationCompleted == null)) {
-                this.GetMaterialIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMaterialIDOperationCompleted);
-            }
-            this.InvokeAsync("GetMaterialID", new object[] {
-                        Assembly_ID,
-                        LinkAssemblyNumber}, this.GetMaterialIDOperationCompleted, userState);
-        }
-        
-        private void OnGetMaterialIDOperationCompleted(object arg) {
-            if ((this.GetMaterialIDCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetMaterialIDCompleted(this, new GetMaterialIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetRouteStepID_EquipmentID", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetRouteStepID_EquipmentID(string RouteText, string MAText, string SearchRouteStepText) {
-            object[] results = this.Invoke("GetRouteStepID_EquipmentID", new object[] {
-                        RouteText,
-                        MAText,
-                        SearchRouteStepText});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetRouteStepID_EquipmentIDAsync(string RouteText, string MAText, string SearchRouteStepText) {
-            this.GetRouteStepID_EquipmentIDAsync(RouteText, MAText, SearchRouteStepText, null);
-        }
-        
-        /// <remarks/>
-        public void GetRouteStepID_EquipmentIDAsync(string RouteText, string MAText, string SearchRouteStepText, object userState) {
-            if ((this.GetRouteStepID_EquipmentIDOperationCompleted == null)) {
-                this.GetRouteStepID_EquipmentIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetRouteStepID_EquipmentIDOperationCompleted);
-            }
-            this.InvokeAsync("GetRouteStepID_EquipmentID", new object[] {
-                        RouteText,
-                        MAText,
-                        SearchRouteStepText}, this.GetRouteStepID_EquipmentIDOperationCompleted, userState);
-        }
-        
-        private void OnGetRouteStepID_EquipmentIDOperationCompleted(object arg) {
-            if ((this.GetRouteStepID_EquipmentIDCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetRouteStepID_EquipmentIDCompleted(this, new GetRouteStepID_EquipmentIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/JoinPanelSkipXOUT", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool JoinPanelSkipXOUT(int Wip_ID) {
-            object[] results = this.Invoke("JoinPanelSkipXOUT", new object[] {
-                        Wip_ID});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void JoinPanelSkipXOUTAsync(int Wip_ID) {
-            this.JoinPanelSkipXOUTAsync(Wip_ID, null);
-        }
-        
-        /// <remarks/>
-        public void JoinPanelSkipXOUTAsync(int Wip_ID, object userState) {
-            if ((this.JoinPanelSkipXOUTOperationCompleted == null)) {
-                this.JoinPanelSkipXOUTOperationCompleted = new System.Threading.SendOrPostCallback(this.OnJoinPanelSkipXOUTOperationCompleted);
-            }
-            this.InvokeAsync("JoinPanelSkipXOUT", new object[] {
-                        Wip_ID}, this.JoinPanelSkipXOUTOperationCompleted, userState);
-        }
-        
-        private void OnJoinPanelSkipXOUTOperationCompleted(object arg) {
-            if ((this.JoinPanelSkipXOUTCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.JoinPanelSkipXOUTCompleted(this, new JoinPanelSkipXOUTCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/SetXOut", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool SetXOut(int Wip_ID, int Panel_ID) {
-            object[] results = this.Invoke("SetXOut", new object[] {
-                        Wip_ID,
-                        Panel_ID});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SetXOutAsync(int Wip_ID, int Panel_ID) {
-            this.SetXOutAsync(Wip_ID, Panel_ID, null);
-        }
-        
-        /// <remarks/>
-        public void SetXOutAsync(int Wip_ID, int Panel_ID, object userState) {
-            if ((this.SetXOutOperationCompleted == null)) {
-                this.SetXOutOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetXOutOperationCompleted);
-            }
-            this.InvokeAsync("SetXOut", new object[] {
-                        Wip_ID,
-                        Panel_ID}, this.SetXOutOperationCompleted, userState);
-        }
-        
-        private void OnSetXOutOperationCompleted(object arg) {
-            if ((this.SetXOutCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SetXOutCompleted(this, new SetXOutCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/BreakPanel", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool BreakPanel(int Wip_ID) {
-            object[] results = this.Invoke("BreakPanel", new object[] {
-                        Wip_ID});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void BreakPanelAsync(int Wip_ID) {
-            this.BreakPanelAsync(Wip_ID, null);
-        }
-        
-        /// <remarks/>
-        public void BreakPanelAsync(int Wip_ID, object userState) {
-            if ((this.BreakPanelOperationCompleted == null)) {
-                this.BreakPanelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnBreakPanelOperationCompleted);
-            }
-            this.InvokeAsync("BreakPanel", new object[] {
-                        Wip_ID}, this.BreakPanelOperationCompleted, userState);
-        }
-        
-        private void OnBreakPanelOperationCompleted(object arg) {
-            if ((this.BreakPanelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.BreakPanelCompleted(this, new BreakPanelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetNextAssembly", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetNextAssembly(int AssemblyID) {
-            object[] results = this.Invoke("GetNextAssembly", new object[] {
-                        AssemblyID});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetNextAssemblyAsync(int AssemblyID) {
-            this.GetNextAssemblyAsync(AssemblyID, null);
-        }
-        
-        /// <remarks/>
-        public void GetNextAssemblyAsync(int AssemblyID, object userState) {
-            if ((this.GetNextAssemblyOperationCompleted == null)) {
-                this.GetNextAssemblyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetNextAssemblyOperationCompleted);
-            }
-            this.InvokeAsync("GetNextAssembly", new object[] {
-                        AssemblyID}, this.GetNextAssemblyOperationCompleted, userState);
-        }
-        
-        private void OnGetNextAssemblyOperationCompleted(object arg) {
-            if ((this.GetNextAssemblyCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetNextAssemblyCompleted(this, new GetNextAssemblyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event GetAssemblySequenceWithSideCompletedEventHandler GetAssemblySequenceWithSideCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetTester_ID", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -821,64 +413,33 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetTesterInfo", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetTesterInfo(int PKTester) {
-            object[] results = this.Invoke("GetTesterInfo", new object[] {
-                        PKTester});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetSerialsInBox", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetSerialsInBox(int pCustomerID, string pContainerNumber) {
+            object[] results = this.Invoke("GetSerialsInBox", new object[] {
+                        pCustomerID,
+                        pContainerNumber});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void GetTesterInfoAsync(int PKTester) {
-            this.GetTesterInfoAsync(PKTester, null);
+        public void GetSerialsInBoxAsync(int pCustomerID, string pContainerNumber) {
+            this.GetSerialsInBoxAsync(pCustomerID, pContainerNumber, null);
         }
         
         /// <remarks/>
-        public void GetTesterInfoAsync(int PKTester, object userState) {
-            if ((this.GetTesterInfoOperationCompleted == null)) {
-                this.GetTesterInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTesterInfoOperationCompleted);
+        public void GetSerialsInBoxAsync(int pCustomerID, string pContainerNumber, object userState) {
+            if ((this.GetSerialsInBoxOperationCompleted == null)) {
+                this.GetSerialsInBoxOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSerialsInBoxOperationCompleted);
             }
-            this.InvokeAsync("GetTesterInfo", new object[] {
-                        PKTester}, this.GetTesterInfoOperationCompleted, userState);
+            this.InvokeAsync("GetSerialsInBox", new object[] {
+                        pCustomerID,
+                        pContainerNumber}, this.GetSerialsInBoxOperationCompleted, userState);
         }
         
-        private void OnGetTesterInfoOperationCompleted(object arg) {
-            if ((this.GetTesterInfoCompleted != null)) {
+        private void OnGetSerialsInBoxOperationCompleted(object arg) {
+            if ((this.GetSerialsInBoxCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetTesterInfoCompleted(this, new GetTesterInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetDataEquipmentByBay", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetDataEquipmentByBay(string RouteStepName, string RouteText, string BayText) {
-            object[] results = this.Invoke("GetDataEquipmentByBay", new object[] {
-                        RouteStepName,
-                        RouteText,
-                        BayText});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetDataEquipmentByBayAsync(string RouteStepName, string RouteText, string BayText) {
-            this.GetDataEquipmentByBayAsync(RouteStepName, RouteText, BayText, null);
-        }
-        
-        /// <remarks/>
-        public void GetDataEquipmentByBayAsync(string RouteStepName, string RouteText, string BayText, object userState) {
-            if ((this.GetDataEquipmentByBayOperationCompleted == null)) {
-                this.GetDataEquipmentByBayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDataEquipmentByBayOperationCompleted);
-            }
-            this.InvokeAsync("GetDataEquipmentByBay", new object[] {
-                        RouteStepName,
-                        RouteText,
-                        BayText}, this.GetDataEquipmentByBayOperationCompleted, userState);
-        }
-        
-        private void OnGetDataEquipmentByBayOperationCompleted(object arg) {
-            if ((this.GetDataEquipmentByBayCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetDataEquipmentByBayCompleted(this, new GetDataEquipmentByBayCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetSerialsInBoxCompleted(this, new GetSerialsInBoxCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -943,35 +504,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetDataProgression", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetDataProgression(string RouteStepName) {
-            object[] results = this.Invoke("GetDataProgression", new object[] {
-                        RouteStepName});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetDataProgressionAsync(string RouteStepName) {
-            this.GetDataProgressionAsync(RouteStepName, null);
-        }
-        
-        /// <remarks/>
-        public void GetDataProgressionAsync(string RouteStepName, object userState) {
-            if ((this.GetDataProgressionOperationCompleted == null)) {
-                this.GetDataProgressionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDataProgressionOperationCompleted);
-            }
-            this.InvokeAsync("GetDataProgression", new object[] {
-                        RouteStepName}, this.GetDataProgressionOperationCompleted, userState);
-        }
-        
-        private void OnGetDataProgressionOperationCompleted(object arg) {
-            if ((this.GetDataProgressionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetDataProgressionCompleted(this, new GetDataProgressionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_LinkNonUniqueComponent", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public bool EPS_LinkNonUniqueComponent(int CustomerID, int WIP_ID, int LinkMaterialID, string LinkData, int RouteStepId, int EquipmentID) {
             object[] results = this.Invoke("EPS_LinkNonUniqueComponent", new object[] {
@@ -1011,37 +543,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetDataProgressionByRouteBay", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetDataProgressionByRouteBay(string RouteStepName, string BayName) {
-            object[] results = this.Invoke("GetDataProgressionByRouteBay", new object[] {
-                        RouteStepName,
-                        BayName});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetDataProgressionByRouteBayAsync(string RouteStepName, string BayName) {
-            this.GetDataProgressionByRouteBayAsync(RouteStepName, BayName, null);
-        }
-        
-        /// <remarks/>
-        public void GetDataProgressionByRouteBayAsync(string RouteStepName, string BayName, object userState) {
-            if ((this.GetDataProgressionByRouteBayOperationCompleted == null)) {
-                this.GetDataProgressionByRouteBayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDataProgressionByRouteBayOperationCompleted);
-            }
-            this.InvokeAsync("GetDataProgressionByRouteBay", new object[] {
-                        RouteStepName,
-                        BayName}, this.GetDataProgressionByRouteBayOperationCompleted, userState);
-        }
-        
-        private void OnGetDataProgressionByRouteBayOperationCompleted(object arg) {
-            if ((this.GetDataProgressionByRouteBayCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetDataProgressionByRouteBayCompleted(this, new GetDataProgressionByRouteBayCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetCheckPoint", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataSet GetCheckPoint(string SerialNumber, string CheckProcess, int CustomerID, int AssemblyID) {
             object[] results = this.Invoke("GetCheckPoint", new object[] {
@@ -1073,35 +574,6 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.GetCheckPointCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetCheckPointCompleted(this, new GetCheckPointCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_ProgressionInspection", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool EPS_ProgressionInspection(string serialNumber) {
-            object[] results = this.Invoke("EPS_ProgressionInspection", new object[] {
-                        serialNumber});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EPS_ProgressionInspectionAsync(string serialNumber) {
-            this.EPS_ProgressionInspectionAsync(serialNumber, null);
-        }
-        
-        /// <remarks/>
-        public void EPS_ProgressionInspectionAsync(string serialNumber, object userState) {
-            if ((this.EPS_ProgressionInspectionOperationCompleted == null)) {
-                this.EPS_ProgressionInspectionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEPS_ProgressionInspectionOperationCompleted);
-            }
-            this.InvokeAsync("EPS_ProgressionInspection", new object[] {
-                        serialNumber}, this.EPS_ProgressionInspectionOperationCompleted, userState);
-        }
-        
-        private void OnEPS_ProgressionInspectionOperationCompleted(object arg) {
-            if ((this.EPS_ProgressionInspectionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EPS_ProgressionInspectionCompleted(this, new EPS_ProgressionInspectionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1352,39 +824,6 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.GetAssemblySequenceCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAssemblySequenceCompleted(this, new GetAssemblySequenceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetAssemblySequenceWithSide", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet GetAssemblySequenceWithSide(string sCustomer, string sAssembly, string sPanelSide) {
-            object[] results = this.Invoke("GetAssemblySequenceWithSide", new object[] {
-                        sCustomer,
-                        sAssembly,
-                        sPanelSide});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetAssemblySequenceWithSideAsync(string sCustomer, string sAssembly, string sPanelSide) {
-            this.GetAssemblySequenceWithSideAsync(sCustomer, sAssembly, sPanelSide, null);
-        }
-        
-        /// <remarks/>
-        public void GetAssemblySequenceWithSideAsync(string sCustomer, string sAssembly, string sPanelSide, object userState) {
-            if ((this.GetAssemblySequenceWithSideOperationCompleted == null)) {
-                this.GetAssemblySequenceWithSideOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAssemblySequenceWithSideOperationCompleted);
-            }
-            this.InvokeAsync("GetAssemblySequenceWithSide", new object[] {
-                        sCustomer,
-                        sAssembly,
-                        sPanelSide}, this.GetAssemblySequenceWithSideOperationCompleted, userState);
-        }
-        
-        private void OnGetAssemblySequenceWithSideOperationCompleted(object arg) {
-            if ((this.GetAssemblySequenceWithSideCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetAssemblySequenceWithSideCompleted(this, new GetAssemblySequenceWithSideCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1733,43 +1172,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/PlaceBoardOnHold", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int PlaceBoardOnHold(int iWIP_ID, int iProcess_ID, int iHoldType_ID, int iHoldBy_ID, string sHoldEMO) {
-            object[] results = this.Invoke("PlaceBoardOnHold", new object[] {
-                        iWIP_ID,
-                        iProcess_ID,
-                        iHoldType_ID,
-                        iHoldBy_ID,
-                        sHoldEMO});
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void PlaceBoardOnHoldAsync(int iWIP_ID, int iProcess_ID, int iHoldType_ID, int iHoldBy_ID, string sHoldEMO) {
-            this.PlaceBoardOnHoldAsync(iWIP_ID, iProcess_ID, iHoldType_ID, iHoldBy_ID, sHoldEMO, null);
-        }
-        
-        /// <remarks/>
-        public void PlaceBoardOnHoldAsync(int iWIP_ID, int iProcess_ID, int iHoldType_ID, int iHoldBy_ID, string sHoldEMO, object userState) {
-            if ((this.PlaceBoardOnHoldOperationCompleted == null)) {
-                this.PlaceBoardOnHoldOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPlaceBoardOnHoldOperationCompleted);
-            }
-            this.InvokeAsync("PlaceBoardOnHold", new object[] {
-                        iWIP_ID,
-                        iProcess_ID,
-                        iHoldType_ID,
-                        iHoldBy_ID,
-                        sHoldEMO}, this.PlaceBoardOnHoldOperationCompleted, userState);
-        }
-        
-        private void OnPlaceBoardOnHoldOperationCompleted(object arg) {
-            if ((this.PlaceBoardOnHoldCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.PlaceBoardOnHoldCompleted(this, new PlaceBoardOnHoldCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/ReleaseBoardOnHold", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public int ReleaseBoardOnHold(int iWIP_ID, int iUpdate_ID, string HoldDateTime, string ReleaseMemo, int iReleasedBy_ID) {
             object[] results = this.Invoke("ReleaseBoardOnHold", new object[] {
@@ -1836,64 +1238,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/SearchRepair", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string SearchRepair(string ARTRepair) {
-            object[] results = this.Invoke("SearchRepair", new object[] {
-                        ARTRepair});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SearchRepairAsync(string ARTRepair) {
-            this.SearchRepairAsync(ARTRepair, null);
-        }
-        
-        /// <remarks/>
-        public void SearchRepairAsync(string ARTRepair, object userState) {
-            if ((this.SearchRepairOperationCompleted == null)) {
-                this.SearchRepairOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchRepairOperationCompleted);
-            }
-            this.InvokeAsync("SearchRepair", new object[] {
-                        ARTRepair}, this.SearchRepairOperationCompleted, userState);
-        }
-        
-        private void OnSearchRepairOperationCompleted(object arg) {
-            if ((this.SearchRepairCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SearchRepairCompleted(this, new SearchRepairCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/SearchDefect", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string SearchDefect(string ARTDefect) {
-            object[] results = this.Invoke("SearchDefect", new object[] {
-                        ARTDefect});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SearchDefectAsync(string ARTDefect) {
-            this.SearchDefectAsync(ARTDefect, null);
-        }
-        
-        /// <remarks/>
-        public void SearchDefectAsync(string ARTDefect, object userState) {
-            if ((this.SearchDefectOperationCompleted == null)) {
-                this.SearchDefectOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchDefectOperationCompleted);
-            }
-            this.InvokeAsync("SearchDefect", new object[] {
-                        ARTDefect}, this.SearchDefectOperationCompleted, userState);
-        }
-        
-        private void OnSearchDefectOperationCompleted(object arg) {
-            if ((this.SearchDefectCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SearchDefectCompleted(this, new SearchDefectCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/ListActiveByCustomer", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataSet ListActiveByCustomer(int CustomerID) {
             object[] results = this.Invoke("ListActiveByCustomer", new object[] {
@@ -1950,6 +1294,41 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.BoardHistoryReportCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.BoardHistoryReportCompleted(this, new BoardHistoryReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_GetAssemblyMaterial", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet EPS_GetAssemblyMaterial(int CustomerID, int AssemblyID, string LinkObject, string LinkObjectRev) {
+            object[] results = this.Invoke("EPS_GetAssemblyMaterial", new object[] {
+                        CustomerID,
+                        AssemblyID,
+                        LinkObject,
+                        LinkObjectRev});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void EPS_GetAssemblyMaterialAsync(int CustomerID, int AssemblyID, string LinkObject, string LinkObjectRev) {
+            this.EPS_GetAssemblyMaterialAsync(CustomerID, AssemblyID, LinkObject, LinkObjectRev, null);
+        }
+        
+        /// <remarks/>
+        public void EPS_GetAssemblyMaterialAsync(int CustomerID, int AssemblyID, string LinkObject, string LinkObjectRev, object userState) {
+            if ((this.EPS_GetAssemblyMaterialOperationCompleted == null)) {
+                this.EPS_GetAssemblyMaterialOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEPS_GetAssemblyMaterialOperationCompleted);
+            }
+            this.InvokeAsync("EPS_GetAssemblyMaterial", new object[] {
+                        CustomerID,
+                        AssemblyID,
+                        LinkObject,
+                        LinkObjectRev}, this.EPS_GetAssemblyMaterialOperationCompleted, userState);
+        }
+        
+        private void OnEPS_GetAssemblyMaterialOperationCompleted(object arg) {
+            if ((this.EPS_GetAssemblyMaterialCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.EPS_GetAssemblyMaterialCompleted(this, new EPS_GetAssemblyMaterialCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2227,35 +1606,6 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.GetCRDsByAssemblyCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetCRDsByAssemblyCompleted(this, new GetCRDsByAssemblyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/Inspections", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable Inspections(string Step) {
-            object[] results = this.Invoke("Inspections", new object[] {
-                        Step});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InspectionsAsync(string Step) {
-            this.InspectionsAsync(Step, null);
-        }
-        
-        /// <remarks/>
-        public void InspectionsAsync(string Step, object userState) {
-            if ((this.InspectionsOperationCompleted == null)) {
-                this.InspectionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInspectionsOperationCompleted);
-            }
-            this.InvokeAsync("Inspections", new object[] {
-                        Step}, this.InspectionsOperationCompleted, userState);
-        }
-        
-        private void OnInspectionsOperationCompleted(object arg) {
-            if ((this.InspectionsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InspectionsCompleted(this, new InspectionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2638,129 +1988,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IStepStatus", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string IStepStatus(int Wip_ID, string Step) {
-            object[] results = this.Invoke("IStepStatus", new object[] {
-                        Wip_ID,
-                        Step});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IStepStatusAsync(int Wip_ID, string Step) {
-            this.IStepStatusAsync(Wip_ID, Step, null);
-        }
-        
-        /// <remarks/>
-        public void IStepStatusAsync(int Wip_ID, string Step, object userState) {
-            if ((this.IStepStatusOperationCompleted == null)) {
-                this.IStepStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIStepStatusOperationCompleted);
-            }
-            this.InvokeAsync("IStepStatus", new object[] {
-                        Wip_ID,
-                        Step}, this.IStepStatusOperationCompleted, userState);
-        }
-        
-        private void OnIStepStatusOperationCompleted(object arg) {
-            if ((this.IStepStatusCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IStepStatusCompleted(this, new IStepStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetStepStatus", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetStepStatus(int Wip_ID, string Step) {
-            object[] results = this.Invoke("GetStepStatus", new object[] {
-                        Wip_ID,
-                        Step});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetStepStatusAsync(int Wip_ID, string Step) {
-            this.GetStepStatusAsync(Wip_ID, Step, null);
-        }
-        
-        /// <remarks/>
-        public void GetStepStatusAsync(int Wip_ID, string Step, object userState) {
-            if ((this.GetStepStatusOperationCompleted == null)) {
-                this.GetStepStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStepStatusOperationCompleted);
-            }
-            this.InvokeAsync("GetStepStatus", new object[] {
-                        Wip_ID,
-                        Step}, this.GetStepStatusOperationCompleted, userState);
-        }
-        
-        private void OnGetStepStatusOperationCompleted(object arg) {
-            if ((this.GetStepStatusCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetStepStatusCompleted(this, new GetStepStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/Diagnostics", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable Diagnostics() {
-            object[] results = this.Invoke("Diagnostics", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void DiagnosticsAsync() {
-            this.DiagnosticsAsync(null);
-        }
-        
-        /// <remarks/>
-        public void DiagnosticsAsync(object userState) {
-            if ((this.DiagnosticsOperationCompleted == null)) {
-                this.DiagnosticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDiagnosticsOperationCompleted);
-            }
-            this.InvokeAsync("Diagnostics", new object[0], this.DiagnosticsOperationCompleted, userState);
-        }
-        
-        private void OnDiagnosticsOperationCompleted(object arg) {
-            if ((this.DiagnosticsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.DiagnosticsCompleted(this, new DiagnosticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetBoardSide", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetBoardSide(string Assembly, string Cell, string Line, out string strAssembly) {
-            object[] results = this.Invoke("GetBoardSide", new object[] {
-                        Assembly,
-                        Cell,
-                        Line});
-            strAssembly = ((string)(results[1]));
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideAsync(string Assembly, string Cell, string Line) {
-            this.GetBoardSideAsync(Assembly, Cell, Line, null);
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideAsync(string Assembly, string Cell, string Line, object userState) {
-            if ((this.GetBoardSideOperationCompleted == null)) {
-                this.GetBoardSideOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBoardSideOperationCompleted);
-            }
-            this.InvokeAsync("GetBoardSide", new object[] {
-                        Assembly,
-                        Cell,
-                        Line}, this.GetBoardSideOperationCompleted, userState);
-        }
-        
-        private void OnGetBoardSideOperationCompleted(object arg) {
-            if ((this.GetBoardSideCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetBoardSideCompleted(this, new GetBoardSideCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsMaster", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string IsMaster(string SerialNumber, string Plataforma, out System.DateTime FechaBaja) {
             object[] results = this.Invoke("IsMaster", new object[] {
@@ -2789,239 +2016,6 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.IsMasterCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.IsMasterCompleted(this, new IsMasterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsMasterType", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string IsMasterType(string SerialNumber, string Plataforma, out System.DateTime FechaBaja) {
-            object[] results = this.Invoke("IsMasterType", new object[] {
-                        SerialNumber,
-                        Plataforma});
-            FechaBaja = ((System.DateTime)(results[1]));
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IsMasterTypeAsync(string SerialNumber, string Plataforma) {
-            this.IsMasterTypeAsync(SerialNumber, Plataforma, null);
-        }
-        
-        /// <remarks/>
-        public void IsMasterTypeAsync(string SerialNumber, string Plataforma, object userState) {
-            if ((this.IsMasterTypeOperationCompleted == null)) {
-                this.IsMasterTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsMasterTypeOperationCompleted);
-            }
-            this.InvokeAsync("IsMasterType", new object[] {
-                        SerialNumber,
-                        Plataforma}, this.IsMasterTypeOperationCompleted, userState);
-        }
-        
-        private void OnIsMasterTypeOperationCompleted(object arg) {
-            if ((this.IsMasterTypeCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsMasterTypeCompleted(this, new IsMasterTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsMasterModel", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string IsMasterModel(string SerialNumber, string Plataforma, string PartNumber, out System.DateTime FechaBaja) {
-            object[] results = this.Invoke("IsMasterModel", new object[] {
-                        SerialNumber,
-                        Plataforma,
-                        PartNumber});
-            FechaBaja = ((System.DateTime)(results[1]));
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IsMasterModelAsync(string SerialNumber, string Plataforma, string PartNumber) {
-            this.IsMasterModelAsync(SerialNumber, Plataforma, PartNumber, null);
-        }
-        
-        /// <remarks/>
-        public void IsMasterModelAsync(string SerialNumber, string Plataforma, string PartNumber, object userState) {
-            if ((this.IsMasterModelOperationCompleted == null)) {
-                this.IsMasterModelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsMasterModelOperationCompleted);
-            }
-            this.InvokeAsync("IsMasterModel", new object[] {
-                        SerialNumber,
-                        Plataforma,
-                        PartNumber}, this.IsMasterModelOperationCompleted, userState);
-        }
-        
-        private void OnIsMasterModelOperationCompleted(object arg) {
-            if ((this.IsMasterModelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsMasterModelCompleted(this, new IsMasterModelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsMasterProduct", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string IsMasterProduct(string SerialNumber, string Plataforma, string PartNumber, out System.DateTime FechaBaja) {
-            object[] results = this.Invoke("IsMasterProduct", new object[] {
-                        SerialNumber,
-                        Plataforma,
-                        PartNumber});
-            FechaBaja = ((System.DateTime)(results[1]));
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IsMasterProductAsync(string SerialNumber, string Plataforma, string PartNumber) {
-            this.IsMasterProductAsync(SerialNumber, Plataforma, PartNumber, null);
-        }
-        
-        /// <remarks/>
-        public void IsMasterProductAsync(string SerialNumber, string Plataforma, string PartNumber, object userState) {
-            if ((this.IsMasterProductOperationCompleted == null)) {
-                this.IsMasterProductOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsMasterProductOperationCompleted);
-            }
-            this.InvokeAsync("IsMasterProduct", new object[] {
-                        SerialNumber,
-                        Plataforma,
-                        PartNumber}, this.IsMasterProductOperationCompleted, userState);
-        }
-        
-        private void OnIsMasterProductOperationCompleted(object arg) {
-            if ((this.IsMasterProductCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsMasterProductCompleted(this, new IsMasterProductCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetBoardSideMachineFYP", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetBoardSideMachineFYP(string Assembly, string Cell, string PKMachine) {
-            object[] results = this.Invoke("GetBoardSideMachineFYP", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineFYPAsync(string Assembly, string Cell, string PKMachine) {
-            this.GetBoardSideMachineFYPAsync(Assembly, Cell, PKMachine, null);
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineFYPAsync(string Assembly, string Cell, string PKMachine, object userState) {
-            if ((this.GetBoardSideMachineFYPOperationCompleted == null)) {
-                this.GetBoardSideMachineFYPOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBoardSideMachineFYPOperationCompleted);
-            }
-            this.InvokeAsync("GetBoardSideMachineFYP", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine}, this.GetBoardSideMachineFYPOperationCompleted, userState);
-        }
-        
-        private void OnGetBoardSideMachineFYPOperationCompleted(object arg) {
-            if ((this.GetBoardSideMachineFYPCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetBoardSideMachineFYPCompleted(this, new GetBoardSideMachineFYPCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetBoardSideMachineAXI", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetBoardSideMachineAXI(string Assembly, string Cell, string PKMachine) {
-            object[] results = this.Invoke("GetBoardSideMachineAXI", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineAXIAsync(string Assembly, string Cell, string PKMachine) {
-            this.GetBoardSideMachineAXIAsync(Assembly, Cell, PKMachine, null);
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineAXIAsync(string Assembly, string Cell, string PKMachine, object userState) {
-            if ((this.GetBoardSideMachineAXIOperationCompleted == null)) {
-                this.GetBoardSideMachineAXIOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBoardSideMachineAXIOperationCompleted);
-            }
-            this.InvokeAsync("GetBoardSideMachineAXI", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine}, this.GetBoardSideMachineAXIOperationCompleted, userState);
-        }
-        
-        private void OnGetBoardSideMachineAXIOperationCompleted(object arg) {
-            if ((this.GetBoardSideMachineAXICompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetBoardSideMachineAXICompleted(this, new GetBoardSideMachineAXICompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetBoardSideMachine", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetBoardSideMachine(string Assembly, string Cell, string PKMachine, out string strAssembly) {
-            object[] results = this.Invoke("GetBoardSideMachine", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine});
-            strAssembly = ((string)(results[1]));
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineAsync(string Assembly, string Cell, string PKMachine) {
-            this.GetBoardSideMachineAsync(Assembly, Cell, PKMachine, null);
-        }
-        
-        /// <remarks/>
-        public void GetBoardSideMachineAsync(string Assembly, string Cell, string PKMachine, object userState) {
-            if ((this.GetBoardSideMachineOperationCompleted == null)) {
-                this.GetBoardSideMachineOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBoardSideMachineOperationCompleted);
-            }
-            this.InvokeAsync("GetBoardSideMachine", new object[] {
-                        Assembly,
-                        Cell,
-                        PKMachine}, this.GetBoardSideMachineOperationCompleted, userState);
-        }
-        
-        private void OnGetBoardSideMachineOperationCompleted(object arg) {
-            if ((this.GetBoardSideMachineCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetBoardSideMachineCompleted(this, new GetBoardSideMachineCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetTesterAOI", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable GetTesterAOI(string BoardSide, string Cell, string PKMachine) {
-            object[] results = this.Invoke("GetTesterAOI", new object[] {
-                        BoardSide,
-                        Cell,
-                        PKMachine});
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetTesterAOIAsync(string BoardSide, string Cell, string PKMachine) {
-            this.GetTesterAOIAsync(BoardSide, Cell, PKMachine, null);
-        }
-        
-        /// <remarks/>
-        public void GetTesterAOIAsync(string BoardSide, string Cell, string PKMachine, object userState) {
-            if ((this.GetTesterAOIOperationCompleted == null)) {
-                this.GetTesterAOIOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTesterAOIOperationCompleted);
-            }
-            this.InvokeAsync("GetTesterAOI", new object[] {
-                        BoardSide,
-                        Cell,
-                        PKMachine}, this.GetTesterAOIOperationCompleted, userState);
-        }
-        
-        private void OnGetTesterAOIOperationCompleted(object arg) {
-            if ((this.GetTesterAOICompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetTesterAOICompleted(this, new GetTesterAOICompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3104,76 +2098,6 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_BoardWipMove", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool EPS_BoardWipMove(string mesServer, string mesDataBase, int CustomerID, int WIPId, int RouteStepID, int EquipmentID, int userID, int NewAssyID) {
-            object[] results = this.Invoke("EPS_BoardWipMove", new object[] {
-                        mesServer,
-                        mesDataBase,
-                        CustomerID,
-                        WIPId,
-                        RouteStepID,
-                        EquipmentID,
-                        userID,
-                        NewAssyID});
-            return ((bool)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EPS_BoardWipMoveAsync(string mesServer, string mesDataBase, int CustomerID, int WIPId, int RouteStepID, int EquipmentID, int userID, int NewAssyID) {
-            this.EPS_BoardWipMoveAsync(mesServer, mesDataBase, CustomerID, WIPId, RouteStepID, EquipmentID, userID, NewAssyID, null);
-        }
-        
-        /// <remarks/>
-        public void EPS_BoardWipMoveAsync(string mesServer, string mesDataBase, int CustomerID, int WIPId, int RouteStepID, int EquipmentID, int userID, int NewAssyID, object userState) {
-            if ((this.EPS_BoardWipMoveOperationCompleted == null)) {
-                this.EPS_BoardWipMoveOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEPS_BoardWipMoveOperationCompleted);
-            }
-            this.InvokeAsync("EPS_BoardWipMove", new object[] {
-                        mesServer,
-                        mesDataBase,
-                        CustomerID,
-                        WIPId,
-                        RouteStepID,
-                        EquipmentID,
-                        userID,
-                        NewAssyID}, this.EPS_BoardWipMoveOperationCompleted, userState);
-        }
-        
-        private void OnEPS_BoardWipMoveOperationCompleted(object arg) {
-            if ((this.EPS_BoardWipMoveCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EPS_BoardWipMoveCompleted(this, new EPS_BoardWipMoveCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/PassInspections", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable PassInspections() {
-            object[] results = this.Invoke("PassInspections", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void PassInspectionsAsync() {
-            this.PassInspectionsAsync(null);
-        }
-        
-        /// <remarks/>
-        public void PassInspectionsAsync(object userState) {
-            if ((this.PassInspectionsOperationCompleted == null)) {
-                this.PassInspectionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPassInspectionsOperationCompleted);
-            }
-            this.InvokeAsync("PassInspections", new object[0], this.PassInspectionsOperationCompleted, userState);
-        }
-        
-        private void OnPassInspectionsOperationCompleted(object arg) {
-            if ((this.PassInspectionsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.PassInspectionsCompleted(this, new PassInspectionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_BatchInfo", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataSet EPS_BatchInfo(string sBatch) {
             object[] results = this.Invoke("EPS_BatchInfo", new object[] {
@@ -3234,35 +2158,6 @@ namespace GoodBad_Conveyor_2._0.MES {
             if ((this.EPS_BatchSNCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.EPS_BatchSNCompleted(this, new EPS_BatchSNCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_GetBatches", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet EPS_GetBatches(string sBatch) {
-            object[] results = this.Invoke("EPS_GetBatches", new object[] {
-                        sBatch});
-            return ((System.Data.DataSet)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EPS_GetBatchesAsync(string sBatch) {
-            this.EPS_GetBatchesAsync(sBatch, null);
-        }
-        
-        /// <remarks/>
-        public void EPS_GetBatchesAsync(string sBatch, object userState) {
-            if ((this.EPS_GetBatchesOperationCompleted == null)) {
-                this.EPS_GetBatchesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEPS_GetBatchesOperationCompleted);
-            }
-            this.InvokeAsync("EPS_GetBatches", new object[] {
-                        sBatch}, this.EPS_GetBatchesOperationCompleted, userState);
-        }
-        
-        private void OnEPS_GetBatchesOperationCompleted(object arg) {
-            if ((this.EPS_GetBatchesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EPS_GetBatchesCompleted(this, new EPS_GetBatchesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3329,64 +2224,186 @@ namespace GoodBad_Conveyor_2._0.MES {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/JoinPanel", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool JoinPanel(string SerialNumber, int CustomerID) {
-            object[] results = this.Invoke("JoinPanel", new object[] {
-                        SerialNumber,
-                        CustomerID});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/BoardInHold", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool BoardInHold(int iWipID) {
+            object[] results = this.Invoke("BoardInHold", new object[] {
+                        iWipID});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void JoinPanelAsync(string SerialNumber, int CustomerID) {
-            this.JoinPanelAsync(SerialNumber, CustomerID, null);
+        public void BoardInHoldAsync(int iWipID) {
+            this.BoardInHoldAsync(iWipID, null);
         }
         
         /// <remarks/>
-        public void JoinPanelAsync(string SerialNumber, int CustomerID, object userState) {
-            if ((this.JoinPanelOperationCompleted == null)) {
-                this.JoinPanelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnJoinPanelOperationCompleted);
+        public void BoardInHoldAsync(int iWipID, object userState) {
+            if ((this.BoardInHoldOperationCompleted == null)) {
+                this.BoardInHoldOperationCompleted = new System.Threading.SendOrPostCallback(this.OnBoardInHoldOperationCompleted);
             }
-            this.InvokeAsync("JoinPanel", new object[] {
-                        SerialNumber,
-                        CustomerID}, this.JoinPanelOperationCompleted, userState);
+            this.InvokeAsync("BoardInHold", new object[] {
+                        iWipID}, this.BoardInHoldOperationCompleted, userState);
         }
         
-        private void OnJoinPanelOperationCompleted(object arg) {
-            if ((this.JoinPanelCompleted != null)) {
+        private void OnBoardInHoldOperationCompleted(object arg) {
+            if ((this.BoardInHoldCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.JoinPanelCompleted(this, new JoinPanelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.BoardInHoldCompleted(this, new BoardInHoldCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/BreakOutPanel", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool BreakOutPanel(string SerialNumber, int CustomerID) {
-            object[] results = this.Invoke("BreakOutPanel", new object[] {
-                        SerialNumber,
-                        CustomerID});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/IsScrap", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool IsScrap(int WipID) {
+            object[] results = this.Invoke("IsScrap", new object[] {
+                        WipID});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void BreakOutPanelAsync(string SerialNumber, int CustomerID) {
-            this.BreakOutPanelAsync(SerialNumber, CustomerID, null);
+        public void IsScrapAsync(int WipID) {
+            this.IsScrapAsync(WipID, null);
         }
         
         /// <remarks/>
-        public void BreakOutPanelAsync(string SerialNumber, int CustomerID, object userState) {
-            if ((this.BreakOutPanelOperationCompleted == null)) {
-                this.BreakOutPanelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnBreakOutPanelOperationCompleted);
+        public void IsScrapAsync(int WipID, object userState) {
+            if ((this.IsScrapOperationCompleted == null)) {
+                this.IsScrapOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsScrapOperationCompleted);
             }
-            this.InvokeAsync("BreakOutPanel", new object[] {
-                        SerialNumber,
-                        CustomerID}, this.BreakOutPanelOperationCompleted, userState);
+            this.InvokeAsync("IsScrap", new object[] {
+                        WipID}, this.IsScrapOperationCompleted, userState);
         }
         
-        private void OnBreakOutPanelOperationCompleted(object arg) {
-            if ((this.BreakOutPanelCompleted != null)) {
+        private void OnIsScrapOperationCompleted(object arg) {
+            if ((this.IsScrapCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.BreakOutPanelCompleted(this, new BreakOutPanelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.IsScrapCompleted(this, new IsScrapCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/LoopsByStep", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int LoopsByStep(string SerialNumber, string Step, int CustomerID) {
+            object[] results = this.Invoke("LoopsByStep", new object[] {
+                        SerialNumber,
+                        Step,
+                        CustomerID});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoopsByStepAsync(string SerialNumber, string Step, int CustomerID) {
+            this.LoopsByStepAsync(SerialNumber, Step, CustomerID, null);
+        }
+        
+        /// <remarks/>
+        public void LoopsByStepAsync(string SerialNumber, string Step, int CustomerID, object userState) {
+            if ((this.LoopsByStepOperationCompleted == null)) {
+                this.LoopsByStepOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoopsByStepOperationCompleted);
+            }
+            this.InvokeAsync("LoopsByStep", new object[] {
+                        SerialNumber,
+                        Step,
+                        CustomerID}, this.LoopsByStepOperationCompleted, userState);
+        }
+        
+        private void OnLoopsByStepOperationCompleted(object arg) {
+            if ((this.LoopsByStepCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoopsByStepCompleted(this, new LoopsByStepCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetMaterialID", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetMaterialID(int Assembly_ID, string LinkAssemblyNumber) {
+            object[] results = this.Invoke("GetMaterialID", new object[] {
+                        Assembly_ID,
+                        LinkAssemblyNumber});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetMaterialIDAsync(int Assembly_ID, string LinkAssemblyNumber) {
+            this.GetMaterialIDAsync(Assembly_ID, LinkAssemblyNumber, null);
+        }
+        
+        /// <remarks/>
+        public void GetMaterialIDAsync(int Assembly_ID, string LinkAssemblyNumber, object userState) {
+            if ((this.GetMaterialIDOperationCompleted == null)) {
+                this.GetMaterialIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetMaterialIDOperationCompleted);
+            }
+            this.InvokeAsync("GetMaterialID", new object[] {
+                        Assembly_ID,
+                        LinkAssemblyNumber}, this.GetMaterialIDOperationCompleted, userState);
+        }
+        
+        private void OnGetMaterialIDOperationCompleted(object arg) {
+            if ((this.GetMaterialIDCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetMaterialIDCompleted(this, new GetMaterialIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/EPS_GetBatches", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet EPS_GetBatches(string sBatch) {
+            object[] results = this.Invoke("EPS_GetBatches", new object[] {
+                        sBatch});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void EPS_GetBatchesAsync(string sBatch) {
+            this.EPS_GetBatchesAsync(sBatch, null);
+        }
+        
+        /// <remarks/>
+        public void EPS_GetBatchesAsync(string sBatch, object userState) {
+            if ((this.EPS_GetBatchesOperationCompleted == null)) {
+                this.EPS_GetBatchesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEPS_GetBatchesOperationCompleted);
+            }
+            this.InvokeAsync("EPS_GetBatches", new object[] {
+                        sBatch}, this.EPS_GetBatchesOperationCompleted, userState);
+        }
+        
+        private void OnEPS_GetBatchesOperationCompleted(object arg) {
+            if ((this.EPS_GetBatchesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.EPS_GetBatchesCompleted(this, new EPS_GetBatchesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://chimestis10/webservices/GetAssemblySequenceWithSide", RequestNamespace="http://chimestis10/webservices/", ResponseNamespace="http://chimestis10/webservices/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet GetAssemblySequenceWithSide(string sCustomer, string sAssembly, string sPanelSide) {
+            object[] results = this.Invoke("GetAssemblySequenceWithSide", new object[] {
+                        sCustomer,
+                        sAssembly,
+                        sPanelSide});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAssemblySequenceWithSideAsync(string sCustomer, string sAssembly, string sPanelSide) {
+            this.GetAssemblySequenceWithSideAsync(sCustomer, sAssembly, sPanelSide, null);
+        }
+        
+        /// <remarks/>
+        public void GetAssemblySequenceWithSideAsync(string sCustomer, string sAssembly, string sPanelSide, object userState) {
+            if ((this.GetAssemblySequenceWithSideOperationCompleted == null)) {
+                this.GetAssemblySequenceWithSideOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAssemblySequenceWithSideOperationCompleted);
+            }
+            this.InvokeAsync("GetAssemblySequenceWithSide", new object[] {
+                        sCustomer,
+                        sAssembly,
+                        sPanelSide}, this.GetAssemblySequenceWithSideOperationCompleted, userState);
+        }
+        
+        private void OnGetAssemblySequenceWithSideOperationCompleted(object arg) {
+            if ((this.GetAssemblySequenceWithSideCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAssemblySequenceWithSideCompleted(this, new GetAssemblySequenceWithSideCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3410,245 +2427,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void BoardInHoldCompletedEventHandler(object sender, BoardInHoldCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class BoardInHoldCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal BoardInHoldCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void IsScrapCompletedEventHandler(object sender, IsScrapCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsScrapCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IsScrapCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void LoopsByStepCompletedEventHandler(object sender, LoopsByStepCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class LoopsByStepCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal LoopsByStepCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetMaterialIDCompletedEventHandler(object sender, GetMaterialIDCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetMaterialIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetMaterialIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetRouteStepID_EquipmentIDCompletedEventHandler(object sender, GetRouteStepID_EquipmentIDCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetRouteStepID_EquipmentIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetRouteStepID_EquipmentIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void JoinPanelSkipXOUTCompletedEventHandler(object sender, JoinPanelSkipXOUTCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class JoinPanelSkipXOUTCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal JoinPanelSkipXOUTCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void SetXOutCompletedEventHandler(object sender, SetXOutCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SetXOutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SetXOutCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void BreakPanelCompletedEventHandler(object sender, BreakPanelCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class BreakPanelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal BreakPanelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetNextAssemblyCompletedEventHandler(object sender, GetNextAssemblyCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetNextAssemblyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetNextAssemblyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetTester_IDCompletedEventHandler(object sender, GetTester_IDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetTester_IDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3670,18 +2453,18 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetTesterInfoCompletedEventHandler(object sender, GetTesterInfoCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetSerialsInBoxCompletedEventHandler(object sender, GetSerialsInBoxCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetTesterInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetSerialsInBoxCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetTesterInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetSerialsInBoxCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3696,37 +2479,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetDataEquipmentByBayCompletedEventHandler(object sender, GetDataEquipmentByBayCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetDataEquipmentByBayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetDataEquipmentByBayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetDataEquipmentCompletedEventHandler(object sender, GetDataEquipmentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetDataEquipmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3748,11 +2505,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetUserMESIDCompletedEventHandler(object sender, GetUserMESIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetUserMESIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3774,37 +2531,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetDataProgressionCompletedEventHandler(object sender, GetDataProgressionCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetDataProgressionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetDataProgressionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_LinkNonUniqueComponentCompletedEventHandler(object sender, EPS_LinkNonUniqueComponentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_LinkNonUniqueComponentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3826,37 +2557,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetDataProgressionByRouteBayCompletedEventHandler(object sender, GetDataProgressionByRouteBayCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetDataProgressionByRouteBayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetDataProgressionByRouteBayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetCheckPointCompletedEventHandler(object sender, GetCheckPointCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCheckPointCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3878,37 +2583,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void EPS_ProgressionInspectionCompletedEventHandler(object sender, EPS_ProgressionInspectionCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EPS_ProgressionInspectionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EPS_ProgressionInspectionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_LinkUniqueComponentCompletedEventHandler(object sender, EPS_LinkUniqueComponentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_LinkUniqueComponentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3930,11 +2609,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetEquipmentIDCompletedEventHandler(object sender, GetEquipmentIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetEquipmentIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3956,11 +2635,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SelectBySerialNumberCompletedEventHandler(object sender, SelectBySerialNumberCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SelectBySerialNumberCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3982,11 +2661,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByPanelWithCoordinatesCompletedEventHandler(object sender, ListByPanelWithCoordinatesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByPanelWithCoordinatesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4008,11 +2687,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListAllByWipIDCompletedEventHandler(object sender, ListAllByWipIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListAllByWipIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4034,11 +2713,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByBoardCompletedEventHandler(object sender, ListByBoardCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByBoardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4060,11 +2739,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByPanelCompletedEventHandler(object sender, ListByPanelCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByPanelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4086,11 +2765,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetAssemblySequenceCompletedEventHandler(object sender, GetAssemblySequenceCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetAssemblySequenceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4112,37 +2791,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetAssemblySequenceWithSideCompletedEventHandler(object sender, GetAssemblySequenceWithSideCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetAssemblySequenceWithSideCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetAssemblySequenceWithSideCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetWorkCellInMESCompletedEventHandler(object sender, GetWorkCellInMESCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetWorkCellInMESCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4164,11 +2817,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByNumberCompletedEventHandler(object sender, ListByNumberCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByNumberCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4190,11 +2843,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void UnitHistoryCompletedEventHandler(object sender, UnitHistoryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class UnitHistoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4216,11 +2869,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void LoadInfoSMTCompletedEventHandler(object sender, LoadInfoSMTCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LoadInfoSMTCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4242,11 +2895,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void QM_CRDsCompletedEventHandler(object sender, QM_CRDsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class QM_CRDsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4268,11 +2921,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void FeederTrayTrackCompletedEventHandler(object sender, FeederTrayTrackCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class FeederTrayTrackCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4294,11 +2947,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EquiposListByActiveStatusCompletedEventHandler(object sender, EquiposListByActiveStatusCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EquiposListByActiveStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4320,11 +2973,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void QM_SelectByIDCompletedEventHandler(object sender, QM_SelectByIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class QM_SelectByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4346,11 +2999,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void QM_SelectBySerialNumberCompletedEventHandler(object sender, QM_SelectBySerialNumberCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class QM_SelectBySerialNumberCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4372,11 +3025,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void WP_BatchCompletedEventHandler(object sender, WP_BatchCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WP_BatchCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4398,11 +3051,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void QM_DefectsCompletedEventHandler(object sender, QM_DefectsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class QM_DefectsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4424,11 +3077,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CR_RouteStepsCompletedEventHandler(object sender, CR_RouteStepsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CR_RouteStepsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4450,37 +3103,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void PlaceBoardOnHoldCompletedEventHandler(object sender, PlaceBoardOnHoldCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PlaceBoardOnHoldCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal PlaceBoardOnHoldCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ReleaseBoardOnHoldCompletedEventHandler(object sender, ReleaseBoardOnHoldCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ReleaseBoardOnHoldCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4502,11 +3129,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListActiveHoldsByWipIDCompletedEventHandler(object sender, ListActiveHoldsByWipIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListActiveHoldsByWipIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4528,63 +3155,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void SearchRepairCompletedEventHandler(object sender, SearchRepairCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SearchRepairCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SearchRepairCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void SearchDefectCompletedEventHandler(object sender, SearchDefectCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SearchDefectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SearchDefectCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListActiveByCustomerCompletedEventHandler(object sender, ListActiveByCustomerCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListActiveByCustomerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4606,11 +3181,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void BoardHistoryReportCompletedEventHandler(object sender, BoardHistoryReportCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class BoardHistoryReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4632,11 +3207,37 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void EPS_GetAssemblyMaterialCompletedEventHandler(object sender, EPS_GetAssemblyMaterialCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class EPS_GetAssemblyMaterialCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal EPS_GetAssemblyMaterialCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_BirthHistoryCompletedEventHandler(object sender, EPS_BirthHistoryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_BirthHistoryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4658,11 +3259,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_PackingSNCompletedEventHandler(object sender, EPS_PackingSNCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_PackingSNCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4684,11 +3285,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetMaterialByBOMCompletedEventHandler(object sender, GetMaterialByBOMCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetMaterialByBOMCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4710,11 +3311,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetMaterialInfoCompletedEventHandler(object sender, GetMaterialInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetMaterialInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4736,11 +3337,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetCRDsByBOMMaterialCompletedEventHandler(object sender, GetCRDsByBOMMaterialCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCRDsByBOMMaterialCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4762,11 +3363,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void RevisionAssemblyCompletedEventHandler(object sender, RevisionAssemblyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RevisionAssemblyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4788,11 +3389,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SelectByNameAssemblyCompletedEventHandler(object sender, SelectByNameAssemblyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SelectByNameAssemblyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4814,11 +3415,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SelectByNameAssemblyVersionCompletedEventHandler(object sender, SelectByNameAssemblyVersionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SelectByNameAssemblyVersionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4840,11 +3441,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetCRDsByAssemblyCompletedEventHandler(object sender, GetCRDsByAssemblyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetCRDsByAssemblyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4866,37 +3467,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void InspectionsCompletedEventHandler(object sender, InspectionsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InspectionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal InspectionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void IDModelCompletedEventHandler(object sender, IDModelCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class IDModelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4918,11 +3493,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SheetCRDsCompletedEventHandler(object sender, SheetCRDsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SheetCRDsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4944,11 +3519,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_LinkChildBoardCompletedEventHandler(object sender, EPS_LinkChildBoardCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_LinkChildBoardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4970,11 +3545,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_CreateBoardCompletedEventHandler(object sender, EPS_CreateBoardCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_CreateBoardCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4996,11 +3571,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_UnlinkCompletedEventHandler(object sender, EPS_UnlinkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_UnlinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5022,11 +3597,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByLinkObjectIDCompletedEventHandler(object sender, ListByLinkObjectIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByLinkObjectIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5048,11 +3623,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByCustomerIDCompletedEventHandler(object sender, ListByCustomerIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByCustomerIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5074,11 +3649,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByCustomerNameCompletedEventHandler(object sender, ListByCustomerNameCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByCustomerNameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5100,11 +3675,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ListByPropertyCompletedEventHandler(object sender, ListByPropertyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ListByPropertyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5126,11 +3701,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void StepStatusCompletedEventHandler(object sender, StepStatusCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class StepStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5152,123 +3727,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void IStepStatusCompletedEventHandler(object sender, IStepStatusCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IStepStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IStepStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetStepStatusCompletedEventHandler(object sender, GetStepStatusCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetStepStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetStepStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void DiagnosticsCompletedEventHandler(object sender, DiagnosticsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class DiagnosticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal DiagnosticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetBoardSideCompletedEventHandler(object sender, GetBoardSideCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetBoardSideCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetBoardSideCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public string strAssembly {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void IsMasterCompletedEventHandler(object sender, IsMasterCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class IsMasterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5298,225 +3761,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void IsMasterTypeCompletedEventHandler(object sender, IsMasterTypeCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsMasterTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IsMasterTypeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime FechaBaja {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.DateTime)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void IsMasterModelCompletedEventHandler(object sender, IsMasterModelCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsMasterModelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IsMasterModelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime FechaBaja {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.DateTime)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void IsMasterProductCompletedEventHandler(object sender, IsMasterProductCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsMasterProductCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IsMasterProductCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime FechaBaja {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.DateTime)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetBoardSideMachineFYPCompletedEventHandler(object sender, GetBoardSideMachineFYPCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetBoardSideMachineFYPCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetBoardSideMachineFYPCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetBoardSideMachineAXICompletedEventHandler(object sender, GetBoardSideMachineAXICompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetBoardSideMachineAXICompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetBoardSideMachineAXICompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetBoardSideMachineCompletedEventHandler(object sender, GetBoardSideMachineCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetBoardSideMachineCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetBoardSideMachineCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public string strAssembly {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GetTesterAOICompletedEventHandler(object sender, GetTesterAOICompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetTesterAOICompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetTesterAOICompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void IDAssemblyCompletedEventHandler(object sender, IDAssemblyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class IDAssemblyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5538,11 +3787,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_BoardWipMoveStatusCompletedEventHandler(object sender, EPS_BoardWipMoveStatusCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_BoardWipMoveStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5564,63 +3813,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void EPS_BoardWipMoveCompletedEventHandler(object sender, EPS_BoardWipMoveCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EPS_BoardWipMoveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EPS_BoardWipMoveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public bool Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void PassInspectionsCompletedEventHandler(object sender, PassInspectionsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PassInspectionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal PassInspectionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataTable Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_BatchInfoCompletedEventHandler(object sender, EPS_BatchInfoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_BatchInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5642,11 +3839,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_BatchSNCompletedEventHandler(object sender, EPS_BatchSNCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_BatchSNCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5668,37 +3865,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void EPS_GetBatchesCompletedEventHandler(object sender, EPS_GetBatchesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EPS_GetBatchesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EPS_GetBatchesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public System.Data.DataSet Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataSet)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EPS_LinkedSNCompletedEventHandler(object sender, EPS_LinkedSNCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EPS_LinkedSNCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5720,11 +3891,11 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void HistoryStatusCompletedEventHandler(object sender, HistoryStatusCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class HistoryStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -5746,18 +3917,18 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void JoinPanelCompletedEventHandler(object sender, JoinPanelCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void BoardInHoldCompletedEventHandler(object sender, BoardInHoldCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class JoinPanelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class BoardInHoldCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal JoinPanelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal BoardInHoldCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -5772,18 +3943,18 @@ namespace GoodBad_Conveyor_2._0.MES {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void BreakOutPanelCompletedEventHandler(object sender, BreakOutPanelCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void IsScrapCompletedEventHandler(object sender, IsScrapCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class BreakOutPanelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class IsScrapCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal BreakOutPanelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal IsScrapCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -5793,6 +3964,110 @@ namespace GoodBad_Conveyor_2._0.MES {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void LoopsByStepCompletedEventHandler(object sender, LoopsByStepCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoopsByStepCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoopsByStepCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetMaterialIDCompletedEventHandler(object sender, GetMaterialIDCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetMaterialIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetMaterialIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void EPS_GetBatchesCompletedEventHandler(object sender, EPS_GetBatchesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class EPS_GetBatchesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal EPS_GetBatchesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAssemblySequenceWithSideCompletedEventHandler(object sender, GetAssemblySequenceWithSideCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAssemblySequenceWithSideCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAssemblySequenceWithSideCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

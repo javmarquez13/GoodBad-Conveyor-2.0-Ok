@@ -12,7 +12,7 @@ namespace GoodBad_Conveyor_2._0.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,10 +26,10 @@ namespace GoodBad_Conveyor_2._0.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://mxchim0mestis10/wsMES/Mes.asmx")]
-        public string GoodBad_Conveyor_2_0_MES_Service {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://mxchim0mestis12/wsMES/Mes.asmx")]
+        public string Good_Bad_Conveyor_MES12_Service {
             get {
-                return ((string)(this["GoodBad_Conveyor_2_0_MES_Service"]));
+                return ((string)(this["Good_Bad_Conveyor_MES12_Service"]));
             }
         }
     }

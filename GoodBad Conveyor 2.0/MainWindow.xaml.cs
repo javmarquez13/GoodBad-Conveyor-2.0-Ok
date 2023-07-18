@@ -1,13 +1,17 @@
-﻿using System;
+﻿using NationalInstruments.DAQmx;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Deployment.Application;
 using System.IO.Ports;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace GoodBad_Conveyor_2._0
@@ -58,6 +62,12 @@ namespace GoodBad_Conveyor_2._0
     /// Added functionality for Shutter and Release to production
     /// 31 JAN 2023
     /// 
+    /// 
+    /// 1.0.0.
+    /// Add Config files pointing to MXCHIM0REL02 to better security
+    /// 28-Apr-2023
+    /// 
+    /// 
     public partial class MainWindow : Window
     {
         SerialPort _Keyence1 = new SerialPort();
@@ -68,6 +78,8 @@ namespace GoodBad_Conveyor_2._0
 
         bool Busy_1 = false;
         bool Busy_2 = false;
+        bool _has2Loops = false;
+
         bool CheckPointLane1_OK = false;
         bool CheckPointLane2_OK = false;
 
@@ -131,7 +143,6 @@ namespace GoodBad_Conveyor_2._0
                            false
                         };
 
-
         bool[] ShuttlerOutLane2_OK =
                         {
                            false,
@@ -144,8 +155,6 @@ namespace GoodBad_Conveyor_2._0
                            false
                         };
 
-
-
         bool[] outLane2_NG =
                         {
                            false,
@@ -157,6 +166,25 @@ namespace GoodBad_Conveyor_2._0
                            false,
                            false
                         };
+
+
+        /// <param name="out0">NG for Lane 1</param>
+        /// <param name="out1">Turn on conveyor</param>
+        /// <param name="out2">OK for Lane 1</param>
+        /// <param name="out3">NG for Lane 2</param>
+        /// <param name="out4"></param>
+        /// <param name="out5">OK for Lane 2</param>
+        /// <param name="out6"></param>
+        /// <param name="out7"></param>
+
+        bool _OKLane1 = false;
+        bool _NGLane1 = false;
+
+        bool _OKLane2 = false;
+        bool _NGLane2 = false;
+
+        bool _OnConveyor = false;
+
 
         public struct DataLane1
         {
@@ -182,6 +210,12 @@ namespace GoodBad_Conveyor_2._0
         {
             InitializeComponent();
 
+            //Debuging 
+            //Globals.SERIAL_NUMBER1 = "DC04723008214365"; //sin doble loop
+            //Globals.SERIAL_NUMBER1 = "DC04823008223391"; //con doble loop
+            //obals.SERIAL_NUMBER1 = "DC06623008183956"; //con doble loop
+            //rifyProcess1();
+
             btnOnOff_Lane1.Visibility = Visibility.Hidden;
             btnOnOff_Lane2.Visibility = Visibility.Hidden;
             btnDebug.Visibility = Visibility.Hidden;
@@ -194,7 +228,7 @@ namespace GoodBad_Conveyor_2._0
 
             Ni.WriteDAQ(DAQDefault);
 
-            _TimerDAQ.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            _TimerDAQ.Interval = new TimeSpan(0, 0, 0, 0, 2000);
             _TimerDAQ.Tick += _TimerReadDAQ;
             _TimerDAQ.Start();
 
@@ -207,6 +241,11 @@ namespace GoodBad_Conveyor_2._0
             {
                 Version myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
                 lblVersion.Content = "PRD v" + myVersion;
+
+                LogEvents.RegisterEvent(13, "v" + myVersion);
+                LogEvents.RegisterEvent(13, "Configuration file: " + Globals.CONFIG_FILE);
+
+                lblVersion.Content = "PRD v 1.0.1.0"; //Version validated in Healthcare
             }
             else lblVersion.Content = "UAT v" + "1.0.0.0";
         }
@@ -446,20 +485,21 @@ namespace GoodBad_Conveyor_2._0
                 {
                     Globals.SERIAL_NUMBER1 = Result;
                     WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "DATA RECEIVED", "PASS");
-                    if (!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
-
+                    //if (!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
+                    System.Threading.Tasks.Task _VerifyingProcess = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyProcess1());                   
+                    System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                 }
             }
-            catch(Exception ex) 
+            catch(Exception ex)
             {
                 LogEvents.RegisterEvent(1, "Keyence1_DataReceived: " + ex.Message);
-            }        
+            }
         }
 
         private void _Keyence1_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-
-        }
+            LogEvents.RegisterEvent(14, "_Keyence1_ErrorReceived " + e.ToString());
+        } 
 
         private void _Keyence2_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -480,7 +520,9 @@ namespace GoodBad_Conveyor_2._0
                 {
                     Globals.SERIAL_NUMBER2 = Result;
                     WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "DATA RECEIVED", "PASS");
-                    if (!Busy_2) Task.Factory.StartNew(() => VerifyProcess2());
+                    //if (!Busy_2) Task.Factory.StartNew(() => VerifyProcess2()); OLD LOGIC
+                    System.Threading.Tasks.Task _VerifyingProcess = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyProcess2());
+                    System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                 }
             }
             catch(Exception ex) 
@@ -510,14 +552,18 @@ namespace GoodBad_Conveyor_2._0
                     {
                         Globals.SERIAL_NUMBER1 = Result;
                         WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "DATA RECEIVED", "PASS");
-                        if (!Busy_1) Task.Factory.StartNew(() => VerifyProcess1());
+                        //if (!Busy_1) Task.Factory.StartNew(() => VerifyProcess1()); OLD LOGIC
+                        System.Threading.Tasks.Task _VerifyingProcess = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyProcess1());
+                        System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                     }
 
                     if (Globals._SHUTTLE_LANE_ACTIVE == "LANE_2")
                     {
                         Globals.SERIAL_NUMBER2 = Result;
                         WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "DATA RECEIVED", "PASS");
-                        if (!Busy_2) Task.Factory.StartNew(() => VerifyProcess2());
+                        //if (!Busy_2) Task.Factory.StartNew(() => VerifyProcess2()); OLG LOGIC
+                        System.Threading.Tasks.Task _VerifyingProcess = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyProcess2());
+                        System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                     }
                 }
             }
@@ -529,37 +575,89 @@ namespace GoodBad_Conveyor_2._0
 
         private void _SingleKeyence_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-
+            LogEvents.RegisterEvent(14, "_SingleKeyence_ErrorReceive: " + e.ToString());
         }
 
-        private void _TimerReadDAQ(object sender, EventArgs e)
+        void ReadDAQ() 
         {
-            if (!Globals.DAQ_OK) 
+            if (!Globals.DAQ_OK)
             {
                 Ni.WriteDAQ(DAQDefault);
                 return;
-            } 
+            }
 
             Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
 
-            if (!Globals.IS_SHUTTLE) 
+            if (!Globals.IS_SHUTTLE)
             {
                 if (Globals.IS_ACTIVE_LANE_1 || Globals.PASS_THRUE) VerifyLane1();
+
                 if (Globals.IS_ACTIVE_LANE_2 || Globals.PASS_THRUE) VerifyLane2();
+
             }
 
-            if (Globals.IS_SHUTTLE) 
+            if (Globals.IS_SHUTTLE)
             {
-                if (Globals.IS_ACTIVE_LANE_1 || Globals.PASS_THRUE) 
+                if (Globals.IS_ACTIVE_LANE_1 || Globals.PASS_THRUE)
                 {
-                    VerifyLane1Shuttle();                    
+                    VerifyLane1Shuttle();
                 }
 
-                if (Globals.IS_ACTIVE_LANE_2 || Globals.PASS_THRUE) 
+                if (Globals.IS_ACTIVE_LANE_2 || Globals.PASS_THRUE)
                 {
                     VerifyLane2Shuttle();
                 }
-            }  
+            }
+        }
+
+        void ReadDAQAsync()
+        {
+            if (!Globals.DAQ_OK)
+            {
+                Ni.WriteDAQ(DAQDefault);
+                return;
+            }
+
+            Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
+
+            if (!Globals.IS_SHUTTLE)
+            {
+                if (Globals.IS_ACTIVE_LANE_1 || Globals.PASS_THRUE)
+                {
+                    System.Threading.Tasks.Task _VerifyingLane1 = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyLane1());
+                    System.Threading.Tasks.Task.WaitAll(_VerifyingLane1);                 
+                }
+
+
+
+                if (Globals.IS_ACTIVE_LANE_2 || Globals.PASS_THRUE)
+                {
+                    System.Threading.Tasks.Task _VerifyingLane2 = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyLane2());
+                    System.Threading.Tasks.Task.WaitAll(_VerifyingLane2);
+                }
+            }
+
+            if (Globals.IS_SHUTTLE)
+            {
+                if (Globals.IS_ACTIVE_LANE_1 || Globals.PASS_THRUE)
+                {
+                    System.Threading.Tasks.Task _VerifyLane1Shuttle = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyLane1Shuttle());
+                    System.Threading.Tasks.Task.WaitAll(_VerifyLane1Shuttle);
+                }
+
+                if (Globals.IS_ACTIVE_LANE_2 || Globals.PASS_THRUE)
+                {
+                    System.Threading.Tasks.Task _VerifyLane2Shuttle = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyLane2Shuttle());
+                    System.Threading.Tasks.Task.WaitAll(_VerifyLane2Shuttle);
+                }
+            }
+        }
+
+
+        private void _TimerReadDAQ(object sender, EventArgs e)
+        {
+            ReadDAQ();
+            //ReadDAQAsync(); // it does not work yet
         }
 
         void VerifyLane1()
@@ -576,18 +674,20 @@ namespace GoodBad_Conveyor_2._0
                     if (!Busy_1 && !Globals.PASS_THRUE)
                     {
                         _Keyence1.Write("LON\r");
-
+                      
                         Globals.COUNT_RETRY_SCANNING1++;
 
-                        if (Globals.COUNT_RETRY_SCANNING1 > 1)
+                        if (Globals.COUNT_RETRY_SCANNING1 >= 1)
                             WriteDgv(1, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
+
+                        WaitNMilliSeconds(700);
                     }
 
                     if (Busy_1 && CheckPointLane1_OK || Globals.PASS_THRUE)
                     {
-                        _TimerDAQ.Stop(); //Validacion
+                        _TimerDAQ.Stop();
                         Ni.WriteDAQ(outLane1_OK);
-
+                        
                         while (Globals.DAQ_OUT_PUTS[1])
                         {
                             Globals.DAQ_OUT_PUTS = Ni.ReadDAQ();
@@ -595,8 +695,9 @@ namespace GoodBad_Conveyor_2._0
                                                     new Action(delegate { }));
                         }
 
-                        Ni.WriteDAQ(DAQDefault);
-                        _TimerDAQ.Start(); //Validacion
+                        Ni.WriteDAQ(DAQDefault); 
+                   
+                        _TimerDAQ.Start();
                         CheckPointLane1_OK = false;
                         CleanUP1();
                     }
@@ -604,6 +705,8 @@ namespace GoodBad_Conveyor_2._0
 
                 else               
                 {
+                    if (!_TimerDAQ.IsEnabled) _TimerDAQ.Start();
+
                     Globals.COUNT_RETRY1 = 0;
 
                     if(!Globals.PASS_THRUE) _Keyence1.Write("LOFF\r");
@@ -622,7 +725,7 @@ namespace GoodBad_Conveyor_2._0
                 if (Globals.COUNT_RETRY_SCANNING1 == Globals.RETRIES_SCANNING)
                 {
                     _Keyence1.Write("LOFF\r");
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
 
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
@@ -636,13 +739,13 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _Keyence1.Write("LOFF\r");
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
 
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1.ToString(), "FAIL");
@@ -656,7 +759,7 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
-             
+                    _TimerDAQ.Start();
                 }
             }
             catch(Exception ex)
@@ -669,7 +772,7 @@ namespace GoodBad_Conveyor_2._0
         {
             try 
             {
-                if (Globals.DAQ_OUT_PUTS[6] || Globals.DAQ_OUT_PUTS[7])
+                if (Globals.DAQ_OUT_PUTS[6])
                 {
                     Globals._SHUTTLE_LANE_ACTIVE = "LANE_2";
 
@@ -682,14 +785,16 @@ namespace GoodBad_Conveyor_2._0
 
                         Globals.COUNT_RETRY_SCANNING2++;
 
-                        if (Globals.COUNT_RETRY_SCANNING2 > 1)
+                        if (Globals.COUNT_RETRY_SCANNING2 >= 1)
                             WriteDgv(2, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
+
+                        WaitNMilliSeconds(700);
                     }
 
 
                     if (Busy_2 && CheckPointLane2_OK || Globals.PASS_THRUE)
                     {
-                        _TimerDAQ.Stop(); //Validacion
+                        _TimerDAQ.Stop();
                         Ni.WriteDAQ(outLane2_OK);
 
                         while (Globals.DAQ_OUT_PUTS[6])
@@ -700,14 +805,16 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
-                        _TimerDAQ.Start(); //Validacion
+                        _TimerDAQ.Start();
                         CheckPointLane2_OK = false;
                         CleanUP2();
                     }
                 }
                 
-                if (!Globals.DAQ_OUT_PUTS[6])
+                else
                 {
+                    if (!_TimerDAQ.IsEnabled) _TimerDAQ.Start();
+
                     Globals.COUNT_RETRY2 = 0;
 
                     if (!Globals.PASS_THRUE) _Keyence2.Write("LOFF\r");
@@ -726,7 +833,7 @@ namespace GoodBad_Conveyor_2._0
                 if (Globals.COUNT_RETRY_SCANNING2 == Globals.RETRIES_SCANNING)
                 {
                     _Keyence2.Write("LOFF\r");
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
 
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
@@ -740,13 +847,13 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
 
                 if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _Keyence2.Write("LOFF\r");
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
 
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
@@ -760,7 +867,7 @@ namespace GoodBad_Conveyor_2._0
                     }
 
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
             }
             catch(Exception ex) 
@@ -786,13 +893,15 @@ namespace GoodBad_Conveyor_2._0
 
                         Globals.COUNT_RETRY_SCANNING1++;
 
-                        if (Globals.COUNT_RETRY_SCANNING1 > 1)
+                        if (Globals.COUNT_RETRY_SCANNING1 >= 1)
                             WriteDgv(1, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
+
+                        WaitNMilliSeconds(700);
                     }
 
                     if (Busy_1 && CheckPointLane1_OK || Globals.PASS_THRUE)
                     {
-                        _TimerDAQ.Stop(); //Validacion
+                        _TimerDAQ.Stop();
                         Ni.WriteDAQ(outLane1_OK);
 
                         while (Globals.DAQ_OUT_PUTS[1])
@@ -804,7 +913,7 @@ namespace GoodBad_Conveyor_2._0
 
                         Ni.WriteDAQ(DAQDefault);
 
-                        _TimerDAQ.Start(); //Validacion
+                        _TimerDAQ.Start();
 
                         CheckPointLane1_OK = false;
                         CleanUP1();
@@ -833,7 +942,7 @@ namespace GoodBad_Conveyor_2._0
                 {
                     _SingleKeyence.Write("LOFF\r");
 
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
 
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING1.ToString(), "FAIL");
@@ -848,14 +957,14 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _SingleKeyence.Write("LOFF\r");
 
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
                     Ni.WriteDAQ(outLane1_NG);
                     WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1.ToString(), "FAIL");
                     LogEvents.RegisterEvent(1, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY1);
@@ -869,7 +978,7 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
             }
             catch (Exception ex)
@@ -895,14 +1004,16 @@ namespace GoodBad_Conveyor_2._0
 
                         Globals.COUNT_RETRY_SCANNING2++;
 
-                        if (Globals.COUNT_RETRY_SCANNING2 > 1)
+                        if (Globals.COUNT_RETRY_SCANNING2 >= 1)
                             WriteDgv(2, DateTime.Now, "NULL", "SCANNING RETRY: " + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
+
+                        WaitNMilliSeconds(700);
                     }
 
 
                     if (Busy_2 && CheckPointLane2_OK || Globals.PASS_THRUE)
                     {
-                        _TimerDAQ.Stop(); //Validacion
+                        _TimerDAQ.Stop();
                         Ni.WriteDAQ(ShuttlerOutLane2_OK);
 
                         while (Globals.DAQ_OUT_PUTS[6])
@@ -913,7 +1024,7 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
-                        _TimerDAQ.Start(); //Validacion
+                        _TimerDAQ.Start();
 
                         CheckPointLane2_OK = false;
                         CleanUP2();
@@ -942,7 +1053,7 @@ namespace GoodBad_Conveyor_2._0
                 {
                     _SingleKeyence.Write("LOFF\r");
 
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, "NULL", "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT SCANNING EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2);
@@ -956,14 +1067,14 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
 
                 if (Globals.COUNT_RETRY2 == Globals.RETRIES_CHECKPROCESS)
                 {
                     _SingleKeyence.Write("LOFF\r");
 
-                    _TimerDAQ.Stop(); //Validacion
+                    _TimerDAQ.Stop();
                     Ni.WriteDAQ(outLane2_NG);
                     WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY_SCANNING2.ToString(), "FAIL");
                     LogEvents.RegisterEvent(2, "VERIFY LANE: RETRIES LIMIT VERIFY PROCESS EXCEEDED, SENDING AS NG BOARD, RETRIES:" + Globals.COUNT_RETRY2);
@@ -977,7 +1088,7 @@ namespace GoodBad_Conveyor_2._0
 
                     WaitNSeconds(10);
                     Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start(); //Validacion
+                    _TimerDAQ.Start();
                 }
             }
             catch (Exception ex)
@@ -988,25 +1099,33 @@ namespace GoodBad_Conveyor_2._0
 
         void VerifyProcess1() 
         {
-            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1) || Busy_1) return;
+            //if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1) || Busy_1) return;
+            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1)) return;
            
           RetryCheckPoint:
 
             Busy_1 = true;
             Globals.COUNT_MATRIX1 = 0;
             Globals.DT_LANE1 = StaticFunctions.VerifyCheckPointNew(Globals.SERIAL_NUMBER1);
-            
+                                           
             foreach (DataRow _dr in Globals.DT_LANE1.Rows)
             {
                 string _TempStep = _dr[7].ToString();
                 string _TempStatus = _dr[8].ToString();
+                string _has2Loops = _dr[9].ToString();
 
-                //if (_TempStep == "MRB" || _TempStep == Globals.STEP_TO_CHECK) 
-                if (_TempStep == "QC / MRB" || _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || _TempStep == "FVT / PBTS" && _TempStatus == "Fail") 
-                {
+
+                if (Globals.PLATFORM == "FVT" && _has2Loops == "False") goto Skip;
+
+                if (_TempStep == "QC / MRB" || 
+                    _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || 
+                    _TempStep == "FVT / PBTS" && _TempStatus == "Fail") 
+                {          
                     Globals.COUNT_MATRIX1++; 
                 }
                 else {  }
+
+                Skip: { }
             }
 
 
@@ -1049,7 +1168,8 @@ namespace GoodBad_Conveyor_2._0
 
         void VerifyProcess2()
         {
-            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER2) || Busy_2) return;
+            //if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER2) || Busy_2) return; OLD LOGIC
+            if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER2)) return;
 
           RetryCheckPoint:
 
@@ -1061,12 +1181,17 @@ namespace GoodBad_Conveyor_2._0
             {
                 string _TempStep = _dr[7].ToString();
                 string _TempStatus = _dr[8].ToString();
+                string _has2Loops = _dr[9].ToString();
+
+                if (Globals.PLATFORM == "FVT" && _has2Loops == "False") goto Skip;
 
                 if (_TempStep == "QC / MRB" || _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || _TempStep == "FVT / PBTS" && _TempStatus == "Fail") 
                 {
                     Globals.COUNT_MATRIX2++;
                 }
                 else { }
+
+                Skip: { }
             }
 
 
@@ -1110,7 +1235,20 @@ namespace GoodBad_Conveyor_2._0
         private void WaitNSeconds(int segundos)
         {
             if (segundos < 1) return;
-            DateTime _desired = DateTime.Now.AddSeconds(segundos);
+            DateTime _desired = DateTime.Now.AddSeconds(segundos); 
+  
+            while (DateTime.Now < _desired)
+            {
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                      new Action(delegate { }));
+            }
+        }
+
+        private void WaitNMilliSeconds(int MilliSeconds)
+        {
+            if (MilliSeconds < 100) return;
+            DateTime _desired = DateTime.Now.AddMilliseconds(MilliSeconds); 
+
             while (DateTime.Now < _desired)
             {
                 Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
@@ -1333,9 +1471,7 @@ namespace GoodBad_Conveyor_2._0
         {
             if (e.ChangedButton == MouseButton.Left) 
             {
-                _TimerDAQ.Stop(); //Validacion
                 DragMove();
-                _TimerDAQ.Start(); //Validacion
             }
            
         }
@@ -1478,3 +1614,9 @@ namespace GoodBad_Conveyor_2._0
   
     }
 }
+
+
+
+
+
+
