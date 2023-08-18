@@ -92,7 +92,8 @@ namespace GoodBad_Conveyor_2._0
             _dtResult = _dtPanel.Copy();
             _dtResult.Columns.Add("History");
             _dtResult.Columns.Add("Status");
-            _dtResult.Columns.Add("Has2Loops"); //OnValidation
+            _dtResult.Columns.Add("Has2Loops");
+            _dtResult.Columns.Add("DefectLocation"); //OnValidation
 
             DataTable EventsByStepMatrix = new DataTable();
 
@@ -153,18 +154,25 @@ namespace GoodBad_Conveyor_2._0
                                                                               r.Field<string>("Test_Process") == StepToCheck &&
                                                                               r.Field<string>("TestStatus") == "Fail")
                                                                   .CopyToDataTable();
-
+                
                         _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
                                                      .Select(b => b["History"] = StepToCheck)
                                                     .ToList();
 
                         _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
                                  .Select(b => b["Status"] = "Fail")
-                                .ToList();
+                                 .ToList();
 
 
+                        //OnValidation
+                        string _DefectLocation = EventsByStepMatrix.Rows[0][11].ToString();
+                        _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                 .Select(b => b["DefectLocation"] = _DefectLocation)
+                                 .ToList();
 
-                        if(Globals.PLATFORM == "FVT" && StepToCheck == "FVT / PBTS") 
+
+                        //Evaluation 2loops
+                        if (Globals.PLATFORM == "FVT" && StepToCheck == "FVT / PBTS") 
                         {
                             bool _has2Loops = Has2Loop(_dsQuery);
 

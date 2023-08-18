@@ -5,6 +5,7 @@ using System.Data;
 using System.Deployment.Application;
 using System.IO.Ports;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -206,15 +207,34 @@ namespace GoodBad_Conveyor_2._0
             public string STATUS { set; get; }
         }
 
+
+
+        [FlagsAttribute]
+        public enum EXECUTION_STATE : uint
+        {
+            ES_AWAYMODE_REQUIRED = 0x00000040,
+            ES_CONTINUOUS = 0x80000000,
+            ES_DISPLAY_REQUIRED = 0x00000002,
+            ES_SYSTEM_REQUIRED = 0x00000001
+            // Legacy flag, should not be used.
+            // ES_USER_PRESENT = 0x00000004
+        }
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-            //Debuging 
-            //Globals.SERIAL_NUMBER1 = "DC04723008214365"; //sin doble loop
-            //Globals.SERIAL_NUMBER1 = "DC04823008223391"; //con doble loop
-            //obals.SERIAL_NUMBER1 = "DC06623008183956"; //con doble loop
-            //rifyProcess1();
+            //ALWAYS AWAKE
+            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+
+            //Debuging
+            //Globals.SERIAL_NUMBER1 = "DC22823001176313";
+            //VerifyProcess1();
+            //Environment.Exit(0);
 
             btnOnOff_Lane1.Visibility = Visibility.Hidden;
             btnOnOff_Lane2.Visibility = Visibility.Hidden;
@@ -1097,7 +1117,7 @@ namespace GoodBad_Conveyor_2._0
             }
         }
 
-        void VerifyProcess1() 
+        void VerifyProcess1()
         {
             //if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1) || Busy_1) return;
             if (string.IsNullOrEmpty(Globals.SERIAL_NUMBER1)) return;
@@ -1113,9 +1133,15 @@ namespace GoodBad_Conveyor_2._0
                 string _TempStep = _dr[7].ToString();
                 string _TempStatus = _dr[8].ToString();
                 string _has2Loops = _dr[9].ToString();
+                string _defectLocation = _dr[10].ToString();
 
 
                 if (Globals.PLATFORM == "FVT" && _has2Loops == "False") goto Skip;
+                if (_defectLocation == "X-OUT") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TOM0") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TMR_STATUS_ON") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TMR_STATUS_OFF") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_CONFIG_BITMASK") goto Skip; //ON VALIDATION
 
                 if (_TempStep == "QC / MRB" || 
                     _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || 
@@ -1182,8 +1208,14 @@ namespace GoodBad_Conveyor_2._0
                 string _TempStep = _dr[7].ToString();
                 string _TempStatus = _dr[8].ToString();
                 string _has2Loops = _dr[9].ToString();
+                string _defectLocation = _dr[10].ToString();
 
                 if (Globals.PLATFORM == "FVT" && _has2Loops == "False") goto Skip;
+                if (_defectLocation == "X-OUT") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TOM0") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TMR_STATUS_ON") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_TMR_STATUS_OFF") goto Skip; //ON VALIDATION
+                if (_defectLocation == "VERIFY_CONFIG_BITMASK") goto Skip; //ON VALIDATION
 
                 if (_TempStep == "QC / MRB" || _TempStep == Globals.STEP_TO_CHECK && _TempStatus == "Pass" || _TempStep == "FVT / PBTS" && _TempStatus == "Fail") 
                 {

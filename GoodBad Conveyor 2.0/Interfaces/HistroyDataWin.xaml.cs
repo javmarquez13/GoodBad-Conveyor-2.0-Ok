@@ -62,6 +62,7 @@ namespace GoodBad_Conveyor_2._0
             public string HISTORY { set; get; }
             public string STATUS { set; get; }
             public string DOUBLE_LOOP { set; get; }
+            public string DEFECT_LOCATION { set; get; }
         }
         void InitDataGrid() 
         {
@@ -95,11 +96,18 @@ namespace GoodBad_Conveyor_2._0
             DOUBLE_LOOP.Width = 50;
             DOUBLE_LOOP.IsReadOnly = true;
 
+            DataGridTextColumn DEFECT_LOCATION = new DataGridTextColumn();
+            DEFECT_LOCATION.Header = "DEFECT_LOCATION";
+            DEFECT_LOCATION.Binding = new Binding("DEFECT_LOCATION");
+            DEFECT_LOCATION.Width = 100;
+            DEFECT_LOCATION.IsReadOnly = true;
+
             DgMesData.Columns.Add(SERIAL_NUMBER);
             DgMesData.Columns.Add(MAPPING);
             DgMesData.Columns.Add(HISTORY);
             DgMesData.Columns.Add(STATUS);
             DgMesData.Columns.Add(DOUBLE_LOOP);
+            DgMesData.Columns.Add(DEFECT_LOCATION);
         }
 
         void MainFunction() 
@@ -119,8 +127,9 @@ namespace GoodBad_Conveyor_2._0
                 string HISTORY = _dr[7].ToString();
                 string STATUS = _dr[8].ToString();
                 string DOUBLE_LOOP = _dr[9].ToString();
+                string DEFECT_LOCATION = _dr[10].ToString();
 
-                WriteDgv(SERIAL_NUMBER, MAPPING, HISTORY, STATUS, DOUBLE_LOOP);
+                WriteDgv(SERIAL_NUMBER, MAPPING, HISTORY, STATUS, DOUBLE_LOOP, DEFECT_LOCATION);
             }
         }
 
@@ -130,13 +139,13 @@ namespace GoodBad_Conveyor_2._0
             catch(Exception ex) { }          
         }
 
-        void WriteDgv(string _SERIAL_NUMBER, string _MAPPING, string _HISTROY, string _STATUS, string _DOUBLE_LOOP)
+        void WriteDgv(string _SERIAL_NUMBER, string _MAPPING, string _HISTROY, string _STATUS, string _DOUBLE_LOOP, string _DEFECT_LOCATION)
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
                 try
                 {
-                    DgMesData.Items.Add(new MESData { SERIAL_NUMBER = _SERIAL_NUMBER, MAPPING = _MAPPING, HISTORY = _HISTROY, STATUS = _STATUS, DOUBLE_LOOP = _DOUBLE_LOOP });
+                    DgMesData.Items.Add(new MESData { SERIAL_NUMBER = _SERIAL_NUMBER, MAPPING = _MAPPING, HISTORY = _HISTROY, STATUS = _STATUS, DOUBLE_LOOP = _DOUBLE_LOOP, DEFECT_LOCATION = _DEFECT_LOCATION });
 
                     if (DgMesData.Items.Count > 0)
                     {
@@ -150,7 +159,7 @@ namespace GoodBad_Conveyor_2._0
                 }
                 catch (Exception ex)
                 {
-                    WriteDgv("APP ERROR", "0", ex.Message, "FAIL", "");
+                    WriteDgv("APP ERROR", "0", ex.Message, "FAIL", "", "");
                 }
             }));
         }

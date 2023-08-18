@@ -18,7 +18,7 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\YJLink Buffer Control 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
+                string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
 
                 if (!File.Exists(Path_Config))
                 {
@@ -28,7 +28,6 @@ namespace GoodBad_Conveyor_2._0
                 }
 
                 return Path_Config;
-
                 //return @"C:\GoodBadConveyor\Config.INI"; 
             }
         }
