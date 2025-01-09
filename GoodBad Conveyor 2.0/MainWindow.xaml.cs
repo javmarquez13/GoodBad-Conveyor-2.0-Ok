@@ -228,31 +228,35 @@ namespace GoodBad_Conveyor_2._0
         {
             InitializeComponent();
 
-            //ALWAYS AWAKE
-            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
-
             //Debuging
             //Globals.SERIAL_NUMBER1 = "DC22823001176313";
             //VerifyProcess1();
             //Environment.Exit(0);
 
-            btnOnOff_Lane1.Visibility = Visibility.Hidden;
-            btnOnOff_Lane2.Visibility = Visibility.Hidden;
-            btnDebug.Visibility = Visibility.Hidden;
-            btnPassThru.Visibility = Visibility.Hidden;
-            DockMenu.Width = 0;
-            InitializeDgv();
-            GetVersion();
+            MainView.Loaded += (sender, e) => 
+            {
 
-            LogEvents.RegisterEvent(13, "Initializing application GOOD BAD CONVEYOR");
+                //ALWAYS AWAKE
+                SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
 
-            Ni.WriteDAQ(DAQDefault);
+                btnOnOff_Lane1.Visibility = Visibility.Hidden;
+                btnOnOff_Lane2.Visibility = Visibility.Hidden;
+                btnDebug.Visibility = Visibility.Hidden;
+                btnPassThru.Visibility = Visibility.Hidden;
+                DockMenu.Width = 0;
+                InitializeDgv();
+                GetVersion();
 
-            _TimerDAQ.Interval = new TimeSpan(0, 0, 0, 0, 2000);
-            _TimerDAQ.Tick += _TimerReadDAQ;
-            _TimerDAQ.Start();
+                LogEvents.RegisterEvent(13, "Initializing application GOOD BAD CONVEYOR");
 
-            InitLanes();
+                Ni.WriteDAQ(DAQDefault);
+
+                _TimerDAQ.Interval = new TimeSpan(0, 0, 0, 0, 2000);
+                _TimerDAQ.Tick += _TimerReadDAQ;
+                _TimerDAQ.Start();
+
+                InitLanes();
+            };  
         }
 
         void GetVersion()
@@ -510,6 +514,10 @@ namespace GoodBad_Conveyor_2._0
                     System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                 }
             }
+            catch(DaqException ex)
+            {
+                LogEvents.RegisterEvent(1, "Keyence1_DataReceived: " + ex.Message);
+            }
             catch(Exception ex)
             {
                 LogEvents.RegisterEvent(1, "Keyence1_DataReceived: " + ex.Message);
@@ -544,6 +552,10 @@ namespace GoodBad_Conveyor_2._0
                     System.Threading.Tasks.Task _VerifyingProcess = System.Threading.Tasks.Task.Factory.StartNew(() => VerifyProcess2());
                     System.Threading.Tasks.Task.WaitAll(_VerifyingProcess);
                 }
+            }
+            catch(DaqException ex)
+            {
+                LogEvents.RegisterEvent(2, "Keyence2_DataReceived: " + ex.Message);
             }
             catch(Exception ex) 
             {
@@ -975,9 +987,9 @@ namespace GoodBad_Conveyor_2._0
                                                 new Action(delegate { }));
                     }
 
-                    WaitNSeconds(10);
-                    Ni.WriteDAQ(DAQDefault);
-                    _TimerDAQ.Start();
+                    WaitNSeconds(segundos: 10);
+                    Ni.WriteDAQ(outputs: DAQDefault);
+                    this._TimerDAQ.Start();
                 }
 
                 if (Globals.COUNT_RETRY1 == Globals.RETRIES_CHECKPROCESS)
@@ -1033,8 +1045,8 @@ namespace GoodBad_Conveyor_2._0
 
                     if (Busy_2 && CheckPointLane2_OK || Globals.PASS_THRUE)
                     {
-                        _TimerDAQ.Stop();
-                        Ni.WriteDAQ(ShuttlerOutLane2_OK);
+                        this._TimerDAQ.Stop();
+                        this.Ni.WriteDAQ(ShuttlerOutLane2_OK);
 
                         while (Globals.DAQ_OUT_PUTS[6])
                         {
@@ -1044,9 +1056,9 @@ namespace GoodBad_Conveyor_2._0
                         }
 
                         Ni.WriteDAQ(DAQDefault);
-                        _TimerDAQ.Start();
+                        this._TimerDAQ.Start();
 
-                        CheckPointLane2_OK = false;
+                        this.CheckPointLane2_OK = false;
                         CleanUP2();
                     }
                 }
@@ -1126,7 +1138,8 @@ namespace GoodBad_Conveyor_2._0
 
             Busy_1 = true;
             Globals.COUNT_MATRIX1 = 0;
-            Globals.DT_LANE1 = StaticFunctions.VerifyCheckPointNew(Globals.SERIAL_NUMBER1);
+            Globals.DT_LANE1 = StaticFunctions
+                               .VerifyCheckPointNew(SerialNumber: Globals.SERIAL_NUMBER1);
                                            
             foreach (DataRow _dr in Globals.DT_LANE1.Rows)
             {
@@ -1155,39 +1168,64 @@ namespace GoodBad_Conveyor_2._0
             }
 
 
-            if (Globals.COUNT_MATRIX1 != 15)
+            if (Globals.COUNT_MATRIX1 != Globals.PCBA_UNITS)
             {
                 Globals.COUNT_RETRY1++;
                 CheckPointLane1_OK = false;
-                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY PROCESS RETRY: " + Globals.COUNT_RETRY1.ToString(), "FAIL");
+
+                WriteDgv(
+                    _LANE: 1, 
+                    _DATE: DateTime.Now,
+                    _SERIAL_NUMBER: Globals.SERIAL_NUMBER1,
+                    _PROCESS: $"VERIFY PROCESS RETRY: {Globals.COUNT_RETRY1}",
+                    _STATUS: "FAIL"
+                    );
 
                 if (Globals.COUNT_RETRY1 < Globals.RETRIES_CHECKPROCESS) goto RetryCheckPoint;              
                 Busy_1 = false;
 
-                LogEvents.RegisterEvent(1, "VERIFY PROCESS: FAIL " + Globals.SERIAL_NUMBER1);
+                LogEvents.RegisterEvent(
+                    LANE: 1,
+                    LOG_STRING: $"VERIFY PROCESS: FAIL {Globals.SERIAL_NUMBER1}"
+                    );
 
                 DataTable _dtReport = Globals.DT_LANE1.Copy();
-                foreach (DataRow _drReport in _dtReport.Rows) 
+                foreach (DataRow _drReport in _dtReport.Rows)
                 {
                     string SN = _drReport[3].ToString();
                     string Array = _drReport[4].ToString();
                     string StepName = _drReport[7].ToString();
                     string Status = _drReport[8].ToString();
 
-                    string LogString = "SN: " + SN + " " +
-                                        "POS: " + Array + " " +
-                                        "STEP: " + StepName + " " +
-                                        "STATUS: " + Status;
+                    string LogString = $"SN: {SN} " +
+                                       $"POS: {Array} " +
+                                       $"STEP: {StepName} " +
+                                       $"STATUS: {Status}";
 
-                    LogEvents.RegisterEvent(1, "VERIFY PROCESS: DETAIL " + LogString);
+                    LogEvents.RegisterEvent(
+                        LANE: 1, 
+                        LOG_STRING: $"VERIFY PROCESS: DETAIL {LogString}"
+                        );
                 }              
             }
 
-            if (Globals.COUNT_MATRIX1 == 15)
+            if (Globals.COUNT_MATRIX1 == Globals.PCBA_UNITS)
             {
                 CheckPointLane1_OK = true;
-                WriteDgv(1, DateTime.Now, Globals.SERIAL_NUMBER1, "VERIFY PROCESS: OK SENDING AS A GOOD BOARD", "PASS");
-                LogEvents.RegisterEvent(1, "VERIFY PROCESS: OK SENDING AS A GOOD BOARD " + Globals.SERIAL_NUMBER1);
+
+                WriteDgv(
+                    _LANE: 1,
+                    _DATE: DateTime.Now,
+                    _SERIAL_NUMBER: Globals.SERIAL_NUMBER1,
+                    _PROCESS: "VERIFY PROCESS: OK SENDING AS A GOOD BOARD",
+                    _STATUS: "PASS"
+                    );
+
+                LogEvents.RegisterEvent(
+                    LANE: 1,
+                    LOG_STRING: $"VERIFY PROCESS: OK SENDING AS A GOOD BOARD {Globals.SERIAL_NUMBER1}"
+                    );
+
                 CleanUP1();
             }
         }
@@ -1201,7 +1239,8 @@ namespace GoodBad_Conveyor_2._0
 
             Busy_2 = true;
             Globals.COUNT_MATRIX2 = 0;
-            Globals.DT_LANE2 = StaticFunctions.VerifyCheckPointNew(Globals.SERIAL_NUMBER2);
+            Globals.DT_LANE2 = StaticFunctions
+                               .VerifyCheckPointNew(SerialNumber: Globals.SERIAL_NUMBER2);
 
             foreach (DataRow _dr in Globals.DT_LANE2.Rows)
             {
@@ -1227,16 +1266,25 @@ namespace GoodBad_Conveyor_2._0
             }
 
 
-            if (Globals.COUNT_MATRIX2 != 15)
+            if (Globals.COUNT_MATRIX2 != Globals.PCBA_UNITS)
             {
                 Globals.COUNT_RETRY2++;
                 CheckPointLane2_OK = false;
-                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY PROCESS RETRY: " + Globals.COUNT_RETRY2.ToString(), "FAIL");
+
+                WriteDgv(
+                    _LANE: 2,
+                    _DATE: DateTime.Now,
+                    _SERIAL_NUMBER: Globals.SERIAL_NUMBER2,
+                    _PROCESS: $"VERIFY PROCESS RETRY: {Globals.COUNT_RETRY2.ToString()}",
+                    _STATUS: "FAIL");
 
                 if (Globals.COUNT_RETRY2 < Globals.RETRIES_CHECKPROCESS) goto RetryCheckPoint;
                 Busy_2 = false;
 
-                LogEvents.RegisterEvent(2, "VERIFY PROCESS: FAIL " + Globals.SERIAL_NUMBER2);
+                LogEvents.RegisterEvent(
+                    LANE: 2, 
+                    LOG_STRING: $"VERIFY PROCESS: FAIL {Globals.SERIAL_NUMBER2}"
+                    );
 
                 DataTable _dtReport = Globals.DT_LANE2.Copy();
                 foreach (DataRow _drReport in _dtReport.Rows)
@@ -1246,20 +1294,35 @@ namespace GoodBad_Conveyor_2._0
                     string StepName = _drReport[7].ToString();
                     string Status = _drReport[8].ToString();
 
-                    string LogString = "SN: " + SN + " " +
-                                        "POS: " + Array + " " +
-                                        "STEP: " + StepName + " " +
-                                        "STATUS: " + Status;
+                    string LogString = $"SN: {SN} "+
+                                       $"POS: {Array} "+
+                                       $"STEP: {StepName} "+
+                                       $"STATUS: " + Status;
 
-                    LogEvents.RegisterEvent(2, "VERIFY PROCESS: DETAIL " + LogString);
+                    LogEvents.RegisterEvent(
+                        LANE:2,
+                        LOG_STRING: $"VERIFY PROCESS: DETAIL {LogString}"
+                        );
                 }
             }
 
-            if (Globals.COUNT_MATRIX2 == 15)
+            if (Globals.COUNT_MATRIX2 == Globals.PCBA_UNITS)
             {
                 CheckPointLane2_OK = true;
-                WriteDgv(2, DateTime.Now, Globals.SERIAL_NUMBER2, "VERIFY PROCESS : OK SENDING AS A GOOD BOARD", "PASS");
-                LogEvents.RegisterEvent(2, "VERIFY PROCESS: OK SENDING AS A GOOD BOARD " + Globals.SERIAL_NUMBER2);
+
+                WriteDgv(
+                    _LANE: 2,
+                    _DATE: DateTime.Now,
+                    _SERIAL_NUMBER: Globals.SERIAL_NUMBER2,
+                    _PROCESS: "VERIFY PROCESS : OK SENDING AS A GOOD BOARD",
+                    _STATUS: "PASS"
+                    );
+
+                LogEvents.RegisterEvent(
+                    LANE:2,
+                    LOG_STRING: $"VERIFY PROCESS: OK SENDING AS A GOOD BOARD { Globals.SERIAL_NUMBER2}"
+                    );
+
                 CleanUP2();             
             }
         }
@@ -1315,7 +1378,13 @@ namespace GoodBad_Conveyor_2._0
                     {
                         if (DgLane1.Items.Count > 100) DgLane1.Items.Clear();
 
-                        DgLane1.Items.Add(new DataLane1 { DATE = _DATE, SERIAL_NUMBER = _SERIAL_NUMBER, PROCESS = _PROCESS, STATUS = _STATUS });
+                        DgLane1.Items.Add(new DataLane1 
+                        { 
+                            DATE = _DATE,
+                            SERIAL_NUMBER = _SERIAL_NUMBER,
+                            PROCESS = _PROCESS, 
+                            STATUS = _STATUS 
+                        });
 
                         if (DgLane1.Items.Count > 0)
                         {
@@ -1323,25 +1392,39 @@ namespace GoodBad_Conveyor_2._0
                             if (border != null)
                             {
                                 var scroll = border.Child as ScrollViewer;
-                                if (scroll != null) scroll.ScrollToEnd();
+                                scroll?.ScrollToEnd();
                             }
                         }
                     }
                     catch(Exception ex) 
                     {
-                        WriteDgv(1, DateTime.Now, "APP ERROR", ex.Message, "FAIL");
-                        LogEvents.RegisterEvent(1, "WRITEDGV: " + ex.Message);
-                    }
-                   
+                        WriteDgv(
+                            _LANE: 1, 
+                            _DATE: DateTime.Now,
+                            _SERIAL_NUMBER: "APP ERROR",
+                            _PROCESS: ex.Message,
+                            _STATUS: "FAIL");
+
+                        LogEvents.RegisterEvent(
+                            LANE: 1, 
+                            LOG_STRING: $"WRITEDGV: {ex.Message}"
+                            );
+                    }           
                 }
 
                 if (_LANE == 2) 
-                { 
-                    try 
+                {
+                    try
                     {
                         if (DgLane2.Items.Count > 100) DgLane2.Items.Clear();
 
-                        DgLane2.Items.Add(new DataLane2 { DATE = _DATE, SERIAL_NUMBER = _SERIAL_NUMBER, PROCESS = _PROCESS, STATUS = _STATUS });
+                        DgLane2.Items.Add(new DataLane2
+                        {
+                            DATE = _DATE,
+                            SERIAL_NUMBER = _SERIAL_NUMBER,
+                            PROCESS = _PROCESS,
+                            STATUS = _STATUS
+                        });
 
                         if (DgLane2.Items.Count > 0)
                         {
@@ -1349,14 +1432,24 @@ namespace GoodBad_Conveyor_2._0
                             if (border != null)
                             {
                                 var scroll = border.Child as ScrollViewer;
-                                if (scroll != null) scroll.ScrollToEnd();
+                                scroll?.ScrollToEnd();
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        WriteDgv(2, DateTime.Now, "APP ERROR", ex.Message, "FAIL");
-                        LogEvents.RegisterEvent(2, "WRITEDGV: " + ex.Message);
+                        WriteDgv(
+                            _LANE: 2,
+                            _DATE: DateTime.Now,
+                            _SERIAL_NUMBER: "APP ERROR",
+                            _PROCESS: ex.Message,
+                            _STATUS: "FAIL"
+                            );
+
+                        LogEvents.RegisterEvent(
+                            LANE: 2,
+                            LOG_STRING: $"WRITEDGV: {ex.Message}"
+                            );
                     }
                 }
 
@@ -1521,8 +1614,7 @@ namespace GoodBad_Conveyor_2._0
         private void DgLane1_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             var row = e.Row;
-            DataLane1 _myData = new DataLane1();
-            _myData = (DataLane1)row.DataContext;
+            var _myData = (DataLane1)row.DataContext;
 
             if (_myData.STATUS == "PASS")
             {

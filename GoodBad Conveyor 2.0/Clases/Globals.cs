@@ -18,17 +18,23 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
+                //string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
+
+                string Path_Config 
+                    = $@"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\{Environment.MachineName}\{Environment.MachineName}\_Config.ini";
 
                 if (!File.Exists(Path_Config))
                 {
-                    MessageBox.Show("Configuration File missing " + Path_Config + "\n \n" + "GoodBadConveyor will be closed, please contact to Administrator", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(
+                        messageBoxText: $"Configuration File missing {Path_Config} \n \n GoodBadConveyor will be closed, please contact to Administrator",
+                        caption: "ERROR", MessageBoxButton.OK,
+                        icon: MessageBoxImage.Error
+                        );
 
                     Environment.Exit(1);
                 }
 
                 return Path_Config;
-                //return @"C:\GoodBadConveyor\Config.INI"; 
             }
         }
 
@@ -36,64 +42,43 @@ namespace GoodBad_Conveyor_2._0
 
         public static string SCANNER_BASE
         {
-            get
-            {
-                return ConfigFiles.reader("KEYENCE", "BASE", CONFIG_FILE);
-            }
+            get=> ConfigFiles.Reader("KEYENCE", "BASE", CONFIG_FILE);
         }
 
 
         public static string COM_SCANNER1
         {
-            get
-            {
-                return ConfigFiles.reader("KEYENCE", "SCANNER1", CONFIG_FILE);
-            }
+            get=> ConfigFiles.Reader("KEYENCE", "SCANNER1", CONFIG_FILE);
         }
 
         public static string COM_SCANNER2
         {
-            get
-            {
-                return ConfigFiles.reader("KEYENCE", "SCANNER2", CONFIG_FILE);
-            }
+            get=> ConfigFiles.Reader("KEYENCE", "SCANNER2", CONFIG_FILE);
         }
 
         public static string SINGLE_SCANNER
         {
-            get
-            {
-                return ConfigFiles.reader("KEYENCE", "SINGLE_SCANNER", CONFIG_FILE);
-            }
+            get=> ConfigFiles.Reader("KEYENCE", "SINGLE_SCANNER", CONFIG_FILE);
         }
 
         public static int BAUD_RATE
         {
-            get
-            {
-                return Convert.ToInt32(ConfigFiles.reader("KEYENCE", "BAUDRATE", CONFIG_FILE));
-            }
+            get=> Convert.ToInt32(ConfigFiles.Reader("KEYENCE", "BAUDRATE", CONFIG_FILE));
         }
 
         public static int DATA_BITS
         {
-            get
-            {
-                return Convert.ToInt32(ConfigFiles.reader("KEYENCE", "DATABITS", CONFIG_FILE));
-            }
+            get=> Convert.ToInt32(ConfigFiles.Reader("KEYENCE", "DATABITS", CONFIG_FILE));
         }
 
 
         private static bool _isActiveLane1 = false;
         public static bool IS_ACTIVE_LANE_1
         {
-            get
-            {
-                return Convert.ToBoolean(ConfigFiles.reader("GOOD BAD CONVEYOR", "ALANE1", CONFIG_FILE));
-            }
+            get=> Convert.ToBoolean(ConfigFiles.Reader("GOOD BAD CONVEYOR", "ALANE1", CONFIG_FILE));
             set
             {
-                ConfigFiles.write("GOOD BAD CONVEYOR", "ALANE1", value.ToString(), CONFIG_FILE);
+                ConfigFiles.Write("GOOD BAD CONVEYOR", "ALANE1", value.ToString(), CONFIG_FILE);
                 _isActiveLane1 = value;
             }
         }
@@ -101,46 +86,36 @@ namespace GoodBad_Conveyor_2._0
         private static bool _isActiveLane2 = false;
         public static bool IS_ACTIVE_LANE_2
         {
-            get
-            {
-                return Convert.ToBoolean(ConfigFiles.reader("GOOD BAD CONVEYOR", "ALANE2", CONFIG_FILE));
-            }
+            get=> Convert.ToBoolean(ConfigFiles.Reader("GOOD BAD CONVEYOR", "ALANE2", CONFIG_FILE));
             set
             {
-                ConfigFiles.write("GOOD BAD CONVEYOR", "ALANE2", value.ToString(), CONFIG_FILE);
+                ConfigFiles.Write("GOOD BAD CONVEYOR", "ALANE2", value.ToString(), CONFIG_FILE);
                 _isActiveLane2 = value;
             }
         }
 
         public static int SN_LENGH
         {
-            get
-            {
-                return Convert.ToInt32(ConfigFiles.reader("GOOD BAD CONVEYOR", "SN_LENGH", CONFIG_FILE));
-            }
+            get=> Convert.ToInt32(ConfigFiles.Reader("GOOD BAD CONVEYOR", "SN_LENGH", CONFIG_FILE));
         }
         public static int SMOTHER_LENGH
         {
-            get
-            {
-                return Convert.ToInt32(ConfigFiles.reader("GOOD BAD CONVEYOR", "SMOTHER_LENGH", CONFIG_FILE));
-            }
+            get=> Convert.ToInt32(ConfigFiles.Reader("GOOD BAD CONVEYOR", "SMOTHER_LENGH", CONFIG_FILE));
         }
 
         public static string DAQ_NAME
         {
-            get
-            {
-                return ConfigFiles.reader("GOOD BAD CONVEYOR", "DAQ_NAME", CONFIG_FILE);
-            }
+            get=> ConfigFiles.Reader("GOOD BAD CONVEYOR", "DAQ_NAME", CONFIG_FILE);
         }
 
         public static bool IS_SHUTTLE
         {
-            get
-            {
-                return Convert.ToBoolean(ConfigFiles.reader("GOOD BAD CONVEYOR", "IS_SHUTTLE", CONFIG_FILE));
-            }
+            get=> Convert.ToBoolean(ConfigFiles.Reader("GOOD BAD CONVEYOR", "IS_SHUTTLE", CONFIG_FILE));
+        }
+
+        public static int PCBA_UNITS
+        {
+            get => Convert.ToInt32(ConfigFiles.Reader("GOOD BAD CONVEYOR", "PCBA_UNITS", CONFIG_FILE));
         }
 
 
@@ -151,14 +126,8 @@ namespace GoodBad_Conveyor_2._0
         private static bool _DOCK_MENU = true;
         public static bool DOCK_MENU
         {
-            get
-            {
-                return _DOCK_MENU;
-            }
-            set
-            {
-                _DOCK_MENU = value;
-            }
+            get => _DOCK_MENU;
+            set => _DOCK_MENU = value;
         }
 
         #endregion
@@ -333,7 +302,7 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                return ConfigFiles.reader("CHECK PROCESS", "STEP_TO_CHECK", CONFIG_FILE);
+                return ConfigFiles.Reader("CHECK PROCESS", "STEP_TO_CHECK", CONFIG_FILE);
             }
         }
 
@@ -341,7 +310,7 @@ namespace GoodBad_Conveyor_2._0
         {
             get             
             {               
-                return ConfigFiles.reader("CHECK PROCESS", "CHECK_PREVIOUS", CONFIG_FILE).ToUpper();
+                return ConfigFiles.Reader("CHECK PROCESS", "CHECK_PREVIOUS", CONFIG_FILE).ToUpper();
             }
         }
 
@@ -350,7 +319,7 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                return ConfigFiles.reader("CHECK PROCESS", "PLATFORM", CONFIG_FILE).ToUpper();
+                return ConfigFiles.Reader("CHECK PROCESS", "PLATFORM", CONFIG_FILE).ToUpper();
             }
         }
 
@@ -536,14 +505,14 @@ namespace GoodBad_Conveyor_2._0
         {
             get 
             {
-                return Convert.ToInt32(ConfigFiles.reader("CHECK PROCESS", "RETRIES_CHECKPROCESS", Globals.CONFIG_FILE)); 
+                return Convert.ToInt32(ConfigFiles.Reader("CHECK PROCESS", "RETRIES_CHECKPROCESS", Globals.CONFIG_FILE)); 
             }
         }
         public static int RETRIES_SCANNING
         {
             get
             {
-                return Convert.ToInt32(ConfigFiles.reader("CHECK PROCESS", "RETRIES_SCANNING", Globals.CONFIG_FILE));
+                return Convert.ToInt32(ConfigFiles.Reader("CHECK PROCESS", "RETRIES_SCANNING", Globals.CONFIG_FILE));
             }
         }
 

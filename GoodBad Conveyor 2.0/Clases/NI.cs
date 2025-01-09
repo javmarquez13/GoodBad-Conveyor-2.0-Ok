@@ -7,7 +7,7 @@ using NationalInstruments.DAQmx;
 
 namespace GoodBad_Conveyor_2._0
 {
-    class NI
+    public class NI
     {
         NationalInstruments.DAQmx.Task TaskReadIn;
         NationalInstruments.DAQmx.Task TaskWriteOut;
@@ -76,7 +76,20 @@ namespace GoodBad_Conveyor_2._0
             catch (DaqException ex)
             {
                 Globals.DAQ_OK = false;
-                LogEvents.RegisterEvent(14, "WriteDAQ: " + ex.Message);
+
+                LogEvents.RegisterEvent(
+                    LANE: 14, 
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
+            }
+            catch(Exception ex)
+            {
+                Globals.DAQ_OK = false;
+
+                LogEvents.RegisterEvent(
+                    LANE: 14,
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
             }
 
             return outputs;
@@ -114,7 +127,20 @@ namespace GoodBad_Conveyor_2._0
             catch (DaqException ex)
             {
                 Globals.DAQ_OK = false;
-                LogEvents.RegisterEvent(14, "WriteDAQ: " + ex.Message);
+
+                LogEvents.RegisterEvent(
+                    LANE: 14, 
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
+            }
+            catch(Exception ex)
+            {
+                Globals.DAQ_OK = false;
+
+                LogEvents.RegisterEvent(
+                    LANE: 14,
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
             }
 
             return outputs;
@@ -145,7 +171,20 @@ namespace GoodBad_Conveyor_2._0
             catch (DaqException ex)
             {
                 Globals.DAQ_OK = false;
-                LogEvents.RegisterEvent(14, "WriteDAQ: " + ex.Message);
+
+                LogEvents.RegisterEvent(
+                    LANE: 14,
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
+            }
+            catch (Exception ex)
+            {
+                Globals.DAQ_OK = false;
+
+                LogEvents.RegisterEvent(
+                    LANE: 14,
+                    LOG_STRING: $"WriteDAQ: {ex.Message}"
+                    );
             }
 
             return outputs;

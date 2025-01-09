@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodBad_Conveyor_2._0
 {
-    class StaticMESFunctions
+    public class StaticMESFunctions
     {
         public static List<string> ListByPanel(string SerialNumber)
         {

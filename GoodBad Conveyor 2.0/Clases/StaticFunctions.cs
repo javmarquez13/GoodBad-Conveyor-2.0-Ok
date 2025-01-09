@@ -46,30 +46,33 @@ namespace GoodBad_Conveyor_2._0
                     {
                         if (_TempStep.Contains(ProcessName))
                         {
-                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                                                .Select(b => b["History"] = ProcessName)
-                                                                .ToList();
+                            _dtResult.AsEnumerable()
+                                     .Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                     .Select(b => b["History"] = ProcessName)
+                                     .ToList();
 
-                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                                                .Select(b => b["Status"] = _TempStatus)
-                                                                .ToList();
+                            _dtResult.AsEnumerable()
+                                     .Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                     .Select(b => b["Status"] = _TempStatus)
+                                     .ToList();
                             break;
                         }
 
                         if (_TempStep.Contains("MRB"))
                         {
-                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                                                .Select(b => b["History"] = "MRB")
-                                                                .ToList();
+                            _dtResult.AsEnumerable()
+                                     .Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                     .Select(b => b["History"] = "MRB")
+                                     .ToList();
 
-                            _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                                    .Select(b => b["Status"] = _TempStatus)
-                                                    .ToList();
+                            _dtResult.AsEnumerable()
+                                     .Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
+                                     .Select(b => b["Status"] = _TempStatus)
+                                     .ToList();
                             break;
                         }
                     }
                 }
-
             }
 
             return _dtResult;
@@ -103,13 +106,13 @@ namespace GoodBad_Conveyor_2._0
 
                 foreach (string _Key in Globals.DATA_MATRIX)
                 {
-                    string StepToCheck = ConfigFiles.reader("DATA_MATRIX", _Key, Globals.CONFIG_FILE);
+                    string StepToCheck = ConfigFiles.Reader("DATA_MATRIX", _Key, Globals.CONFIG_FILE);
 
                     try
                     {
                         EventsByStepMatrix = _dsQuery.Tables[0].AsEnumerable()
-                                     .Where(r => r.Field<string>("Test_Process") == "QC / MRB")
-                                     .CopyToDataTable();
+                                            .Where(r => r.Field<string>("Test_Process") == "QC / MRB")
+                                            .CopyToDataTable();
 
                         _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
                                               .Select(b => b["History"] = "QC / MRB")
@@ -136,11 +139,11 @@ namespace GoodBad_Conveyor_2._0
 
                             _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
                                                   .Select(b => b["History"] = Globals.STEP_TO_CHECK)
-                                                 .ToList();
+                                                  .ToList();
 
                             _dtResult.AsEnumerable().Where(row => row.Field<string>("SerialNumber") == _dr[3].ToString())
-                                     .Select(b => b["Status"] = "Pass")
-                                    .ToList();
+                                                  .Select(b => b["Status"] = "Pass")
+                                                  .ToList();
 
                             break;
                         }
@@ -307,7 +310,7 @@ namespace GoodBad_Conveyor_2._0
 
                 foreach (string _StepMatrix in Globals.DATA_MATRIX)
                 {
-                    string StepToCheck = ConfigFiles.reader("DATA_MATRIX", _StepMatrix, Globals.CONFIG_FILE);
+                    string StepToCheck = ConfigFiles.Reader("DATA_MATRIX", _StepMatrix, Globals.CONFIG_FILE);
 
                     DataTable EventsByStepMatrix = new DataTable();
 

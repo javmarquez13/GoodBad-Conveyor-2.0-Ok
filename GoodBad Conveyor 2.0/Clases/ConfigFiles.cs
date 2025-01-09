@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace GoodBad_Conveyor_2._0
 {
-    class ConfigFiles
+    public class ConfigFiles
     {
         [DllImport("kernel32")]
         public static extern int GetPrivateProfileString(string seccion, string llave, string def, StringBuilder StrBuilder, int size, string filepath);
@@ -17,12 +16,7 @@ namespace GoodBad_Conveyor_2._0
         [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileSection(string lpAppName, byte[] lpszReturnBuffer, int nSize, string lpFileName);
 
-        public class configFiles
-        {
-               
-        }
-
-        public static string reader(string _seccion, string _llave, string _FilePath)
+        public static string Reader(string _seccion, string _llave, string _FilePath)
         {
             string _result;
             StringBuilder _builder = new StringBuilder(500);
@@ -31,11 +25,10 @@ namespace GoodBad_Conveyor_2._0
             return _result;
         }
 
-        public static void write(string _seccion, string _llave, string _valor, string _filePath)
+        public static void Write(string _seccion, string _llave, string _valor, string _filePath)
         {
             WritePrivateProfileString(_seccion, _llave, _valor, _filePath);
         }
-
 
         public static List<string> GetKeys(string category)
         {
