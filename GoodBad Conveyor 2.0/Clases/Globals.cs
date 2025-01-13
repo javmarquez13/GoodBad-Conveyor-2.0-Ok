@@ -18,8 +18,6 @@ namespace GoodBad_Conveyor_2._0
         {
             get
             {
-                //string Path_Config = @"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\" + Environment.MachineName + @"\" + Environment.MachineName + "_Config.ini";
-
                 string Path_Config 
                     = $@"\\mxchim0rel02\Dexcom\TEApplications\GoodBad Conveyor 2.0\!Configurations\{Environment.MachineName}\{Environment.MachineName}_Config.ini";
 
