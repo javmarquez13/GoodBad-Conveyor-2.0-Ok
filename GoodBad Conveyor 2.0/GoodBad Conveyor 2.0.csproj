@@ -199,7 +199,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Clases\StaticFunctions.cs" />
-    <Compile Include="HttpMethodWithBody.cs" />
     <Compile Include="Interfaces\HistroyDataWin.xaml.cs">
       <DependentUpon>HistroyDataWin.xaml</DependentUpon>
     </Compile>
@@ -256,7 +255,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="GoodBad Conveyor 2.0_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
